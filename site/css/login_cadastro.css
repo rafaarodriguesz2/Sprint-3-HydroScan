@@ -1,0 +1,73 @@
+/*Configurações Padrões*/
+*{
+    margin:0px;
+    padding: 0px;
+    font-family: sans-serif;
+}
+
+body{
+    background-color: #0c8ea1;
+}
+
+/*Conteudo Principal*/
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
+/*Div Esquerda*/
+.div-esquerda{  
+    height: 100vh;
+    width: 58%;
+    background-color: #0c8ea1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 60px;
+}
+
+.div-esquerda p{
+    color: white;
+    font-size: 40px;
+}
+
+/*Div Direita*/
+.div-direita{
+    height: 100vh;
+    width: 100%;
+    background-color: white;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Css do formulário */
+.formulario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.formulario input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #757575;
+    padding: 20px;
+}
+
+.formulario button{
+    background-color: #00c4cc;
+    color: white;
+    border: none;
+    margin-top: 10px;
+    height: 40px;
+    width: 300px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin:30px 0px;
+}
