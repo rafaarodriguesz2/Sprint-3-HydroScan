@@ -39,7 +39,7 @@ body{
 }
 
 .navbar a{
-    color: black;
+    color: rgb(255, 255, 255);
     text-decoration: none;
 }
 
@@ -101,6 +101,21 @@ body{
     cursor: pointer;
 }
 
+/* Body Container */
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 60px;
+    text-align: justify;
+}
+
+.container p {
+    font-size: 20px;
+}
+
 /*Footer*/
 
 .footer{
@@ -117,6 +132,7 @@ body{
     font-size: 10px;
     margin-left: 20px;
 }
+
 
 /*Dashboard estilização*/
 .container {
@@ -160,3 +176,4 @@ h1 {
     font-size: 28px;
     font-weight: 600;
 }
+
