@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💧HydroScan💧</title>
+    <title>Dashboard - HydroScan</title>
     <link rel="stylesheet" href="../css/pages.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
     <header class="navbar">
         <nav class="nav-esquerda">
@@ -17,7 +16,6 @@
             <a href="../pages/calculadora.html">Calculadora</a>
             <a href="../pages/graficos.html">Gráficos</a>
             <a href="../pages/sobre_nos.html">Sobre Nós</a>
-
         </nav>
         <nav class="nav-direita">
             <div class="cadastrar">
@@ -31,14 +29,73 @@
     </header>
 
     <section class="container">
-        <h1>Graficos</h1>
+        <h1>Dashboard de Monitoramento</h1>
+        <div class="grafico-container">
+            <div class="grafico">
+                <canvas id="reservoirChart"></canvas>
+            </div>
+            <div class="descricao">
+                <h3>Nível dos Reservatórios</h3>
+                <p>O acompanhamento contínuo dos reservatórios é essencial para prever períodos de seca e garantir o abastecimento adequado. Aqui, você pode visualizar a variação dos níveis ao longo dos meses.</p>
+            </div>
+        </div>
+        <div class="grafico-container">
+            <div class="grafico">
+                <canvas id="energyChart"></canvas>
+            </div>
+            <div class="descricao">
+                <h3>Produção de Energia</h3>
+                <p>A relação entre a produção de energia e os níveis dos reservatórios permite um melhor planejamento estratégico para otimizar recursos e manter a estabilidade do fornecimento energético.</p>
+            </div>
+        </div>
     </section>
-
     <footer class="footer">
         <h3>Fale conosco: sac@hydroscan.com</h3>
     </footer>
+    <script>
+        const ctxReservoir = document.getElementById('reservoirChart').getContext('2d');
+        const ctxEnergy = document.getElementById('energyChart').getContext('2d');
 
+        new Chart(ctxReservoir, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível dos Reservatórios (%)',
+                    data: [80, 75, 60, 50, 40, 30],
+                    backgroundColor: 'rgba(0, 99, 255, 0.7)',
+                    borderColor: 'rgba(0, 99, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
 
+        new Chart(ctxEnergy, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [900, 850, 700, 600, 500, 350],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.3)',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
 </body>
-
 </html>

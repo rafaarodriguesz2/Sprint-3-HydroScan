@@ -132,3 +132,48 @@ body{
     font-size: 10px;
     margin-left: 20px;
 }
+
+
+/*Dashboard estilização*/
+.container {
+    max-width: 90%;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+.grafico-container{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 96%;
+    margin: 30px 0;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+.grafico {
+    flex: 1;
+    min-width: 45%;
+    max-width: 50%;
+}
+.descricao {
+    flex: 1;
+    min-width: 45%;
+    max-width: 50%;
+    padding: 20px;
+    background: #d9e9ff;
+    border-radius: 12px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    text-align: left;
+}
+h1 {
+    color: #0056b3;
+    font-size: 28px;
+    font-weight: 600;
+}
+
