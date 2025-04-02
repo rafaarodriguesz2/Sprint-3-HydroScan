@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>💧HydroScan💧</title>
     <link rel="stylesheet" href="../css/pages.css">
+    <link rel="icon" href="../img/Logo-pequena.png" type="image/x-icon">
 </head>
 
 <body>
@@ -15,7 +16,6 @@
                 <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
             </a>
             <a href="../pages/calculadora.html">Calculadora</a>
-            <a href="../pages/graficos.html">Gráficos</a>
             <a href="../pages/sobre_nos.html">Sobre Nós</a>
 
         </nav>
@@ -32,13 +32,73 @@
 
     <section class="container">
         <h1>Calculadora</h1>
+
+        <div class="content">
+            <div id="div_ipt_btn" class="hide">
+                <h1 id="h1-principal">Calcule quanto você economiza com a HydroScan</h1>
+                <input type="text" id="ipt_peso" placeholder="Digite o valor mensal">
+                <br>
+                <button onclick="calcularDesconto()" id="btn" class="botao">Calcular Desconto!</button>
+            </div>
+
+            <!-- Div de resultados sem e com a CodeBerry -->
+            <div class="card sem-empresa hidden" id="div_esquerda"></div>
+            <div class="card com-empresa hidden" id="div_direita"></div>
+        </div>
     </section>
 
     <footer class="footer">
         <h3>Fale conosco: sac@hydroscan.com</h3>
     </footer>
 
-
 </body>
+
+<script>
+    function calcularDesconto() {
+        // Esconde o botão e o input CSS
+        document.getElementById('div_ipt_btn').classList.add("hidden");
+        // Mostra as divs de valores com a empresa e sem CSS
+        document.getElementById('div_esquerda').classList.remove("hidden");
+        document.getElementById('div_direita').classList.remove("hidden");
+
+        // Obtém o peso do input
+        var peso = Number(ipt_peso.value);
+
+        // Preço por kg de morango
+        var precoMorango = 20.83;
+
+        // Calcula o preço total, sem e com CodeBerry
+        var precoCheio = peso * precoMorango;
+        var semCodeBerry = precoCheio * 0.6;  // 60% da produção aproveitada
+        var comCodeBerry = precoCheio * 0.92;  // 92% da produção aproveitada
+
+        // Mostra as divs e os valores delas 
+        div_esquerda.innerHTML = `
+            <div class="card-title">
+                <h1>❌Sem a HydroScan❌</h1>
+                <h3> Você Está Perdendo Dinheiro!</h3>
+            </div>
+            <p class="p-style">🔴 </p>
+            <p class="p-style">🔴 </p>
+            <p class="p-style">💥 </p>
+            <p class="p-style">❗ </p>
+            <p class="p-style">🚀 </p>
+        `;
+
+        div_direita.innerHTML = `
+            <div class="card-title">
+                <h1>✅ Com a HydroScan✅ </h1>
+                <h3> Mais Lucro, Menos Perda!</h3>
+            </div>
+            <p class="p-style">🟢 </p>
+            <p class="p-style">🟢 </p>
+            <p class="p-style">💡 </p>
+            <p class="p-style">💰 </p>
+            <p class="p-style">📈 </p>
+            <button class="botao" id="contato">Entre em contato📞</button>
+        `;
+    }
+    
+</script>
 
 </html>
