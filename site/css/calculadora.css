@@ -171,11 +171,7 @@ body{
     font-size: 16px;
     text-align: left;
 }
-h1 {
-    color: #0056b3;
-    font-size: 28px;
-    font-weight: 600;
-}
+
 
 /* Calculadora Financeira */
 
@@ -243,7 +239,7 @@ h1 {
 }
 
 .p-style{
-    padding: 5px;
+    padding: 10px;
 }
 
 .card-title{
@@ -252,10 +248,10 @@ h1 {
 }
 
 #div_direita{
-    background-color: rgb(143, 221, 143);
+    background-color: #0c8ea1;
 }
 #div_esquerda{
-    background-color: rgb(231, 139, 139);
+    background-color: rgb(151,151,151);
 }
 
 input{
@@ -268,4 +264,12 @@ input{
     outline: none;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+}
+
+.obs{
+    background-color: rgb(228, 228, 228);
+    padding: 20px;
+    color: black;
+    border-radius: 10px;
+    width: 84%;
 }
