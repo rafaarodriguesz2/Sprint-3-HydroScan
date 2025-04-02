@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>💧HydroScan💧</title>
-    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="../css/calculadora.css">
     <link rel="icon" href="../img/Logo-pequena.png" type="image/x-icon">
 </head>
 
@@ -36,7 +36,10 @@
         <div class="content">
             <div id="div_ipt_btn" class="hide">
                 <h1 id="h1-principal">Calcule quanto você economiza com a HydroScan</h1>
-                <input type="text" id="ipt_peso" placeholder="Digite o valor mensal">
+                <input type="text" id="ipt_potencia" placeholder="Digite o valor da Potencia Instalada">
+                <input type="text" id="ipt_capacidade" placeholder="Eficiência média de geração da usina.">
+                <input type="text" id="ipt_preco_energia" placeholder="Quanto a usina recebe por megawatt-hora gerado.">
+                <input type="text" id="ipt_custos_operacionais" placeholder="Gastos com operação e manutenção da usina.">
                 <br>
                 <button onclick="calcularDesconto()" id="btn" class="botao">Calcular Desconto!</button>
             </div>
@@ -61,18 +64,16 @@
         document.getElementById('div_esquerda').classList.remove("hidden");
         document.getElementById('div_direita').classList.remove("hidden");
 
-        // Obtém o peso do input
-        var peso = Number(ipt_peso.value);
+        var potencia = Number(ipt_potencia.value)
+        var capacidade = Number(ipt_capacidade.value)
+        var precoEnergia = Number(ipt_preco_energia.value)
+        var custosOperacionais = Number(ipt_custos_operacionais.value)
 
-        // Preço por kg de morango
-        var precoMorango = 20.83;
-
-        // Calcula o preço total, sem e com CodeBerry
-        var precoCheio = peso * precoMorango;
-        var semCodeBerry = precoCheio * 0.6;  // 60% da produção aproveitada
-        var comCodeBerry = precoCheio * 0.92;  // 92% da produção aproveitada
-
-        // Mostra as divs e os valores delas 
+        
+    
+        // Energia Gerada=500MW×0,50×720horas=180.000MWh
+        //Receita Mensal=180.000MWh×R$307,29/MWh=R$55.312.200
+ 
         div_esquerda.innerHTML = `
             <div class="card-title">
                 <h1>❌Sem a HydroScan❌</h1>
