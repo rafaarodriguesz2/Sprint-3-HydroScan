@@ -25,18 +25,21 @@
         <section class="div-direita">
             <h1>Cadastrar</h1>
             <form class="formulario">
-                <input type="text" placeholder="Nome Completo: ">
-                <input type="int" placeholder="CPF: ">
-                <input type="int" placeholder="CNPJ Da Empresa: ">
-                <input type="email" placeholder="Email: ">
-                <input type="password" placeholder="Senha: ">
-                <input type="password" placeholder="Confirme a Senha: ">
-                <button>Cadastrar</button>
+                <input id="ipt_nomeCompleto" type="text" placeholder="Nome Completo: ">
+                <input id="ipt_CPF" type="int" placeholder="CPF: ">
+                <input id="ipt_CNPJ" type="int" placeholder="CNPJ Da Empresa: ">
+                <input id="ipt_email" type="email" placeholder="Email: ">
+                <input id="ipt_senha" type="password" placeholder="Senha: ">
+                <input id="ipt_confirmeSenha" type="password" placeholder="Confirme a Senha: ">
+                <button onclick="cadastro()">Cadastrar</button>
+                <div id="div_resposta"></div>
                 <p>Já tem conta? Faça Login</p>
             </form>
         </section>
     </main>
 
 </body>
+<script src="JS/Script_cadastro.js"></script>
+
 
 </html>
