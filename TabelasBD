@@ -1,0 +1,83 @@
+-- criei o banco de dados da empresa
+CREATE DATABASE HydroScan;
+USE HydroScan;
+
+
+-- TABELA: Empresa
+-- removi o CHECK e ajustei para tipo CHAR(14) no CNPJ.
+-- Aumentei o tamanho dos campos.
+CREATE TABLE Empresa (
+    CNPJ CHAR(14) PRIMARY KEY,              -- CNPJ fixo com 14 caracteres numéricos
+    Nome VARCHAR(100) NOT NULL,             -- Nome completo da empresa
+    Endereco VARCHAR(200) NOT NULL,         -- Endereço detalhado da empresa
+    Telefone VARCHAR(20),                   -- Telefone de contato (opcional)
+    Email VARCHAR(100) NOT NULL,            -- Email institucional da empresa
+    UNIQUE (Email)                          -- Garante que não haja dois emails iguais
+);
+
+
+-- TABELA: Usuario
+-- CPF char(11) - quanitdade exata da numeração do documento 
+-- senha era VARCHAR(20) e coloquei para varchar(100) para conseguir usar senhas mais seguras
+-- AUTO_INCREMENT incluído no ID
+CREATE TABLE Usuario (
+    IdUsuario INT AUTO_INCREMENT PRIMARY KEY,  -- Identificador único do usuário
+    CPF CHAR(11) NOT NULL UNIQUE,              -- CPF com 11 dígitos, exclusivo
+    Nome VARCHAR(100) NOT NULL,                -- Nome completo do usuário
+    Email VARCHAR(100) NOT NULL,               -- Email pessoal/corporativo do usuário
+    Senha VARCHAR(100) NOT NULL,               -- Armazena senhas (criptografadas preferencialmente)
+    FkEmpresa CHAR(14),                        -- CNPJ da empresa à qual o usuário pertence
+    FOREIGN KEY (FkEmpresa) REFERENCES Empresa(CNPJ) -- Relacionamento com empresa
+);
+
+
+-- TABELA: Usina
+-- tirei um campo fkMedicao que não era necessário.
+-- agora é possivel colocar casas decimais no volume e potencia
+CREATE TABLE Usina (
+    IdUsina INT AUTO_INCREMENT PRIMARY KEY,    -- Identificador único da usina
+    Nome VARCHAR(100) NOT NULL,                -- Nome da usina
+    Localizacao VARCHAR(200) NOT NULL,         -- Endereço ou coordenadas da usina
+    VolumeMaximo DECIMAL(10,2) NOT NULL,       -- Capacidade máxima do reservatório em m³
+    PotenciaMaxima DECIMAL(10,2) NOT NULL,     -- Potência elétrica máxima gerada em MW
+    FkEmpresa CHAR(14),                        -- Empresa proprietária da usina
+    FOREIGN KEY (FkEmpresa) REFERENCES Empresa(CNPJ)
+);
+
+
+-- TABELA: AguaMedicao
+-- criei a tabela medição para poder fazer diversas medições
+CREATE TABLE AguaMedicao (
+    IdMedicao INT AUTO_INCREMENT PRIMARY KEY,  -- Identificador único da medição
+    IdUsina INT,                               -- Referência à usina medida
+    NivelAguaAtual DECIMAL(8,2) NOT NULL,      -- Nível atual da água no momento da medição (em metros)
+    DataMedicao DATETIME DEFAULT CURRENT_TIMESTAMP, -- Data e hora da medição
+    FOREIGN KEY (IdUsina) REFERENCES Usina(IdUsina)
+);
+
+
+-- TABELA: VolumeReservatorio
+-- criei essa tabela para guardar diferentes volumes
+CREATE TABLE VolumeReservatorio (
+    IdVolume INT AUTO_INCREMENT PRIMARY KEY,   -- Identificador único do registro de volume
+    IdUsina INT,                               -- Usina associada
+    VolumeUtil DECIMAL(10,2),                  -- Volume útil disponível para geração
+    VolumeMorto DECIMAL(10,2),                 -- Volume morto (não aproveitável)
+    VolumeEspera DECIMAL(10,2),                -- Volume em espera/reserva
+    VolumeMaximorum DECIMAL(10,2),             -- Volume máximo suportado registrado
+    DataRegistro DATETIME DEFAULT CURRENT_TIMESTAMP, -- Data e hora do registro
+    FOREIGN KEY (IdUsina) REFERENCES Usina(IdUsina)
+);
+
+
+-- TABELA: ZonaMorta
+-- criei essa tabela para demonstrar o tamanho das medidas da zona morta da represa
+CREATE TABLE ZonaMorta (
+    IdZona INT AUTO_INCREMENT PRIMARY KEY,     -- Identificador da zona morta
+    IdUsina INT,                               -- Usina à qual a zona está associada
+    Profundidade DECIMAL(6,2),                 -- Profundidade da zona morta (em metros)
+    Comprimento DECIMAL(6,2),                  -- Comprimento da zona morta
+    Largura DECIMAL(6,2),                      -- Largura da zona morta
+    Observacao TEXT,                           -- Observações complementares (ex: condições específicas)
+    FOREIGN KEY (IdUsina) REFERENCES Usina(IdUsina)
+);
