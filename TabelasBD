@@ -4,7 +4,7 @@ USE HydroScan;
 
 
 -- TABELA: Empresa
--- removi o CHECK e ajustei para tipo CHAR(14) no CNPJ.
+-- removi o CHECK e ajustei para tipo CHAR(14) no CNPJ
 -- Aumentei o tamanho dos campos.
 CREATE TABLE Empresa (
     CNPJ CHAR(14) PRIMARY KEY,              -- CNPJ fixo com 14 caracteres numéricos
