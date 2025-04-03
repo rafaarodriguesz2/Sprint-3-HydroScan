@@ -31,19 +31,25 @@
     </header>
 
     <section class="container">
-        <h1>Calculadora financeira</h1>
-
-        <div class="content">
+        <div class="conteudo-principal">
             <div id="div_ipt_btn" class="hide">
-                <h1 id="h1-principal">Calcule quanto você economiza com a HydroScan</h1>
-                <input type="text" id="ipt_potencia" placeholder="Digite o valor da Potencia Instalada ex: (500 MW)">
-                <input type="text" id="ipt_capacidade" placeholder="Eficiência média de geração da usina ex: (50%)">
-                <input type="text" id="ipt_preco_energia"
-                    placeholder="Quanto a usina recebe por megawatt-hora gerado ex: (R$ 307,29/MWh)">
-                <input type="text" id="ipt_custos_operacionais"
-                    placeholder="Gastos com operação e manutenção da usina (ex: 5.000.000)">
-                <br>
-                <button onclick="calcularDesconto()" id="btn" class="botao">Calcular Desconto!</button>
+                <h1 id="h1-principal">Calcule quanto você economiza <br> com a HydroScan</h1>
+                <div class="formulario">
+                    <h3 id="h3-formulario">Potência Instalada (MW):</h3>
+                    <input type="text" id="ipt_potencia"
+                        placeholder="Digite o valor da Potencia Instalada ex: (500 MW)">
+                    <h3 id="h3-formulario">Eficiência Média (Decimal):</h3>
+                    <input type="text" id="ipt_capacidade"
+                        placeholder="Eficiência média de geração da usina ex: (0.5 = 50%)">
+                    <h3 id="h3-formulario">Preço da Energia (R$/MWh):</h3>
+                    <input type="text" id="ipt_preco_energia"
+                        placeholder="Quanto a usina recebe por megawatt-hora gerado ex: (R$ 307,29/MWh)">
+                    <h3 id="h3-formulario">Custos Operacionais (R$):</h3>
+                    <input type="text" id="ipt_custos_operacionais"
+                        placeholder="Gastos com operação e manutenção da usina ex: (R$ 5.000.000)">
+                    <br>
+                    <button onclick="calcularDesconto()" id="btn" class="botao">Calcular Desconto!</button>
+                </div>
             </div>
 
             <!-- Div de resultados sem e com a HydroScan-->
@@ -55,6 +61,7 @@
                 melhorias propostas resultará em um aumento de produção de até 15%. Esses valores podem variar conforme
                 fatores operacionais e condições específicas de cada processo.
             </p>
+            <br>
         </div>
 
     </section>
@@ -72,9 +79,7 @@
         // Mostra as divs de valores com a empresa e sem CSS
         document.getElementById('div_esquerda').classList.remove("hidden");
         document.getElementById('div_direita').classList.remove("hidden");
-        document.getElementById
-            ('obs').classList.remove
-            ("hidden")
+        document.getElementById('obs').classList.remove("hidden")
 
         var potencia = Number(ipt_potencia.value)
         var capacidade = Number(ipt_capacidade.value)
@@ -82,9 +87,7 @@
         var custosOperacionais = Number(ipt_custos_operacionais.value)
 
         // Energia Gerada=500MW×0,50×720horas=180.000MWh
-
         var energiaGerada = potencia * capacidade * 720
-
         //Receita Mensal=180.000MWh×R$307,29/MWh=R$55.312.200
         var receitaMensal = energiaGerada * precoEnergia - custosOperacionais
         //Receita com a HydroScan
@@ -92,7 +95,7 @@
         //Energia HydroScan
         var energiaHydroScan = energiaGerada * 1.15
         //Prejuizo sem a nossa empresa
-        var prejuizo = receitaHydroScan - receitaMensal
+        var diferenca = receitaHydroScan - receitaMensal
         //Calcula o aumento com a hydroScan
 
         console.log(potencia.toLocaleString("pt-BR"))
@@ -110,9 +113,9 @@
                 <h1>❌Sem a HydroScan❌</h1>
                 <h3> Você Está Perdendo Dinheiro!</h3>
             </div>
-            <p class="p-style">🔴Sem a HydroScan sua empresa lucra apenas R$${receitaMensal.toLocaleString("pt-BR")} por mês</p>
-            <p class="p-style">💥Você produz apenas ${energiaGerada.toLocaleString("pt-BR")}MW/h</p>
-            <p class="p-style">❗Isso representa um prejuizo de R$${prejuizo.toLocaleString("pt-BR")}</p>
+            <p class="p-style">🔴 Sem a HydroScan sua empresa lucra apenas R$${receitaMensal.toLocaleString("pt-BR")} por mês</p>
+            <p class="p-style">❗ Isso representa um prejuízo de R$${diferenca.toLocaleString("pt-BR")} por mês sem a HydroScan</p>
+            <p class="p-style">💥 Você produz apenas ${energiaGerada.toLocaleString("pt-BR")}MW/h</p>
             <p class="p-style">🚀 Pare de perder dinheiro e entre em contato conosco! </p>
         `;
 
@@ -121,10 +124,10 @@
                 <h1>✅ Com a HydroScan✅ </h1>
                 <h3> Mais Lucro, Menos Perda!</h3>
             </div>
-            <p class="p-style">🟢 Com a HydroScan o lucro da sua empresa aumenta para R$${receitaHydroScan.toLocaleString("pt-BR")}</p>
+            <p class="p-style">🟢 Com a HydroScan o lucro da sua empresa aumenta para R$${receitaHydroScan.toLocaleString("pt-BR")} por mês</p>
+            <p class="p-style">💰 Isso seguinifica um aumento de R$${diferenca.toLocaleString("pt-BR")} por mês</p>
             <p class="p-style">💡 Sua energia produzida irá aumentar para ${energiaHydroScan.toLocaleString("pt-BR")}MW/h</p>
-            <p class="p-style">💰 Isso seguinifica um aumento de R$${prejuizo.toLocaleString("pt-BR")}</p>
-            <p class="p-style">📈 Entre em contato conosco!</p>
+            <p class="p-style">📈 Aumente seus lucros e entre em contato conosco!</p>
             <button class="botao" id="contato">Entrar em contato</button>
 
         `;

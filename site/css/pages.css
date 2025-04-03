@@ -172,7 +172,9 @@ body{
     text-align: left;
 }
 h1 {
-    color: #0056b3;
+    color: transparent;
+    background: linear-gradient(45deg, #6877ff, #09eecf);
+    background-clip: text;
     font-size: 28px;
     font-weight: 600;
 }

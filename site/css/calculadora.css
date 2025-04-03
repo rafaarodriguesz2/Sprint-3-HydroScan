@@ -101,141 +101,20 @@ body{
     cursor: pointer;
 }
 
-/* Body Container */
 
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 60px;
-    text-align: justify;
-}
+/* Calculadora Financeira */
+
 
 .container p {
     font-size: 20px;
 }
 
-/*Footer*/
-
-.footer{
-    position: fixed;
-    bottom: 0px;
-    height: 40px;
-    width: 100%;
-    background-color: #bcc7ca;
-    display: flex;
-    align-items: center;
-}
-
-.footer h3{
-    font-size: 10px;
-    margin-left: 20px;
-}
-
-
-/*Dashboard estilização*/
-.container {
-    max-width: 90%;
-    margin: 40px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-}
-.grafico-container{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    width: 96%;
-    margin: 30px 0;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
-}
-.grafico {
-    flex: 1;
-    min-width: 45%;
-    max-width: 50%;
-}
-.descricao {
-    flex: 1;
-    min-width: 45%;
-    max-width: 50%;
-    padding: 20px;
-    background: #d9e9ff;
-    border-radius: 12px;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-    text-align: left;
-}
-
-
-/* Calculadora Financeira */
-
 .hidden {
     display: none;
 }
 
-.botao {
-    margin-top: 20px;
-    background: linear-gradient(145deg, #6a11cb, #2575fc);
-    color: white;
-    padding: 15px 30px;
-    font-size: 18px;
-    font-weight: bold;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease-in-out;
-    
-}
-
-.botao:hover {
-    background: linear-gradient(145deg, #2575fc, #6a11cb);
-    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
-}
-
 #contato{
     border-radius: 20px;
-}
-
-
-#h1-principal {
-    margin-bottom: 40px;
-    font-size: 30px;
-    font-weight: bold;
-    color: transparent;
-    background: linear-gradient(45deg, #6877ff, #09eecf);
-    background-clip: text;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding: 20px 0;
-}
-
-.content {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 60px);
-    padding: 20px;
-    
-}
-
-.card {
-    width: 38%;
-    height: 80%;
-    color: white;
-    background-color: rgb(182, 182, 182);
-    padding: 20px;
-    border-radius: 10px;
-    margin: 40px;
-    text-align: left;
 }
 
 .p-style{
@@ -254,16 +133,86 @@ body{
     background-color: rgb(151,151,151);
 }
 
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: justify;
+}
+
+.card {
+    width: 38%;
+    height: 70vh;
+    color: white;
+    padding: 20px;
+    padding-bottom: 0px;
+    border-radius: 10px;
+    margin: 40px;
+    text-align: left;
+}
+
+#h1-principal {
+    margin: 20px 0px;
+    font-size: 30px;
+    font-weight: bold;
+    color: transparent;
+    background: linear-gradient(45deg, #6877ff, #09eecf);
+    background-clip: text;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.formulario h3{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 6%;
+    gap: 10px;
+}
+
+#h3-formulario{
+    color: transparent;
+    background: linear-gradient(45deg, #6877ff, #09eecf);
+    background-clip: text;
+}
+
+.conteudo-principal {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao {
+    margin-top: 10px;
+    background: linear-gradient(145deg, #6877ff, #2575fc);
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+
+}
+
+.botao:hover {
+    background: linear-gradient(145deg, #2575fc, #09eecf);
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
+}
+
 input{
-    width: 60%;
-    padding: 15px 20px;
-    border-radius: 30px;
+    margin: 5px;
+    width: 85%;
+    padding: 15px;
+    border-radius: 15px;
     font-size: 16px;
     border: 2px solid #ccc;
     color: rgb(0, 0, 0);
-    outline: none;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
 }
 
 .obs{
@@ -272,4 +221,22 @@ input{
     color: black;
     border-radius: 10px;
     width: 84%;
+    margin-bottom: 10vh;
+}
+
+/*Footer*/
+
+.footer{
+    position: fixed;
+    bottom: 0px;
+    height: 40px;
+    width: 100%;
+    background-color: #bcc7ca;
+    display: flex;
+    align-items: center;
+}
+
+.footer h3{
+    font-size: 10px;
+    margin-left: 20px;
 }
