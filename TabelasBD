@@ -116,4 +116,43 @@ VALUES
 (2, 6.00, 2500.00, 1500.00, 'Zona morta representando a área submersa onde a geração de energia não é possível.'),
 (3, 5.00, 2500.00, 1000.00, 'Zona morta no fundo do reservatório, influenciada por variações sazonais.');
 
+-- 1. Selecionar todas as empresas cadastradas
+-- Essa consulta retorna todos os registros da tabela Empresa.
+SELECT * FROM Empresa;
+
+-- 2. Selecionar todos os usuários cadastrados com o nome da empresa a qual pertencem
+-- Essa consulta retorna os usuários junto com o nome da empresa associada a cada um.
+SELECT u.Nome AS NomeUsuario, u.Email, e.Nome AS NomeEmpresa
+FROM Usuario u
+JOIN Empresa e ON u.FkEmpresa = e.CNPJ;
+
+-- 3. Selecionar as usinas com seus respectivos volumes máximos e potências
+-- Essa consulta retorna o nome, volume máximo e potência máxima de todas as usinas cadastradas.
+SELECT Nome, VolumeMaximo, PotenciaMaxima
+FROM Usina;
+
+-- 4. Selecionar as medições de nível de água realizadas nas usinas
+-- Essa consulta retorna o nível de água atual e a data da medição de cada usina.
+SELECT um.IdUsina, u.Nome AS NomeUsina, um.NivelAguaAtual, um.DataMedicao
+FROM AguaMedicao um
+JOIN Usina u ON um.IdUsina = u.IdUsina;
+
+-- 5. Selecionar os volumes registrados dos reservatórios das usinas
+-- Essa consulta retorna o volume útil, volume morto, volume de espera e volume máximo de cada usina.
+SELECT vr.IdUsina, u.Nome AS NomeUsina, vr.VolumeUtil, vr.VolumeMorto, vr.VolumeEspera, vr.VolumeMaximorum, vr.DataRegistro
+FROM VolumeReservatorio vr
+JOIN Usina u ON vr.IdUsina = u.IdUsina;
+
+-- 6. Selecionar as zonas mortas associadas às usinas, com informações sobre profundidade, comprimento e largura
+-- Essa consulta retorna as informações das zonas mortas associadas a cada usina.
+SELECT zm.IdUsina, u.Nome AS NomeUsina, zm.Profundidade, zm.Comprimento, zm.Largura, zm.Observacao
+FROM ZonaMorta zm
+JOIN Usina u ON zm.IdUsina = u.IdUsina;
+
+-- 8. Selecionar o nível de água mais recente de cada usina
+-- Essa consulta retorna o nível de água mais recente de cada usina, baseado na data da medição.
+SELECT um.IdUsina, u.Nome AS NomeUsina, um.NivelAguaAtual, um.DataMedicao
+FROM AguaMedicao um
+JOIN Usina u ON um.IdUsina = u.IdUsina
+WHERE um.DataMedicao = (SELECT MAX(DataMedicao) FROM AguaMedicao WHERE IdUsina = um.IdUsina);
 
