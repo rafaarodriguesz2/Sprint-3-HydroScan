@@ -35,9 +35,9 @@
             <div id="div_ipt_btn" class="hide">
                 <h1 id="h1-principal">Calcule quanto você economiza <br> com a HydroScan</h1>
                 <div class="formulario">
-                    <h3 id="h3-formulario">Potência Instalada (MW):</h3>
+                    <h3 id="h3-formulario">Potência Máxima/Instalada (MW):</h3>
                     <input type="text" id="ipt_potencia"
-                        placeholder="Digite o valor da Potencia Instalada ex: (500 MW)">
+                        placeholder="Digite o valor da Potencia Máxima/Instalada ex: (500 MW)">
                     <h3 id="h3-formulario">Eficiência Média (Decimal):</h3>
                     <input type="text" id="ipt_capacidade"
                         placeholder="Eficiência média de geração da usina ex: (0.5 = 50%)">
@@ -115,7 +115,7 @@
             </div>
             <p class="p-style">🔴 Sem a HydroScan sua empresa lucra apenas R$${receitaMensal.toLocaleString("pt-BR")} por mês</p>
             <p class="p-style">❗ Isso representa um prejuízo de R$${diferenca.toLocaleString("pt-BR")} por mês sem a HydroScan</p>
-            <p class="p-style">💥 Você produz apenas ${energiaGerada.toLocaleString("pt-BR")}MW/h</p>
+            <p class="p-style">💥 Você produz apenas ${energiaGerada.toLocaleString("pt-BR")}MW por mês!</p>
             <p class="p-style">🚀 Pare de perder dinheiro e entre em contato conosco! </p>
         `;
 
@@ -126,7 +126,7 @@
             </div>
             <p class="p-style">🟢 Com a HydroScan o lucro da sua empresa aumenta para R$${receitaHydroScan.toLocaleString("pt-BR")} por mês</p>
             <p class="p-style">💰 Isso seguinifica um aumento de R$${diferenca.toLocaleString("pt-BR")} por mês</p>
-            <p class="p-style">💡 Sua energia produzida irá aumentar para ${energiaHydroScan.toLocaleString("pt-BR")}MW/h</p>
+            <p class="p-style">💡 Sua energia produzida irá aumentar para ${energiaHydroScan.toLocaleString("pt-BR")}MW por mês!</p>
             <p class="p-style">📈 Aumente seus lucros e entre em contato conosco!</p>
             <button class="botao" id="contato">Entrar em contato</button>
 
