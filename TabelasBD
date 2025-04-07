@@ -81,3 +81,39 @@ CREATE TABLE ZonaMorta (
     Observacao TEXT,                           -- Observações complementares (ex: condições específicas)
     FOREIGN KEY (IdUsina) REFERENCES Usina(IdUsina)
 );
+
+INSERT INTO Empresa (CNPJ, Nome, Endereco, Telefone, Email) 
+VALUES 
+('12345678000195', 'HydroScan Energia Ltda', 'Rua das Águas, 123, Bairro Hidro, Cidade Energia', '(11) 1234-5678', 'contato@hydroscan.com.br'),
+('98765432000123', 'Itaipu Binacional', 'Avenida Parati, 1000, Foz do Iguaçu, PR', '(45) 3520-8500', 'itaipu@itaipu.gov.br');
+
+INSERT INTO Usuario (CPF, Nome, Email, Senha, FkEmpresa) 
+VALUES 
+('28349788052', 'João Silva', 'joao.silva@hydroscan.com.br', 'senha_segura_123', '12345678000195'),
+('18433498991', 'Maria Souza', 'maria.souza@itaipu.gov.br', 'senha_super_secreta', '98765432000123');
+
+INSERT INTO Usina (Nome, Localizacao, VolumeMaximo, PotenciaMaxima, FkEmpresa)
+VALUES 
+('Usina Belo Monte', 'Altamira, Pará', 22400000000.00, 11323.00, '12345678000195'),
+('Usina Itaipu', 'Foz do Iguaçu, Paraná', 29000000000.00, 14000.00, '98765432000123'),
+('Usina Tucuruí', 'Tucuruí, Pará', 45000000000.00, 8370.00, '98765432000123');
+
+INSERT INTO AguaMedicao (IdUsina, NivelAguaAtual, DataMedicao) 
+VALUES 
+(1, 98.50, '2025-04-07 08:30:00'),  -- Belo Monte
+(2, 200.00, '2025-04-07 12:45:00'),  -- Itaipu
+(3, 93.00, '2025-04-07 09:00:00');   -- Tucuruí
+
+INSERT INTO VolumeReservatorio (IdUsina, VolumeUtil, VolumeMorto, VolumeEspera, VolumeMaximorum, DataRegistro) 
+VALUES 
+(1, 18000000000.00, 500000000.00, 2000000000.00, 22400000000.00, '2025-04-07 08:30:00'),
+(2, 22000000000.00, 800000000.00, 3000000000.00, 29000000000.00, '2025-04-07 12:45:00'),
+(3, 40000000000.00, 1000000000.00, 5000000000.00, 45000000000.00, '2025-04-07 09:00:00');
+
+INSERT INTO ZonaMorta (IdUsina, Profundidade, Comprimento, Largura, Observacao) 
+VALUES 
+(1, 4.50, 2000.00, 1000.00, 'Zona morta localizada na extremidade do reservatório, não aproveitável para geração de energia.'),
+(2, 6.00, 2500.00, 1500.00, 'Zona morta representando a área submersa onde a geração de energia não é possível.'),
+(3, 5.00, 2500.00, 1000.00, 'Zona morta no fundo do reservatório, influenciada por variações sazonais.');
+
+
