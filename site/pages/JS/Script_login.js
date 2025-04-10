@@ -12,6 +12,7 @@ function login(){
     if (listaUsuario.includes(email) && senha == '123'){
       resposta += `Usuário reconhecido`
       console.log('chegou dentro do if do for');
+      alert('chegou dentro do if do for')
       
     }else resposta +=`Email ou senha incorretos`; break
   }
