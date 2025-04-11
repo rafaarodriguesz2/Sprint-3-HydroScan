@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>💧HydroScan💧</title>
     <link rel="stylesheet" href="../css/login_cadastro.css">
-    <link rel="icon" href="../img/Logo-pequena.png">
 </head>
 
 <body>
@@ -25,21 +24,23 @@
         </section>
         <section class="div-direita">
             <h1>Cadastrar</h1>
-            <form class="formulario">
-                <input type="text" placeholder="Nome Completo: ">
-                <input type="int" placeholder="CPF: ">
-                <input type="int" placeholder="CNPJ Da Empresa: ">
-                <input type="email" placeholder="Email: ">
-                <input type="password" placeholder="Senha: ">
-                <input type="password" placeholder="Confirme a Senha: ">
-                <a href="../pages/graficos.html">
-                    Cadastrar
-                </a>
+            <div class="formulario">
+                <input id="ipt_nomeCompleto" type="text" placeholder="Nome Completo: ">
+                <input id="ipt_cpf" type="int" placeholder="CPF: ">
+                <input id="ipt_cnpj" type="int" placeholder="CNPJ Da Empresa: ">
+                <input id="ipt_email" type="email" placeholder="Email: ">
+                <input id="ipt_senha" type="password" placeholder="Senha: ">
+                <input id="ipt_confirmeSenha" type="password" placeholder="Confirme a Senha: ">
+                <button onclick="cadastro()">Cadastrar</button>
+                <div id="div_resposta1"></div>
+                <div id="div_resposta2"></div>
+                <div id="div_resposta3"></div>
+                <div id="div_resposta4"></div>
                 <p>Já tem conta? Faça Login</p>
-            </form>
+            </div>
         </section>
     </main>
 
 </body>
-
+<script src="JS/Script_cadastro.js"></script>
 </html>
