@@ -4,17 +4,15 @@ function login(){
   const listaUsuario = [ "Gabriel@sptech", "Gustavo@sptech", "Kheyla@sptech", "Leandro@sptech", "Rafael@sptech"]
   var resposta = ''
 
-  alert('botao apertado')
+  alert("Verificando Usuário")
 
   for (var contador = 1; contador <= listaUsuario.length; contador++){
-    console.log('chegou no for');
     
     if (listaUsuario.includes(email) && senha == '123'){
-      resposta += `Usuário reconhecido`
-      console.log('chegou dentro do if do for');
-      alert('chegou dentro do if do for')
+      resposta = `Usuário reconhecido`
+      alert('Usuario Reconhecido')
       
-    }else resposta +=`Email ou senha incorretos`; break
+    }else resposta =`Email ou senha incorretos`; break
   }
-  div_resposta.innerHTML += resposta
+  div_resposta.innerHTML = resposta
 }
