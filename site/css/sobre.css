@@ -26,41 +26,86 @@
   }
   
   /* Navbar */
-  .navbar {
-    background-color: var(--cor-primaria);
-    padding: 1rem 2rem;
+
+/* Navbar */
+.navbar{
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+}
+
+.navbar nav{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    list-style: none;
+    background-color: #0c8ea1;
     align-items: center;
-  }
-  
-  .nav-esquerda a,
-  .nav-direita a {
-    color: white;
-    margin: 0 1rem;
+    
+}
+
+.navbar a{
+    color: rgb(255, 255, 255);
     text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
-  
-  .nav-esquerda a:hover,
-  .nav-direita a:hover {
-    color: var(--cor-secundaria);
-  }
-  
-  .img-logo {
+}
+
+/* Lado Esquerdo*/
+
+.nav-esquerda{
+    display: flex;
+    justify-content: flex-start;
+    gap: 30px;
+}
+
+.img-logo{
+    width: auto;
+    height: 65px;
+}
+
+/* Lado Direito */
+.nav-direita{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.img-perfil{
+    width: 45px;
+    height: 45px;
+    margin: 10px;
+}
+
+.cadastrar{
     height: 40px;
-    margin-right: 1rem;
-  }
-  
-  .img-perfil {
+    width: 80px;
+    border: 1px solid;
+    border-color: #023a4d;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadastrar a{
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.login{
     height: 40px;
-    width: 40px;
-    margin-left: 1rem;
-    border-radius: 50%;
-    border: 2px solid white;
-  }
-  
+    width: 80px;
+    border-radius: 20px;
+    background-color: #023a4d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.login a{
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+}
+
   /* Container principal */
   .container {
     max-width: 900px;
@@ -156,72 +201,6 @@
     line-height: 1.4;
 }
 
-/* AJUSTE NA NAVBAR */
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 65px;
-    background-color: #0c8ea1;
-    padding: 0 30px;
-}
-
-.navbar nav a {
-    margin-right: 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.navbar nav a:hover {
-    color: #e2e2e2;
-}
-
-.nav-esquerda,
-.nav-direita {
-    display: flex;
-    align-items: center;
-}
-
-.img-logo {
-    height: 55px;
-    margin-right: 15px;
-}
-
-.img-perfil {
-    width: 40px;
-    height: 40px;
-    margin-left: 15px;
-    border-radius: 50%;
-}
-
-.cadastrar,
-.login {
-    padding: 6px 16px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 10px;
-}
-
-.cadastrar {
-    border: 1px solid white;
-}
-
-.cadastrar a,
-.login a {
-    font-size: 14px;
-    color: white;
-    text-decoration: none;
-}
-
-.login {
-    background-color: #023a4d;
-}
 
 /* FOOTER */
 
