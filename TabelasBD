@@ -8,8 +8,8 @@ CREATE TABLE Empresa (
 );
 
 INSERT INTO Empresa (CNPJ, Nome, Endereco, Telefone, Email) VALUES
-('14349678000100', 'Itaipu', 'Rua das Águas, 100', '11990933799', 'contato@hidrotech.com'),
-('45993432000188', 'EcoPower', 'Av. Sustentável, 500', '11922490747', 'suporte@ecopower.com');
+('14349678000100', 'Itaipu Geração', 'Rua das Águas, 100 - Foz do Iguaçu', '11990933799', 'contato@itaipu.com.br'),
+('45993432000188', 'EcoPower Soluções', 'Av. Sustentável, 500 - Belo Horizonte', '11922490747', 'suporte@ecopower.com');
 
 
 -- TABELA: Usuario
@@ -18,31 +18,32 @@ CREATE TABLE Usuario (
     CPF CHAR(11),
     Nome VARCHAR(100),
     Email VARCHAR(100),
-    Senha_hash VARCHAR(255),  -- Senha criptografada
-    tipo_usuario VARCHAR(20), -- Tipo do usuário (admin, operador, etc)
-    ativo TINYINT,  -- Indica se está ativo (1) ou não (0)
-    FkEmpresa_CNPJ CHAR(14), -- Empresa à qual o usuário pertence
-    FOREIGN KEY (FkEmpresa_CNPJ) REFERENCES Empresa(CNPJ) -- Chave estrangeira para Empresa
+    Senha_hash VARCHAR(255),
+    tipo_usuario VARCHAR(20),
+    ativo TINYINT,
+    Empresa_CNPJ CHAR(14),
+    FOREIGN KEY (Empresa_CNPJ) REFERENCES Empresa(CNPJ)
 );
 
-INSERT INTO Usuario (CPF, Nome, Email, Senha_hash, tipo_usuario, ativo, FkEmpresa_CNPJ) VALUES
-('19945623881', 'João Silva', 'joao@hidrotech.com', 'senha123', 'admin', 1, '14349678000100'),
-('11967579030', 'Maria Souza', 'maria@ecopower.com', 'senha456', 'operador', 1, '45993432000188');
+INSERT INTO Usuario (CPF, Nome, Email, Senha_hash, tipo_usuario, ativo, Empresa_CNPJ) VALUES
+('19945623881', 'João Silva', 'joao@itaipu.com.br', 'hashed_senha_joao', 'admin', 1, '14349678000100'),
+('11967579030', 'Maria Souza', 'maria@ecopower.com', 'hashed_senha_maria', 'operador', 1, '45993432000188');
+
 
 -- TABELA: Represa
 CREATE TABLE Represa (
     idRepresa INT AUTO_INCREMENT PRIMARY KEY,
     Nome VARCHAR(100),
     Localizacao VARCHAR(200),
-    VolumeMaximo DECIMAL(10,2),  -- Volume máximo de água
-    VolumeMinimo DECIMAL(10,2), -- Volume mínimo operacional
-    potencia_maxima_kw DECIMAL(10,2), -- Potência máxima de geração
+    VolumeMaximo DECIMAL(10,2),
+    VolumeMinimo DECIMAL(10,2),
+    potencia_max_kw DECIMAL(10,2),
     FkEmpresa CHAR(14),
-    data_cadastro DATETIME,  -- Data de cadastro da represa
+    data_cadastro DATETIME,
     FOREIGN KEY (FkEmpresa) REFERENCES Empresa(CNPJ)
 );
 
-INSERT INTO Represa (Nome, Localizacao, VolumeMaximo, VolumeMinimo, potencia_maxima_kw, FkEmpresa, data_cadastro) VALUES
+INSERT INTO Represa (Nome, Localizacao, VolumeMaximo, VolumeMinimo, potencia_max_kw, FkEmpresa, data_cadastro) VALUES
 ('Represa Azul', 'Vale das Águas, SP', 1991340.00, 209200.00, 5000.00, '14349678000100', NOW()),
 ('Represa Verde', 'Montanhas Azuis, MG', 866730.00, 150700.00, 4000.00, '45993432000188', NOW());
 
@@ -50,69 +51,30 @@ INSERT INTO Represa (Nome, Localizacao, VolumeMaximo, VolumeMinimo, potencia_max
 -- TABELA: Sensor
 CREATE TABLE Sensor (
     idSensor INT AUTO_INCREMENT PRIMARY KEY,
-    modelo VARCHAR(45), -- Modelo do sensor (ex: HC-SR04, MaxBotix, etc.)
-    status VARCHAR(20), -- Status atual (ativo, inativo)
+    modelo VARCHAR(45),
+    status VARCHAR(20),
     local_instalacao VARCHAR(100),
-    idRepresa INT,
-    data_instalacao DATETIME, -- Quando foi instalado
-    FOREIGN KEY (idRepresa) REFERENCES Represa(idRepresa)
+    Represa_idRepresa INT,
+    data_instalacao DATETIME,
+    FOREIGN KEY (Represa_idRepresa) REFERENCES Represa(idRepresa)
 );
 
-INSERT INTO Sensor (modelo, status, local_instalacao, idRepresa, data_instalacao) VALUES
-('Model-X', 'ativo', 'Entrada norte', 1, NOW()),
-('Model-Y', 'ativo', 'Centro', 2, NOW());
+INSERT INTO Sensor (modelo, status, local_instalacao, Represa_idRepresa, data_instalacao) VALUES
+('HC-SR04', 'ativo', 'Entrada Norte', 1, NOW()),
+('MB7360', 'ativo', 'Centro Hidráulico', 2, NOW());
 
 
 -- TABELA: Leitura
 CREATE TABLE Leitura (
     idLeitura INT AUTO_INCREMENT PRIMARY KEY,
-    idSensor INT, -- Sensor que fez a leitura
-    data_hora DATETIME, -- Data e hora da leitura
-    nivel_agua_m DECIMAL(6,2),-- Nível de água em metros
-    status_geracao VARCHAR(20), -- Situação da geração (gerando, parada, etc)
+    idSensor INT,
+    data_hora DATETIME,
+    nivel_agua_m DECIMAL(6,2),
+    status_geracao VARCHAR(20),
     FOREIGN KEY (idSensor) REFERENCES Sensor(idSensor)
 );
-
 
 INSERT INTO Leitura (idSensor, data_hora, nivel_agua_m, status_geracao) VALUES
 (1, NOW(), 42.50, 'gerando'),
 (1, NOW() - INTERVAL 1 DAY, 41.80, 'gerando'),
 (2, NOW(), 35.20, 'parada');
-
-
--- TABELA: EnergiaGerada
-CREATE TABLE EnergiaGerada (
-    idEnergiaGerada INT AUTO_INCREMENT PRIMARY KEY,
-    idRepresa INT,
-    data DATE, -- Data da geração
-    Energia_mwb DECIMAL(10,2), -- Energia gerada em kW
-    estimativa TINYINT,  -- 1 se for estimativa, 0 se real
-    FOREIGN KEY (idRepresa) REFERENCES Represa(idRepresa)
-);
-
-INSERT INTO EnergiaGerada (idRepresa, data, Energia_mwb, estimativa) VALUES
-(1, CURDATE(), 4500.00, 0),
-(1, CURDATE() - INTERVAL 1 DAY, 4600.00, 0),
-(2, CURDATE(), 3900.00, 1);
-
-
--- Ver todas as empresas cadastradas
-SELECT * FROM Empresa;
-
--- Listar todos os usuários ativos
-SELECT Nome, Email FROM Usuario WHERE ativo = 1;
-
--- Mostrar as leituras recentes da Represa Azul
-SELECT L.data_hora, L.nivel_agua_m, L.status_geracao
-FROM Leitura L
-JOIN Sensor S ON L.idSensor = S.idSensor
-JOIN Represa R ON S.idRepresa = R.idRepresa
-WHERE R.Nome = 'Represa Azul'
-ORDER BY L.data_hora DESC;
-
--- Energia gerada hoje por represa
-SELECT R.Nome AS Represa, E.data, E.Energia_mwb, 
-       IF(E.estimativa = 1, 'Estimado', 'Real') AS Tipo
-FROM EnergiaGerada E
-JOIN Represa R ON E.idRepresa = R.idRepresa
-WHERE E.data = CURDATE();
