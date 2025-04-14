@@ -3,7 +3,7 @@ function cadastro() {
   var cnpj = ipt_cnpj.value;
   var senha = ipt_senha.value;
   var confirmeSenha = ipt_confirmeSenha.value;
-  
+
   var resposta1 = '';
   var resposta2 = '';
   var resposta3 = '';
@@ -54,5 +54,7 @@ function cadastro() {
   div_resposta3.innerHTML = resposta3;
   div_resposta4.innerHTML = resposta4;
 
-  console.log("ok");
+  if(resposta1 == '' && resposta2 == '' && resposta3 == '' && resposta4 == ''){
+    window.location = "../pages/login.html"
+  }
 }

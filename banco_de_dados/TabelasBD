@@ -1,3 +1,6 @@
+create database hydroscan;
+use hydroscan;
+
 -- TABELA: Empresa
 CREATE TABLE Empresa (
     CNPJ CHAR(14) PRIMARY KEY,
@@ -78,3 +81,15 @@ INSERT INTO Leitura (idSensor, data_hora, nivel_agua_m, status_geracao) VALUES
 (1, NOW(), 42.50, 'gerando'),
 (1, NOW() - INTERVAL 1 DAY, 41.80, 'gerando'),
 (2, NOW(), 35.20, 'parada');
+
+create table Api (
+idApi int primary key auto_increment,
+nivel_da_agua int
+);
+
+SELECT * FROM Empresa;
+SELECT * FROM Usuario;
+SELECT * FROM Represa;
+SELECT * FROM Sensor;
+SELECT * FROM Leitura;
+SELECT * FROM Api;

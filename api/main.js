@@ -22,7 +22,7 @@ const serial = async (
             host: '127.0.0.1',
             user: 'aluno',
             password: 'Sptech#2024',
-            database: 'testeApi',
+            database: 'hydroscan',
             port: 3307
         }
     ).promise();
@@ -62,7 +62,7 @@ const serial = async (
 
             // este insert irá inserir os dados na tabela "teste2"
             await poolBancoDados.execute(
-                'INSERT INTO teste2 (dados) VALUES (?)',
+                'INSERT INTO Api (nivel_da_agua) VALUES (?)',
                 [sensorDigital]
                 
             );
