@@ -262,102 +262,155 @@ body {
 }
 
 /* ------------------ TABELA DE REGISTROS ------------------ */
-
 .secao-tabela {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 24px;
-	margin-top: 32px;
-	width: 100%;
-	color: var(--preto);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 32px;
+    width: 100%;
+    color: var(--preto);
 }
 
 .secao-tabela > div {
-	flex-grow: 1;
-	flex-basis: 500px;
-	border-radius: 20px;
-	background: var(--branco);
-	padding: 24px;
-	overflow-x: auto;
-	box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    flex-grow: 1;
+    flex-basis: 500px;
+    border-radius: 20px;
+    background: var(--branco);
+    padding: 24px;
+    overflow-x: auto;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
 }
 
 .cabecalho {
-	display: flex;
-	align-items: center;
-	gap: 16px;
-	margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
 .cabecalho h3 {
-	font-size: 22px;
-	font-weight: 600;
-	margin-right: auto;
-	color: var(--azul);
+    font-size: 22px;
+    font-weight: 600;
+    margin-right: auto;
+    color: var(--azul);
 }
 
 .cabecalho .icone {
-	cursor: pointer;
-	font-size: 20px;
-	color: var(--cinza-escuro);
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--cinza-escuro);
 }
 
 /* Tabela */
 .tabela-pedidos table {
-	width: 100%;
-	border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .tabela-pedidos th {
-	padding-bottom: 12px;
-	font-size: 13px;
-	text-align: left;
-	border-bottom: 2px solid var(--cinza);
-	color: var(--azul);
+    padding-bottom: 12px;
+    font-size: 13px;
+    text-align: left;
+    border-bottom: 2px solid var(--cinza);
+    color: var(--azul);
 }
 
 .tabela-pedidos td {
-	padding: 16px 0;
-	font-size: 14px;
+    padding: 16px 0;
+    font-size: 14px;
 }
 
 .tabela-pedidos tr td:first-child {
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	padding-left: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-left: 6px;
 }
 
 .tabela-pedidos img {
-	width: 36px;
-	height: 36px;
-	border-radius: 50%;
-	object-fit: cover;
-	border: 1px solid var(--cinza);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--cinza);
 }
 
 .tabela-pedidos tbody tr:hover {
-	background: var(--cinza);
+    background: var(--cinza);
 }
 
+/* Status */
 .status {
-	font-size: 11px;
-	padding: 6px 16px;
-	color: #fff;
-	border-radius: 20px;
-	font-weight: 600;
-	display: inline-block;
+    font-size: 11px;
+    padding: 6px 16px;
+    color: #fff;
+    border-radius: 20px;
+    font-weight: 600;
+    display: inline-block;
 }
 
 .status.normal {
-	background: var(--azul);
+    background: var(--azul);
 }
-.status.alerta{
-	background: var(--amarelo);
-	color: #000;
+
+.status.alerta {
+    background: var(--amarelo);
+    color: #000;
 }
+
 .status.atencao {
-	background: var(--laranja);
+    background: var(--laranja);
+}
+
+/* Detalhes da Usina */
+details {
+    margin-top: 24px;
+    background: var(--branco);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+details summary {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--azul);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+/* Gráficos e Cards */
+.container-graficos {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.card-grafico {
+    flex-basis: 48%;
+    background: var(--branco);
+    padding: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    border-radius: 12px;
+}
+
+.card-grafico h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: var(--azul);
+}
+
+.card-grafico canvas {
+    width: 100%;
+    height: 200px;
+}
+
+.descricao-grafico {
+    font-size: 12px;
+    color: var(--cinza-escuro);
 }
 
 
