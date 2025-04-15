@@ -11,7 +11,7 @@ function login(){
     if (listaUsuario.includes(email) && senha == '123'){
       resposta = `Usuário reconhecido`
       alert('Usuario Reconhecido')
-      window.location = "../pages/graficos.html"
+      window.location = "../pages/registros.html"
     }else resposta =`Email ou senha incorretos`; break
   }
   div_resposta.innerHTML = resposta
