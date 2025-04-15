@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💧Dashboard - HydroScan💧</title>
+    <title>Registros - HydroScan</title>
     <link rel="stylesheet" href="../css/pages.css">
     <!-- Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -20,7 +20,6 @@
             </a>
             <a href="../pages/calculadora.html">Calculadora</a>
             <a href="../pages/sobre_nos.html">Sobre Nós</a>
-            <a href="../pages/graficos.html">Gráficos</a>
 
         </nav>
         <nav class="nav-direita">
@@ -30,6 +29,7 @@
 
     <section id="container">
         <main>
+            
             <!-- Indicadores Rápidos -->
             <ul class="lista-informacoes">
                 <li>
@@ -37,8 +37,8 @@
                         <i class='bx bx-water'></i>
                     </div>
                     <span class="texto">
-                        <h3>75%</h3>
-                        <p>Nível médio dos reservatórios</p>
+                        <h3>103</h3>
+                        <p>Sensores sendo utilizados</p>
                     </span>
                 </li>
                 <li>
@@ -46,8 +46,8 @@
                         <i class='bx bxs-bar-chart-alt-2'></i>
                     </div>
                     <span class="texto">
-                        <h3>2800 MW</h3>
-                        <p>Produção atual de energia</p>
+                        <h3>100</h3>
+                        <p>Nível da água adequado</p>
                     </span>
                 </li>
                 <li>
@@ -90,37 +90,26 @@
                             </tr> -->
                             
                             <details>
-                                <summary>
+                                <summary class="1">
                                     <p>Usina X</p>
-                                    <img src="../img/usina1.png" alt="Reservatório">
+                                    <img src="../img/usina1.png" alt="Reservatório logo">
                                 </summary>
                                 <p>
                                     <!--dashboard-->
                                     <div class="container-graficos">
                                         <div class="card-grafico">
                                             <h2>Histórico de Volume de Água</h2>
-                                            <canvas id="graficoHistorico"></canvas>
+                                            <canvas id="graficoHistorico1"></canvas>
                                             <p class="descricao-grafico">
-                                                Este gráfico mostra o volume mensal de água nos reservatórios nos últimos seis meses, permitindo
-                                                analisar a variação hídrica em cada período. Com ele, é possível identificar quedas no nível de
-                                                água, muitas vezes ligadas à redução de chuvas ou maior demanda de consumo. Essas informações
-                                                ajudam os operadores a prever impactos na geração de energia e a tomar medidas preventivas, como
-                                                redistribuir a carga entre usinas ou acionar fontes alternativas. Além disso, a análise
-                                                histórica contribui para o planejamento de médio e longo prazo, apoiando decisões estratégicas e
-                                                políticas públicas em períodos de escassez hídrica.
+                                                Descrição Histórico de Volume de Água
                                             </p>
                                         </div>
                         
                                         <div class="card-grafico">
                                             <h2>Previsão de Produção Energética</h2>
-                                            <canvas id="graficoPrevisao"></canvas>
+                                            <canvas id="graficoPrevisao1"></canvas>
                                             <p class="descricao-grafico">
-                                                Neste gráfico, visualizamos a projeção da produção energética com base no histórico dos níveis
-                                                dos reservatórios. Essa análise permite antecipar possíveis quedas na geração, auxiliando no
-                                                planejamento estratégico do setor. Com ela, é possível adotar medidas preventivas, como o uso de
-                                                fontes alternativas, além de garantir maior eficiência na distribuição de energia. A projeção
-                                                também apoia decisões públicas e operacionais em momentos de escassez hídrica, promovendo uma
-                                                gestão mais sustentável e segura dos recursos energéticos.
+                                                Descrição da Previsão de Produção Energética
                                             </p>
                                         </div>
                                     </div>
@@ -136,28 +125,17 @@
                                     <div class="container-graficos">
                                         <div class="card-grafico">
                                             <h2>Histórico de Volume de Água</h2>
-                                            <canvas id="graficoHistorico"></canvas>
+                                            <canvas id="graficoHistorico2"></canvas>
                                             <p class="descricao-grafico">
-                                                Este gráfico mostra o volume mensal de água nos reservatórios nos últimos seis meses, permitindo
-                                                analisar a variação hídrica em cada período. Com ele, é possível identificar quedas no nível de
-                                                água, muitas vezes ligadas à redução de chuvas ou maior demanda de consumo. Essas informações
-                                                ajudam os operadores a prever impactos na geração de energia e a tomar medidas preventivas, como
-                                                redistribuir a carga entre usinas ou acionar fontes alternativas. Além disso, a análise
-                                                histórica contribui para o planejamento de médio e longo prazo, apoiando decisões estratégicas e
-                                                políticas públicas em períodos de escassez hídrica.
+                                                Descrição do Histórico de Volume de Água
                                             </p>
                                         </div>
                         
                                         <div class="card-grafico">
                                             <h2>Previsão de Produção Energética</h2>
-                                            <canvas id="graficoPrevisao"></canvas>
+                                            <canvas id="graficoPrevisao2"></canvas>
                                             <p class="descricao-grafico">
-                                                Neste gráfico, visualizamos a projeção da produção energética com base no histórico dos níveis
-                                                dos reservatórios. Essa análise permite antecipar possíveis quedas na geração, auxiliando no
-                                                planejamento estratégico do setor. Com ela, é possível adotar medidas preventivas, como o uso de
-                                                fontes alternativas, além de garantir maior eficiência na distribuição de energia. A projeção
-                                                também apoia decisões públicas e operacionais em momentos de escassez hídrica, promovendo uma
-                                                gestão mais sustentável e segura dos recursos energéticos.
+                                                Descrição da Previsão de Produção Energética
                                             </p>
                                         </div>
                                     </div>
@@ -173,33 +151,23 @@
                                     <div class="container-graficos">
                                         <div class="card-grafico">
                                             <h2>Histórico de Volume de Água</h2>
-                                            <canvas id="graficoHistorico"></canvas>
+                                            <canvas id="graficoHistorico3"></canvas>
                                             <p class="descricao-grafico">
-                                                Este gráfico mostra o volume mensal de água nos reservatórios nos últimos seis meses, permitindo
-                                                analisar a variação hídrica em cada período. Com ele, é possível identificar quedas no nível de
-                                                água, muitas vezes ligadas à redução de chuvas ou maior demanda de consumo. Essas informações
-                                                ajudam os operadores a prever impactos na geração de energia e a tomar medidas preventivas, como
-                                                redistribuir a carga entre usinas ou acionar fontes alternativas. Além disso, a análise
-                                                histórica contribui para o planejamento de médio e longo prazo, apoiando decisões estratégicas e
-                                                políticas públicas em períodos de escassez hídrica.
+                                                Descrição Histórico de Volume de Água
                                             </p>
                                         </div>
                         
                                         <div class="card-grafico">
                                             <h2>Previsão de Produção Energética</h2>
-                                            <canvas id="graficoPrevisao"></canvas>
+                                            <canvas id="graficoPrevisao3"></canvas>
                                             <p class="descricao-grafico">
-                                                Neste gráfico, visualizamos a projeção da produção energética com base no histórico dos níveis
-                                                dos reservatórios. Essa análise permite antecipar possíveis quedas na geração, auxiliando no
-                                                planejamento estratégico do setor. Com ela, é possível adotar medidas preventivas, como o uso de
-                                                fontes alternativas, além de garantir maior eficiência na distribuição de energia. A projeção
-                                                também apoia decisões públicas e operacionais em momentos de escassez hídrica, promovendo uma
-                                                gestão mais sustentável e segura dos recursos energéticos.
+                                                Descrição da Previsão de Produção Energética
                                             </p>
                                         </div>
                                     </div>
                                 </p>
                               </details>
+
                               <details>
                                 <summary>
                                     <p>Usina X</p>
@@ -210,28 +178,44 @@
                                     <div class="container-graficos">
                                         <div class="card-grafico">
                                             <h2>Histórico de Volume de Água</h2>
-                                            <canvas id="graficoHistorico"></canvas>
+                                            <canvas id="graficoHistorico4"></canvas>
                                             <p class="descricao-grafico">
-                                                Este gráfico mostra o volume mensal de água nos reservatórios nos últimos seis meses, permitindo
-                                                analisar a variação hídrica em cada período. Com ele, é possível identificar quedas no nível de
-                                                água, muitas vezes ligadas à redução de chuvas ou maior demanda de consumo. Essas informações
-                                                ajudam os operadores a prever impactos na geração de energia e a tomar medidas preventivas, como
-                                                redistribuir a carga entre usinas ou acionar fontes alternativas. Além disso, a análise
-                                                histórica contribui para o planejamento de médio e longo prazo, apoiando decisões estratégicas e
-                                                políticas públicas em períodos de escassez hídrica.
+                                                Descrição Histórico de Volume de Água
                                             </p>
                                         </div>
                         
                                         <div class="card-grafico">
                                             <h2>Previsão de Produção Energética</h2>
-                                            <canvas id="graficoPrevisao"></canvas>
+                                            <canvas id="graficoPrevisao4"></canvas>
                                             <p class="descricao-grafico">
-                                                Neste gráfico, visualizamos a projeção da produção energética com base no histórico dos níveis
-                                                dos reservatórios. Essa análise permite antecipar possíveis quedas na geração, auxiliando no
-                                                planejamento estratégico do setor. Com ela, é possível adotar medidas preventivas, como o uso de
-                                                fontes alternativas, além de garantir maior eficiência na distribuição de energia. A projeção
-                                                também apoia decisões públicas e operacionais em momentos de escassez hídrica, promovendo uma
-                                                gestão mais sustentável e segura dos recursos energéticos.
+                                                Descrição da Previsão de Produção Energética
+                                            </p>
+                                        </div>
+                                    </div>
+                                </p>
+                              </details>
+                              
+                              <details>
+                                <summary>
+                                    <p>Usina X</p>
+                                    <img src="../img/usina1.png" alt="Reservatório">
+                                </summary>
+                                <p>
+                                    <!--dashboard-->
+                                    <div class="container-graficos">
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Volume de Água</h2>
+                                            <canvas id="graficoHistorico5"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
+                                        </div>
+                        
+                                        <div class="card-grafico">
+                                            <h2>Previsão de Produção Energética</h2>
+                                            <canvas id="graficoPrevisao5"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição da Previsão de Produção Energética
                                             </p>
                                         </div>
                                     </div>
@@ -255,8 +239,8 @@
 
 
     <script>
-        const ctxReservatorio = document.getElementById('graficoHistorico').getContext('2d');
-        const ctxEnergia = document.getElementById('graficoPrevisao').getContext('2d');
+        const ctxReservatorio = document.getElementById('graficoHistorico1').getContext('2d');
+        const ctxEnergia = document.getElementById('graficoPrevisao1').getContext('2d');
 
         new Chart(ctxReservatorio, {
             type: 'bar',
@@ -279,6 +263,180 @@
         });
 
         new Chart(ctxEnergia, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [900, 850, 700, 600, 500, 350],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.3)',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        //Dashboard 2
+        const ctxReservatorio2 = document.getElementById('graficoHistorico2').getContext('2d');
+        const ctxEnergia2 = document.getElementById('graficoPrevisao2').getContext('2d');
+
+        new Chart(ctxReservatorio2, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível dos Reservatórios (%)',
+                    data: [80, 75, 60, 50, 40, 30],
+                    backgroundColor: 'rgba(0, 99, 255, 0.7)',
+                    borderColor: 'rgba(0, 99, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        new Chart(ctxEnergia2, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [900, 850, 700, 600, 500, 350],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.3)',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+        //Dashboard 3
+        const ctxReservatorio3 = document.getElementById('graficoHistorico3').getContext('2d');
+        const ctxEnergia3 = document.getElementById('graficoPrevisao3').getContext('2d');
+
+        new Chart(ctxReservatorio3, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível dos Reservatórios (%)',
+                    data: [80, 75, 60, 50, 40, 30],
+                    backgroundColor: 'rgba(0, 99, 255, 0.7)',
+                    borderColor: 'rgba(0, 99, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        new Chart(ctxEnergia3, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [900, 850, 700, 600, 500, 350],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.3)',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        //Dashboard 4
+        const ctxReservatorio4 = document.getElementById('graficoHistorico4').getContext('2d');
+        const ctxEnergia4 = document.getElementById('graficoPrevisao4').getContext('2d');
+        new Chart(ctxReservatorio4, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível dos Reservatórios (%)',
+                    data: [80, 75, 60, 50, 40, 30],
+                    backgroundColor: 'rgba(0, 99, 255, 0.7)',
+                    borderColor: 'rgba(0, 99, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+        new Chart(ctxEnergia4, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [900, 850, 700, 600, 500, 350],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.3)',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+        //Dashboard 5
+        const ctxReservatorio5 = document.getElementById('graficoHistorico5').getContext('2d');
+        const ctxEnergia5 = document.getElementById('graficoPrevisao5').getContext('2d');
+        new Chart(ctxReservatorio5, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível dos Reservatórios (%)',
+                    data: [80, 75, 60, 50, 40, 30],
+                    backgroundColor: 'rgba(0, 99, 255, 0.7)',
+                    borderColor: 'rgba(0, 99, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+        new Chart(ctxEnergia5, {
             type: 'line',
             data: {
                 labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
