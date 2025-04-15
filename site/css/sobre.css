@@ -4,28 +4,26 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  /* Cores principais */
-  :root {
+}
+
+/* Cores principais */
+:root {
     --cor-primaria: #0077b6;
     --cor-secundaria: #90e0ef;
     --cor-fundo: #f0f8ff;
     --cor-texto: #1b262c;
     --cor-footer: #023e8a;
-  }
-  
-  /* Estilo do body */
-  body {
+}
+
+/* Body */
+body {
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-  }
-  
-  /* Navbar */
+}
 
 /* Navbar */
 .navbar{
@@ -40,7 +38,6 @@
     list-style: none;
     background-color: #0c8ea1;
     align-items: center;
-    
 }
 
 .navbar a{
@@ -48,8 +45,7 @@
     text-decoration: none;
 }
 
-/* Lado Esquerdo*/
-
+/* Lado Esquerdo */
 .nav-esquerda{
     display: flex;
     justify-content: flex-start;
@@ -73,23 +69,23 @@
     margin: 10px;
 }
 
-.cadastrar{
+/*Botão login e cadastro*/
+.cadastrar {
     height: 40px;
     width: 80px;
-    border: 1px solid;
-    border-color: #023a4d;
+    border: 1px solid #023a4d;
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.cadastrar a{
     font-size: 15px;
+    color: #023a4d;
+    text-decoration: none;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.login{
+.login {
     height: 40px;
     width: 80px;
     border-radius: 20px;
@@ -98,39 +94,14 @@
     align-items: center;
     justify-content: center;
     margin-left: 10px;
-}
-
-.login a{
     font-size: 15px;
     color: white;
+    text-decoration: none;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-  /* Container principal */
-  .container {
-    max-width: 900px;
-    margin: 4rem auto;
-    padding: 2rem;
-    background-color: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    animation: fadeIn 1s ease-in-out;
-  }
-  
-  .container h1 {
-    color: var(--cor-primaria);
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .container p {
-    font-size: 1.2rem;
-    text-align: justify;
-    color: #333;
-  }
-  /* SOBRE NÓS */
-
+/* Container principal */
 .container-sobre {
     width: 100%;
     min-height: 100vh;
@@ -160,21 +131,32 @@
     line-height: 1.6;
 }
 
+/* Cards */
 .equipe {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 30px;
-    width: 100%;
-    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
 }
+
+.linha-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 90px; 
+    margin-bottom: 40px;
+}
+
 
 .card-integrante {
     background-color: #f4f9fa;
     border-radius: 20px;
     padding: 20px;
+    width: 300px;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease;
+    margin-bottom: 20px; /* Espaço entre os cards na vertical */
 }
 
 .card-integrante:hover {
@@ -189,19 +171,7 @@
     margin-bottom: 15px;
 }
 
-.card-integrante h3 {
-    color: #0c8ea1;
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.card-integrante p {
-    font-size: 15px;
-    color: #022531;
-    line-height: 1.4;
-}
-
-/* FOOTER */
+/* Footer */
 .footer {
     position: fixed;
     bottom: 0;
