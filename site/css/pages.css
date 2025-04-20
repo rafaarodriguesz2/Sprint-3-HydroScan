@@ -206,8 +206,8 @@ body {
 	color: var(--azul);
 }
 .lista-informacoes li:nth-child(2) .icone {
-	background: var(--amarelo-claro);
-	color: var(--amarelo);
+	background: lightgreen;
+	color: green;
 }
 .lista-informacoes li:nth-child(3) .icone {
 	background: var(--laranja-claro);
@@ -221,6 +221,14 @@ body {
 .lista-informacoes p {
 	font-size: 14px;
 	color: var(--cinza-escuro);
+}
+
+.texto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
 }
 
 /* ------------------ GRÁFICOS EM GRADE ------------------ */
@@ -379,8 +387,13 @@ details summary {
     display: flex;
     align-items: center;
     gap: 12px;
+    justify-content: space-between;
 }
 
+.div-img-nome-usina{
+    display: flex;
+    flex-direction: row;
+}
 
 /* Gráficos e Cards */
 .container-graficos {

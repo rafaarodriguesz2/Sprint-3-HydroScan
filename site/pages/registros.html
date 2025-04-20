@@ -37,8 +37,8 @@
                         <i class='bx bx-water'></i>
                     </div>
                     <span class="texto">
-                        <h3>103</h3>
-                        <p>Sensores sendo utilizados</p>
+                        <h3>5</h3>
+                        <p>Usinas Cadastradas</p>
                     </span>
                 </li>
                 <li>
@@ -46,8 +46,8 @@
                         <i class='bx bxs-bar-chart-alt-2'></i>
                     </div>
                     <span class="texto">
-                        <h3>100</h3>
-                        <p>Nível da água adequado</p>
+                        <h3>2</h3>
+                        <p>Usinas com nível da água adequado</p>
                     </span>
                 </li>
                 <li>
@@ -56,7 +56,7 @@
                     </div>
                     <span class="texto">
                         <h3>3</h3>
-                        <p>Alertas ativos</p>
+                        <p>Usinas com alertas em nível da água</p>
                     </span>
                 </li>
             </ul>
@@ -82,15 +82,19 @@
 
                                 <details>
                                     <summary class="1">
-                                        <p>Usina X</p>
-                                        <img src="../img/usina1.png" alt="Reservatório logo">
+                                        <div class="div-img-nome-usina">
+                                            <p>Usina 1</p>
+                                            <img src="../img/usina1.png" alt="Reservatório logo">
+                                        </div>
+                                        <p><strong>Data:</strong> 03/04/2025</p>
+                                        <p><strong>Status:</strong> <span class="status normal">Normal</span></p>
                                     </summary>
-                                    <p>
-                                        <!--dashboard-->
+
+                                    <!--dashboard-->
                                     <div class="container-graficos">
                                         <div class="card-grafico">
-                                            <h2>Histórico de Volume de Água</h2>
-                                            <canvas id="graficoHistorico1"></canvas>
+                                            <h2>Volume de Água Atual</h2>
+                                            <canvas id="graficoNivel1"></canvas>
                                             <p class="descricao-grafico">
                                                 Descrição Histórico de Volume de Água
                                             </p>
@@ -103,22 +107,39 @@
                                                 Descrição da Previsão de Produção Energética
                                             </p>
                                         </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Volume de Água No Ano Passado</h2>
+                                            <canvas id="graficoHistorico1"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Ininiciar plano de Contingência?</h2>
+                                            <canvas id="graficoPizza1"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
+                                        </div>
                                     </div>
-                                    </p>
                                 </details>
                                 <details>
                                     <summary>
-                                        <p>Usina X</p>
-                                        <img src="../img/usina1.png" alt="Reservatório">
+                                        <div class="div-img-nome-usina">
+                                            <p>Usina 2</p>
+                                            <img src="../img/usina2.png" alt="Reservatório logo">
+                                        </div>
+                                        <p><strong>Data:</strong> 03/04/2025</p>
+                                        <p><strong>Status:</strong> <span class="status normal">Normal</span></p>
                                     </summary>
                                     <p>
                                         <!--dashboard-->
                                     <div class="container-graficos">
                                         <div class="card-grafico">
-                                            <h2>Histórico de Volume de Água</h2>
-                                            <canvas id="graficoHistorico2"></canvas>
+                                            <h2>Volume de Água Atual</h2>
+                                            <canvas id="graficoNivel2"></canvas>
                                             <p class="descricao-grafico">
-                                                Descrição do Histórico de Volume de Água
+                                                Descrição Histórico de Volume de Água
                                             </p>
                                         </div>
 
@@ -129,20 +150,38 @@
                                                 Descrição da Previsão de Produção Energética
                                             </p>
                                         </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Volume de Água No Ano Passado</h2>
+                                            <canvas id="graficoHistorico2"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Ininiciar plano de Contingência?</h2>
+                                            <canvas id="graficoPizza2"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
+                                        </div>
                                     </div>
                                     </p>
                                 </details>
                                 <details>
                                     <summary>
-                                        <p>Usina X</p>
-                                        <img src="../img/usina1.png" alt="Reservatório">
+                                        <div class="div-img-nome-usina">
+                                            <p>Usina 3</p>
+                                            <img src="../img/usina3.png" alt="Reservatório logo">
+                                        </div>
+                                        <p><strong>Data:</strong> 03/04/2025</p>
+                                        <p><strong>Status:</strong> <span class="status alerta">Alerta</span></p>
                                     </summary>
                                     <p>
                                         <!--dashboard-->
                                     <div class="container-graficos">
                                         <div class="card-grafico">
-                                            <h2>Histórico de Volume de Água</h2>
-                                            <canvas id="graficoHistorico3"></canvas>
+                                            <h2>Volume de Água Atual</h2>
+                                            <canvas id="graficoNivel3"></canvas>
                                             <p class="descricao-grafico">
                                                 Descrição Histórico de Volume de Água
                                             </p>
@@ -155,21 +194,39 @@
                                                 Descrição da Previsão de Produção Energética
                                             </p>
                                         </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Volume de Água No Ano Passado</h2>
+                                            <canvas id="graficoHistorico3"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Ininiciar plano de Contingência?</h2>
+                                            <canvas id="graficoPizza3"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
+                                        </div>
                                     </div>
                                     </p>
                                 </details>
 
                                 <details>
                                     <summary>
-                                        <p>Usina X</p>
-                                        <img src="../img/usina1.png" alt="Reservatório">
+                                        <div class="div-img-nome-usina">
+                                            <p>Usina 4</p>
+                                            <img src="../img/usina4.png" alt="Reservatório logo">
+                                        </div>
+                                        <p><strong>Data:</strong> 03/04/2025</p>
+                                        <p><strong>Status:</strong> <span class="status alerta">Alerta</span></p>
                                     </summary>
                                     <p>
                                         <!--dashboard-->
                                     <div class="container-graficos">
                                         <div class="card-grafico">
-                                            <h2>Histórico de Volume de Água</h2>
-                                            <canvas id="graficoHistorico4"></canvas>
+                                            <h2>Volume de Água Atual</h2>
+                                            <canvas id="graficoNivel4"></canvas>
                                             <p class="descricao-grafico">
                                                 Descrição Histórico de Volume de Água
                                             </p>
@@ -182,30 +239,48 @@
                                                 Descrição da Previsão de Produção Energética
                                             </p>
                                         </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Volume de Água No Ano Passado</h2>
+                                            <canvas id="graficoHistorico4"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Ininiciar plano de Contingência?</h2>
+                                            <canvas id="graficoPizza4"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
+                                        </div>
                                     </div>
                                     </p>
                                 </details>
 
                                 <details>
                                     <summary>
-                                        <p>Usina X</p>
-                                        <img src="../img/usina1.png" alt="Reservatório">
-                                            <p><strong>Data:</strong> 03/04/2025</p>
-                                            <p><strong>Status:</strong> <span class="status alerta">Alerta</span></p>
-                                        
+                                        <div class="div-img-nome-usina">
+                                            <p>Usina 5</p>
+                                            <img src="../img/usina5.png" alt="Reservatório logo">
+                                        </div>
+                                        <p><strong>Data:</strong> 03/04/2025</p>
+                                        <p><strong>Status:</strong> <span class="status alerta">Alerta</span></p>
+
                                     </summary>
 
-                                
+
                                     <!-- Dashboard -->
+                                    <p>
+                                        <!--dashboard-->
                                     <div class="container-graficos">
                                         <div class="card-grafico">
-                                            <h2>Histórico de Volume de Água</h2>
-                                            <canvas id="graficoHistorico5"></canvas>
+                                            <h2>Volume de Água Atual</h2>
+                                            <canvas id="graficoNivel5"></canvas>
                                             <p class="descricao-grafico">
-                                                Descrição do Histórico de Volume de Água
+                                                Descrição Histórico de Volume de Água
                                             </p>
                                         </div>
-                                
+
                                         <div class="card-grafico">
                                             <h2>Previsão de Produção Energética</h2>
                                             <canvas id="graficoPrevisao5"></canvas>
@@ -213,7 +288,22 @@
                                                 Descrição da Previsão de Produção Energética
                                             </p>
                                         </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Volume de Água No Ano Passado</h2>
+                                            <canvas id="graficoHistorico5"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Ininiciar plano de Contingência?</h2>
+                                            <canvas id="graficoPizza5"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
+                                        </div>
                                     </div>
+                                    </p>
                                 </details>
                         </tbody>
                     </table>
@@ -231,19 +321,23 @@
 
 
     <script>
+        //DashBoard 1
         const ctxReservatorio = document.getElementById('graficoHistorico1').getContext('2d');
         const ctxEnergia = document.getElementById('graficoPrevisao1').getContext('2d');
+        const ctxNivel = document.getElementById('graficoNivel1').getContext('2d');
+        const ctxPizza = document.getElementById('graficoPizza1').getContext('2d');
 
-        new Chart(ctxReservatorio, {
+        new Chart(ctxNivel, {
             type: 'bar',
             data: {
                 labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
                 datasets: [{
-                    label: 'Nível dos Reservatórios (%)',
-                    data: [80, 75, 60, 50, 40, 30],
-                    backgroundColor: 'rgba(0, 99, 255, 0.7)',
-                    borderColor: 'rgba(0, 99, 255, 1)',
-                    borderWidth: 1
+                    label: 'Produção de Energia (MW)',
+                    data: [900, 850, 700, 600, 500, 350],
+                    borderColor: '#008000',
+                    backgroundColor: '#90EE90',
+                    borderWidth: 2,
+                    fill: true
                 }]
             },
             options: {
@@ -275,11 +369,7 @@
             }
         });
 
-        //Dashboard 2
-        const ctxReservatorio2 = document.getElementById('graficoHistorico2').getContext('2d');
-        const ctxEnergia2 = document.getElementById('graficoPrevisao2').getContext('2d');
-
-        new Chart(ctxReservatorio2, {
+        new Chart(ctxReservatorio, {
             type: 'bar',
             data: {
                 labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
@@ -289,6 +379,58 @@
                     backgroundColor: 'rgba(0, 99, 255, 0.7)',
                     borderColor: 'rgba(0, 99, 255, 1)',
                     borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+
+
+        new Chart(ctxPizza, {
+            type: 'pie',
+            data: {
+                labels: ['Sim', 'Não'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [300, 900],
+                    backgroundColor: [
+                        'rgb(75, 192, 192)',
+                        'rgb(255, 99, 132)'
+                    ],
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        //Dashboard 2
+        const ctxReservatorio2 = document.getElementById('graficoHistorico2').getContext('2d');
+        const ctxEnergia2 = document.getElementById('graficoPrevisao2').getContext('2d');
+        const ctxNivel2 = document.getElementById('graficoNivel2').getContext('2d');
+        const ctxPizza2 = document.getElementById('graficoPizza2').getContext('2d');
+
+        new Chart(ctxNivel2, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [900, 850, 700, 600, 500, 350],
+                    borderColor: '#008000',
+                    backgroundColor: '#90EE90',
+                    borderWidth: 2,
+                    fill: true
                 }]
             },
             options: {
@@ -319,11 +461,8 @@
                 }
             }
         });
-        //Dashboard 3
-        const ctxReservatorio3 = document.getElementById('graficoHistorico3').getContext('2d');
-        const ctxEnergia3 = document.getElementById('graficoPrevisao3').getContext('2d');
 
-        new Chart(ctxReservatorio3, {
+        new Chart(ctxReservatorio2, {
             type: 'bar',
             data: {
                 labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
@@ -333,6 +472,56 @@
                     backgroundColor: 'rgba(0, 99, 255, 0.7)',
                     borderColor: 'rgba(0, 99, 255, 1)',
                     borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+        
+        new Chart(ctxPizza2, {
+            type: 'pie',
+            data: {
+                labels: ['Sim', 'Não'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [300, 900],
+                    backgroundColor: [
+                        'rgb(75, 192, 192)',
+                        'rgb(255, 99, 132)'
+                    ],
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        //Dashboard 3
+        const ctxReservatorio3 = document.getElementById('graficoHistorico3').getContext('2d');
+        const ctxEnergia3 = document.getElementById('graficoPrevisao3').getContext('2d');
+        const ctxNivel3 = document.getElementById('graficoNivel3').getContext('2d');
+        const ctxPizza3 = document.getElementById('graficoPizza3').getContext('2d');
+
+        new Chart(ctxNivel3, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [900, 850, 700, 600, 500, 350],
+                    borderColor: '#008000',
+                    backgroundColor: '#90EE90',
+                    borderWidth: 2,
+                    fill: true
                 }]
             },
             options: {
@@ -364,10 +553,7 @@
             }
         });
 
-        //Dashboard 4
-        const ctxReservatorio4 = document.getElementById('graficoHistorico4').getContext('2d');
-        const ctxEnergia4 = document.getElementById('graficoPrevisao4').getContext('2d');
-        new Chart(ctxReservatorio4, {
+        new Chart(ctxReservatorio3, {
             type: 'bar',
             data: {
                 labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
@@ -386,6 +572,57 @@
                 }
             }
         });
+        
+        new Chart(ctxPizza3, {
+            type: 'pie',
+            data: {
+                labels: ['Sim', 'Não'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [900, 300],
+                    backgroundColor: [
+                        'rgb(75, 192, 192)',
+                        'rgb(255, 99, 132)'
+                    ],
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        //Dashboard 4
+        const ctxReservatorio4 = document.getElementById('graficoHistorico4').getContext('2d');
+        const ctxEnergia4 = document.getElementById('graficoPrevisao4').getContext('2d');
+        const ctxNivel4 = document.getElementById('graficoNivel4').getContext('2d');
+        const ctxPizza4 = document.getElementById('graficoPizza4').getContext('2d');
+
+        new Chart(ctxNivel4, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [900, 850, 700, 600, 500, 350],
+                    borderColor: '#008000',
+                    backgroundColor: '#90EE90',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
         new Chart(ctxEnergia4, {
             type: 'line',
             data: {
@@ -406,9 +643,97 @@
                 }
             }
         });
+
+        new Chart(ctxReservatorio4, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível dos Reservatórios (%)',
+                    data: [80, 75, 60, 50, 40, 30],
+                    backgroundColor: 'rgba(0, 99, 255, 0.7)',
+                    borderColor: 'rgba(0, 99, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+        
+        new Chart(ctxPizza4, {
+            type: 'pie',
+            data: {
+                labels: ['Sim', 'Não'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [900, 300],
+                    backgroundColor: [
+                        'rgb(75, 192, 192)',
+                        'rgb(255, 99, 132)'
+                    ],
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
         //Dashboard 5
         const ctxReservatorio5 = document.getElementById('graficoHistorico5').getContext('2d');
         const ctxEnergia5 = document.getElementById('graficoPrevisao5').getContext('2d');
+        const ctxNivel5 = document.getElementById('graficoNivel5').getContext('2d');
+        const ctxPizza5 = document.getElementById('graficoPizza5').getContext('2d');
+
+        new Chart(ctxNivel5, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [900, 850, 700, 600, 500, 350],
+                    borderColor: '#008000',
+                    backgroundColor: '#90EE90',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        new Chart(ctxEnergia5, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [900, 850, 700, 600, 500, 350],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.3)',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
         new Chart(ctxReservatorio5, {
             type: 'bar',
             data: {
@@ -428,15 +753,18 @@
                 }
             }
         });
-        new Chart(ctxEnergia5, {
-            type: 'line',
+        
+        new Chart(ctxPizza5, {
+            type: 'pie',
             data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                labels: ['Sim', 'Não'],
                 datasets: [{
                     label: 'Produção de Energia (MW)',
-                    data: [900, 850, 700, 600, 500, 350],
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.3)',
+                    data: [900, 300],
+                    backgroundColor: [
+                        'rgb(75, 192, 192)',
+                        'rgb(255, 99, 132)'
+                    ],
                     borderWidth: 2,
                     fill: true
                 }]
