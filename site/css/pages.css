@@ -368,26 +368,7 @@ details summary {
     margin-right: 8px;
     vertical-align: middle;
 }
-/* ------------------ Botão ------------------ */
-.btn-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.btn-toggle i {
-    font-size: 1.6rem;
-    color: var(--azul);
-    transition: color 0.3s ease;
-}
-
-.btn-toggle:hover i {
-    color: var(--amarelo); 
-}
 
 /* ------------------ STATUS ------------------ */
 
