@@ -6,20 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registros - HydroScan</title>
     <link rel="stylesheet" href="../css/pages.css">
+    <!-- Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" href="../img/Logo-pequena.png" type="image/x-icon">
 </head>
 
 <body>
-    <!-- NAVBAR -->
     <header class="navbar">
         <nav class="nav-esquerda">
             <a href="../index.html">
                 <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
             </a>
-            <a href="./calculadora.html">Calculadora</a>
-            <a href="./sobre_nos.html">Sobre Nós</a>
+            <a href="../pages/calculadora.html">Calculadora</a>
+            <a href="../pages/sobre_nos.html">Sobre Nós</a>
+
         </nav>
         <nav class="nav-direita">
             <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
@@ -27,246 +28,290 @@
     </header>
 
     <section id="container">
-        <!-- Descrição da página -->
-        <section class="banner">
-            <h1>HydroScan - Monitoramento de Usinas Hidrelétricas</h1>
-            <p>Controle e monitoramento do nível de água das usinas para garantir a eficiência energética.</p>
-        </section>
-        
+        <main>
 
-    <!-- KPIs -->
-    <ul class="lista-informacoes">
-        <li>
-            <div class="icone">
-                <i class='bx bx-water'></i>
-            </div>
-            <span class="texto">
-                <h3>5</h3>
-                <p>Usinas Cadastradas</p>
-            </span>
-        </li>
-        <li>
-            <div class="icone">
-                <i class='bx bxs-bar-chart-alt-2'></i>
-            </div>
-            <span class="texto">
-                <h3>2</h3>
-                <p>Usinas com nível da água adequado</p>
-            </span>
-        </li>
-        <li>
-            <div class="icone">
-                <i class='bx bxs-error'></i>
-            </div>
-            <span class="texto">
-                <h3>3</h3>
-                <p>Usinas com alertas em nível da água</p>
-            </span>
-        </li>
-    </ul>
+            <!-- Indicadores Rápidos -->
+            <ul class="lista-informacoes">
+                <li>
+                    <div class="icone">
+                        <i class='bx bx-water'></i>
+                    </div>
+                    <span class="texto">
+                        <h3>5</h3>
+                        <p>Usinas Cadastradas</p>
+                    </span>
+                </li>
+                <li>
+                    <div class="icone">
+                        <i class='bx bxs-bar-chart-alt-2'></i>
+                    </div>
+                    <span class="texto">
+                        <h3>2</h3>
+                        <p>Usinas com nível da água adequado</p>
+                    </span>
+                </li>
+                <li>
+                    <div class="icone">
+                        <i class='bx bxs-error'></i>
+                    </div>
+                    <span class="texto">
+                        <h3>3</h3>
+                        <p>Usinas com alertas em nível da água</p>
+                    </span>
+                </li>
+            </ul>
 
             <!-- Tabela de Últimos Registros -->
             <div class="secao-tabela">
                 <div class="tabela-pedidos">
                     <div class="cabecalho">
                         <h3>Últimos Registros</h3>
-                        <i class="bx bx-search icone"></i>
-                        <i class="bx bx-filter icone"></i>
+                        <i class='bx bx-search'></i>
+                        <i class='bx bx-filter'></i>
                     </div>
-                    <table class="tabela-registros">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Reservatório</th>
                                 <th>Última Medição</th>
                                 <th>Status</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Usina 1 -->
-                        <tr class="linha-principal">
-                            <td><img src="../img/usina1.png" alt="Usina 1" class="img-usina"><strong>Usina 1</strong></td>
-                            <td>03/04/2025</td>
-                            <td><span class="status normal">Normal</span></td>
-                            <td><button class="btn-toggle"><i class="bx bx-chevron-down"></i></button></td>
-                        </tr>
-                        <tr class="linha-detalhes" style="display: none;">
-                            <td colspan="4">
-                                <div class="container-graficos">
-                                    <div class="card-grafico">
-                                        <h2>Volume de Água Atual</h2>
-                                        <canvas id="graficoNivel1"></canvas>
-                                        <p class="descricao-grafico">Descrição Histórico de Volume de Água</p>
-                                    </div>
-                                    <div class="card-grafico">
-                                        <h2>Previsão de Produção Energética</h2>
-                                        <canvas id="graficoPrevisao1"></canvas>
-                                        <p class="descricao-grafico">Descrição da Previsão de Produção Energética</p>
-                                    </div>
-                                    <div class="card-grafico">
-                                        <h2>Histórico de Volume de Água No Ano Passado</h2>
-                                        <canvas id="graficoHistorico1"></canvas>
-                                        <p class="descricao-grafico">Descrição Histórico de Volume de Água</p>
-                                    </div>
-                                    <div class="card-grafico card-pizza">
-                                        <h2>Iniciar Plano de Contingência?</h2>
-                                        <canvas id="graficoPizza1" class="grafico-pizza"></canvas>
-                                        <p class="descricao-grafico">Descrição Histórico de Volume de Água</p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                            <table id="modelTable">
 
-                        
-                            <!-- Usina 2 -->
-                            <tr class="linha-principal">
-                                <td><img src="../img/usina2.png" alt="Usina 2" class="img-usina"><strong>Usina 2</strong></td>
-                                <td>03/04/2025</td>
-                                <td><span class="status normal">Normal</span></td>
-                                <td><button class="btn-toggle"><i class="bx bx-chevron-down"></i></button></td>
-                            </tr>
-                            <tr class="linha-detalhes" style="display: none;">
-                                <td colspan="4">
+                                <details>
+                                    <summary class="1">
+                                        <div class="div-img-nome-usina">
+                                            <p>Usina 1</p>
+                                            <img src="../img/usina1.png" alt="Reservatório logo">
+                                        </div>
+                                        <p><strong>Data:</strong> 03/04/2025</p>
+                                        <p><strong>Status:</strong> <span class="status normal">Normal</span></p>
+                                    </summary>
+
+                                    <!--dashboard-->
+                                    <div class="container-graficos">
+                                        <div class="card-grafico">
+                                            <h2>Volume de Água Atual</h2>
+                                            <canvas id="graficoNivel1"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
+                                        </div>
+
+                                        <div class="card-grafico">
+                                            <h2>Previsão de Produção Energética</h2>
+                                            <canvas id="graficoPrevisao1"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição da Previsão de Produção Energética
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Volume de Água No Ano Passado</h2>
+                                            <canvas id="graficoHistorico1"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Ininiciar plano de Contingência?</h2>
+                                            <canvas id="graficoPizza1"></canvas>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
+                                        </div>
+                                    </div>
+                                </details>
+                                <details>
+                                    <summary>
+                                        <div class="div-img-nome-usina">
+                                            <p>Usina 2</p>
+                                            <img src="../img/usina2.png" alt="Reservatório logo">
+                                        </div>
+                                        <p><strong>Data:</strong> 03/04/2025</p>
+                                        <p><strong>Status:</strong> <span class="status normal">Normal</span></p>
+                                    </summary>
+                                    <p>
+                                        <!--dashboard-->
                                     <div class="container-graficos">
                                         <div class="card-grafico">
                                             <h2>Volume de Água Atual</h2>
                                             <canvas id="graficoNivel2"></canvas>
-                                            <p class="descricao-grafico">Descrição Histórico de Volume de Água</p>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
                                         </div>
+
                                         <div class="card-grafico">
                                             <h2>Previsão de Produção Energética</h2>
                                             <canvas id="graficoPrevisao2"></canvas>
-                                            <p class="descricao-grafico">Descrição da Previsão de Produção Energética</p>
+                                            <p class="descricao-grafico">
+                                                Descrição da Previsão de Produção Energética
+                                            </p>
                                         </div>
                                         <div class="card-grafico">
                                             <h2>Histórico de Volume de Água No Ano Passado</h2>
                                             <canvas id="graficoHistorico2"></canvas>
-                                            <p class="descricao-grafico">Descrição Histórico de Volume de Água</p>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
                                         </div>
-                                        <div class="card-grafico card-pizza">
-                                            <h2>Iniciar Plano de Contingência?</h2>
+                                        <div class="card-grafico">
+                                            <h2>Ininiciar plano de Contingência?</h2>
                                             <canvas id="graficoPizza2"></canvas>
-                                            <p class="descricao-grafico">Descrição Histórico de Volume de Água</p>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
                                         </div>
-                                        
                                     </div>
-                                </td>
-                            </tr>
-                        
-                            <!-- Usina 3 -->
-                            <tr class="linha-principal">
-                                <td><img src="../img/usina3.png" alt="Usina 3" class="img-usina"><strong>Usina 3</strong></td>
-                                <td>03/04/2025</td>
-                                <td><span class="status alerta">Alerta</span></td>
-                                <td><button class="btn-toggle"><i class="bx bx-chevron-down"></i></button></td>
-                            </tr>
-                            <tr class="linha-detalhes" style="display: none;">
-                                <td colspan="4">
+                                    </p>
+                                </details>
+                                <details>
+                                    <summary>
+                                        <div class="div-img-nome-usina">
+                                            <p>Usina 3</p>
+                                            <img src="../img/usina3.png" alt="Reservatório logo">
+                                        </div>
+                                        <p><strong>Data:</strong> 03/04/2025</p>
+                                        <p><strong>Status:</strong> <span class="status alerta">Alerta</span></p>
+                                    </summary>
+                                    <p>
+                                        <!--dashboard-->
                                     <div class="container-graficos">
                                         <div class="card-grafico">
                                             <h2>Volume de Água Atual</h2>
                                             <canvas id="graficoNivel3"></canvas>
-                                            <p class="descricao-grafico">Descrição Histórico de Volume de Água</p>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
                                         </div>
+
                                         <div class="card-grafico">
                                             <h2>Previsão de Produção Energética</h2>
                                             <canvas id="graficoPrevisao3"></canvas>
-                                            <p class="descricao-grafico">Descrição da Previsão de Produção Energética</p>
+                                            <p class="descricao-grafico">
+                                                Descrição da Previsão de Produção Energética
+                                            </p>
                                         </div>
                                         <div class="card-grafico">
                                             <h2>Histórico de Volume de Água No Ano Passado</h2>
                                             <canvas id="graficoHistorico3"></canvas>
-                                            <p class="descricao-grafico">Descrição Histórico de Volume de Água</p>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
                                         </div>
-                                        <div class="card-grafico card-pizza">
-                                            <h2>Iniciar Plano de Contingência?</h2>
+                                        <div class="card-grafico">
+                                            <h2>Ininiciar plano de Contingência?</h2>
                                             <canvas id="graficoPizza3"></canvas>
-                                            <p class="descricao-grafico">Descrição Histórico de Volume de Água</p>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
                                         </div>
-                                        
                                     </div>
-                                </td>
-                            </tr>
-                        
-                            <!-- Usina 4 -->
-                            <tr class="linha-principal">
-                                <td><img src="../img/usina4.png" alt="Usina 4" class="img-usina"><strong>Usina 4</strong></td>
-                                <td>03/04/2025</td>
-                                <td><span class="status alerta">Alerta</span></td>
-                                <td><button class="btn-toggle"><i class="bx bx-chevron-down"></i></button></td>
-                            </tr>
-                            <tr class="linha-detalhes" style="display: none;">
-                                <td colspan="4">
+                                    </p>
+                                </details>
+
+                                <details>
+                                    <summary>
+                                        <div class="div-img-nome-usina">
+                                            <p>Usina 4</p>
+                                            <img src="../img/usina4.png" alt="Reservatório logo">
+                                        </div>
+                                        <p><strong>Data:</strong> 03/04/2025</p>
+                                        <p><strong>Status:</strong> <span class="status alerta">Alerta</span></p>
+                                    </summary>
+                                    <p>
+                                        <!--dashboard-->
                                     <div class="container-graficos">
                                         <div class="card-grafico">
                                             <h2>Volume de Água Atual</h2>
                                             <canvas id="graficoNivel4"></canvas>
-                                            <p class="descricao-grafico">Descrição Histórico de Volume de Água</p>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
                                         </div>
+
                                         <div class="card-grafico">
                                             <h2>Previsão de Produção Energética</h2>
                                             <canvas id="graficoPrevisao4"></canvas>
-                                            <p class="descricao-grafico">Descrição da Previsão de Produção Energética</p>
+                                            <p class="descricao-grafico">
+                                                Descrição da Previsão de Produção Energética
+                                            </p>
                                         </div>
                                         <div class="card-grafico">
                                             <h2>Histórico de Volume de Água No Ano Passado</h2>
                                             <canvas id="graficoHistorico4"></canvas>
-                                            <p class="descricao-grafico">Descrição Histórico de Volume de Água</p>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
                                         </div>
-                                        <div class="card-grafico card-pizza">
-                                            <h2>Iniciar Plano de Contingência?</h2>
+                                        <div class="card-grafico">
+                                            <h2>Ininiciar plano de Contingência?</h2>
                                             <canvas id="graficoPizza4"></canvas>
-                                            <p class="descricao-grafico">Descrição Histórico de Volume de Água</p>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
                                         </div>
-                                        
                                     </div>
-                                </td>
-                            </tr>
-                        
-                            <!-- Usina 5 -->
-                            <tr class="linha-principal">
-                                <td><img src="../img/usina5.png" alt="Usina 5" class="img-usina"><strong>Usina 5</strong></td>
-                                <td>03/04/2025</td>
-                                <td><span class="status alerta">Alerta</span></td>
-                                <td><button class="btn-toggle"><i class="bx bx-chevron-down"></i></button></td>
-                            </tr>
-                            <tr class="linha-detalhes" style="display: none;">
-                                <td colspan="4">
+                                    </p>
+                                </details>
+
+                                <details>
+                                    <summary>
+                                        <div class="div-img-nome-usina">
+                                            <p>Usina 5</p>
+                                            <img src="../img/usina5.png" alt="Reservatório logo">
+                                        </div>
+                                        <p><strong>Data:</strong> 03/04/2025</p>
+                                        <p><strong>Status:</strong> <span class="status alerta">Alerta</span></p>
+
+                                    </summary>
+
+
+                                    <!-- Dashboard -->
+                                    <p>
+                                        <!--dashboard-->
                                     <div class="container-graficos">
                                         <div class="card-grafico">
                                             <h2>Volume de Água Atual</h2>
                                             <canvas id="graficoNivel5"></canvas>
-                                            <p class="descricao-grafico">Descrição Histórico de Volume de Água</p>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
                                         </div>
+
                                         <div class="card-grafico">
                                             <h2>Previsão de Produção Energética</h2>
                                             <canvas id="graficoPrevisao5"></canvas>
-                                            <p class="descricao-grafico">Descrição da Previsão de Produção Energética</p>
+                                            <p class="descricao-grafico">
+                                                Descrição da Previsão de Produção Energética
+                                            </p>
                                         </div>
                                         <div class="card-grafico">
                                             <h2>Histórico de Volume de Água No Ano Passado</h2>
                                             <canvas id="graficoHistorico5"></canvas>
-                                            <p class="descricao-grafico">Descrição Histórico de Volume de Água</p>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
                                         </div>
-                                        <div class="card-grafico card-pizza">
-                                            <h2>Iniciar Plano de Contingência?</h2>
+                                        <div class="card-grafico">
+                                            <h2>Ininiciar plano de Contingência?</h2>
                                             <canvas id="graficoPizza5"></canvas>
-                                            <p class="descricao-grafico">Descrição Histórico de Volume de Água</p>
+                                            <p class="descricao-grafico">
+                                                Descrição Histórico de Volume de Água
+                                            </p>
                                         </div>
-                                        
                                     </div>
-                                </td>
-                            </tr>
-
-                                                        
+                                    </p>
+                                </details>
                         </tbody>
-                        
                     </table>
                 </div>
             </div>
 
-
         </main>
+
     </section>
 
 
@@ -276,26 +321,6 @@
 
 
     <script>
-
-        const botoesToggle = document.querySelectorAll('.btn-toggle');
-
-        botoesToggle.forEach((botao) => {
-            botao.addEventListener('click', function () {
-                const linhaPrincipal = this.closest('.linha-principal');
-                const linhaDetalhes = linhaPrincipal.nextElementSibling;
-
-                if (linhaDetalhes && linhaDetalhes.classList.contains('linha-detalhes')) {
-                    const visivel = linhaDetalhes.style.display === 'table-row';
-                    linhaDetalhes.style.display = visivel ? 'none' : 'table-row';
-
-                    // Alternar o ícone de seta para cima ou para baixo)
-                    const icone = this.querySelector('i');
-                    icone.classList.toggle('bx-chevron-down');
-                    icone.classList.toggle('bx-chevron-up');
-                }
-            });
-        });
-
         //DashBoard 1
         const ctxReservatorio = document.getElementById('graficoHistorico1').getContext('2d');
         const ctxEnergia = document.getElementById('graficoPrevisao1').getContext('2d');
