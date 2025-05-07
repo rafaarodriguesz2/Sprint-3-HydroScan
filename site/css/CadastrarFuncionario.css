@@ -183,11 +183,12 @@ body {
 .formulario select{
   text-align: center;
   font-family: var(--fonte-secundaria);
-  border-radius: 5px;
   margin-top: 2vh;
   padding: 0.2rem;
-  width: fit-content;
+  width: 100%;
   justify-self: center;
+  border: none;
+  border-bottom: 1px solid #757575;
 }
 
 .formulario button:hover{
