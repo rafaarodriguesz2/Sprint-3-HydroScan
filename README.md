@@ -1,5 +1,5 @@
 
-# HydroScan - Sistema de Monitoramento para Usinas Hidrelétricas
+# HydroScan - Sistema de Monitoramento para Usinas Hidrelétricas 
 
 HydroScan é um projeto acadêmico desenvolvido como parte da disciplina de **Pesquisa e Inovação I**, no curso de **Ciência da Computação** da **SPTech School**. O projeto tem como foco o desenvolvimento de um sistema informativo e visual para gerenciamento de dados relacionados a usinas hidrelétricas, abordando desde o cadastro das usinas até a exibição de dados operacionais em gráficos.
 
