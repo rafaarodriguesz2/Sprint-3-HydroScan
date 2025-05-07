@@ -136,7 +136,7 @@ body {
 /*---------------------------- CSS Específico ----------------------------*/
 /* Css do formulário */
 .formulario{
-  margin-top: 15vh;
+  margin-top: 4vh;
   padding: 2rem;
   background-color: var(--branco);
   border-radius: 2rem;
