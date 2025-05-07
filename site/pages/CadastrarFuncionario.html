@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de funcionarios</title>
+  <link rel="stylesheet" href="../css/CadastrarFuncionario.css">
+  <!-- Boxicons CSS -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="icon" href="../img/Logo-pequena.png" type="image/x-icon">
+</head>
+<body>
+  <header class="navbar">
+    <nav class="nav-esquerda">
+        <a href="../index.html">
+            <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
+        </a>
+        <a href="../pages/calculadora.html">Calculadora</a>
+        <a href="../pages/sobre_nos.html">Sobre Nós</a>
+        <a href="CadastrarFuncionario.html" class="agora">Cadastrar usuário</a>
+    </nav>
+    <nav class="nav-direita">
+        <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
+    </nav>
+</header>
+
+
+<div class="formulario">
+  <p class="titulo"> Cadastro de funcionário</p>
+  <input type="text" id="ipt_CPF" class="input" placeholder="Insira aqui o CPF do funcionário">
+  <input type="text" id="ipt_nomeFuncionario" class="input" placeholder="Insira aqui o nome completo do funcionário">
+  <select name="slct_nivelAcesso" id="slct_nivelAcesso">
+    <option value="#" selected disabled>Selecione um nivel de acceso</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+  <button>Cadastrar</button>
+</div>
+
+
+<footer class="footer">
+  <h3>Fale conosco: sac@hydroscan.com</h3>
+</footer>
+</body>
+</html>

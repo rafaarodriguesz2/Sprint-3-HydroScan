@@ -1,0 +1,237 @@
+/* Importação das fontes */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Reset básico de estilos */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+a {
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+
+button{
+  
+  box-shadow: 0px 4px 9px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Cores e fontes personalizadas */
+:root {
+	--fonte-padrao: 'Poppins', sans-serif;
+	--fonte-secundaria: 'Lato', sans-serif;
+	--branco: #ffffff;
+	--azul: #0c8ea1;
+	--azul-claro: #d5f3f7;
+	--cinza: #f4f4f4;
+	--cinza-escuro: #7c7c7c;
+	--preto: #222222;
+	--vermelho: #DB504A;
+	--amarelo: #FFCE26;
+	--amarelo-claro: #FFF9DA;
+	--laranja: #FD7238;
+	--laranja-claro: #FFE0D3;
+}
+
+
+
+/* Corpo da página */
+body {
+	background: var(--cinza);
+	font-family: var(--fonte-padrao);
+	color: var(--preto);
+}
+
+
+/* ------------------ BARRA DE NAVEGAÇÃO ------------------ */
+/* Navbar */
+.navbar{
+    display: flex;
+    flex-direction: row;
+}
+
+.navbar nav{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    list-style: none;
+    background-color: #0c8ea1;
+    align-items: center;
+    
+}
+
+.navbar a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+/* Lado Esquerdo*/
+
+.nav-esquerda{
+    display: flex;
+    justify-content: flex-start;
+    gap: 30px;
+}
+
+.img-logo{
+    width: auto;
+    height: 65px;
+}
+
+/* Lado Direito */
+.nav-direita{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.img-perfil{
+    width: 45px;
+    height: 45px;
+    margin: 10px;
+}
+
+.cadastrar{
+    height: 40px;
+    width: 80px;
+    border: 1px solid;
+    border-color: #023a4d;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadastrar a{
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.login{
+    height: 40px;
+    width: 80px;
+    border-radius: 20px;
+    background-color: #023a4d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.login a{
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+.agora{
+  font-weight: bold;
+}
+
+/*---------------------------- CSS Específico ----------------------------*/
+/* Css do formulário */
+.formulario{
+  margin-top: 25vh;
+  padding: 2rem;
+  background-color: var(--branco);
+  border-radius: 2rem;
+  text-align: center;
+  justify-self: center;
+  display: grid;
+  grid-template-rows: repeat(5, auto);
+  box-shadow: 2px 4px 9px 1px rgba(0, 0, 0, 0.25);
+}
+
+.formulario input{
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #757575;
+  padding: 20px;
+  transition: all 0.3s ease;
+  margin-bottom: 0.1vh;
+}
+
+.formulario button{
+  background-color: #00c4cc;
+  border: none;
+  color: white;
+  margin-top: 10px;
+  height: 40px;
+  width: 300px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin:30px 0px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.formulario a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.formulario select{
+  text-align: center;
+  font-family: var(--fonte-secundaria);
+  border-radius: 5px;
+  margin-top: 2vh;
+  padding: 0.2rem;
+  width: fit-content;
+  justify-self: center;
+}
+
+.formulario button:hover{
+  transform: scale(1.05);
+  background-color: #33e4ff;
+}
+
+.formulario input:hover{
+  border-color: #00c4cc;
+  transform: scale(1.025);
+}
+
+.formulario input:focus::placeholder{
+  color: #00c4cc;
+}
+
+.formulario .titulo{
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.formulario select:hover{
+  border-color: #00c4cc;
+  transform: scale(1.025);
+}
+
+/* FOOTER */
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #0c8ea1;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.footer:hover {
+  color: #022531;
+}
+
