@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de funcionarios</title>
+  <link rel="stylesheet" href="../css/cadastrarFuncionarioRepresas.css">
+  <!-- Boxicons CSS -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="icon" href="../img/Logo-pequena.png" type="image/x-icon">
+</head>
+<body>
+  <header class="navbar">
+    <nav class="nav-esquerda">
+        <a href="../index.html">
+            <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
+        </a>
+        <a href="../pages/calculadora.html">Calculadora</a>
+        <a href="../pages/sobre_nos.html">Sobre Nós</a>
+        <a href="./CadastrarFuncionario.html" class="agora">Cadastrar usuário</a>
+        <a href="./cadastrarRepresas.html">Cadastrar Represas</a>
+    </nav>
+    <nav class="nav-direita">
+        <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
+    </nav>
+</header>
+
+
+<div class="formulario">
+  <p class="titulo"> Cadastro de funcionário</p>
+  <input type="text" id="ipt_cpfFuncionario" class="input" placeholder="Insira aqui o CPF do funcionário">
+  <input type="text" id="ipt_nomeFuncionario" class="input" placeholder="Insira aqui o nome completo do funcionário">
+  <input type="text" id="ipt_emailFuncionario" class="input" placeholder="Insira aqui o email do funcionário">
+  <input type="text" id="ipt_senhaTemporariaFuncionario" class="input" placeholder="Insira a senha temporaria do funcionário">
+  <input type="text" id="ipt_cnpjEmpresa" class="input" placeholder="Insira o CNPJ de sua empresa">
+  <select name="slct_nivelAcesso" id="slct_nivelAcesso">
+    <option value="#" selected disabled>Selecione um nivel de acceso</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+  <div class="div_resposta"></div>
+  <button onclick="cadastroFuncionario()">Cadastrar</button>
+</div>
+
+<footer class="footer">
+  <h3>Fale conosco: sac@hydroscan.com</h3>
+</footer>
+</body>
+<script>
+  function cadastroFuncionario(){
+    const cpf = document.getElementById("ipt_cpfFuncionario").value;
+    const nome = document.getElementById("ipt_nomeFuncionario").value;
+    const email = document.getElementById("ipt_emailFuncionario").value;
+    const senhaTemporaria = document.getElementById("ipt_senhaTemporariaFuncionario").value;
+    const nivelAcesso = document.getElementById("slct_nivelAcesso").value;
+    const cnpjEmpresa = document.getElementById("ipt_cnpjEmpresa").value;
+
+    const divResposta = document.getElementById("div_resposta")
+
+    const dadosParaApi = {
+        cpf: cpf,                            // No controller: cpf
+        nome: nome,                          // No controller: nome
+        email: email,                        // No controller: email
+        SenhaTemporaria: senhaTemporaria,    // No controller: SenhaTemporaria (S e T maiúsculos)
+        tipo_usuario: nivelAcesso,           // No controller: tipo_usuario
+        Empresa_CNPJ: cnpjEmpresa            // No controller: Empresa_CNPJ (E, C, N, P, J maiúsculos)
+    };
+
+    console.log('Dados que serão enviados para a API:', dadosParaApi);
+    
+
+    const urlApi = `http://localhost:3333/funcionarios/cadastrar-funcionario`;
+
+    fetch(urlApi, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+          
+        },
+        body: JSON.stringify(dadosParaApi) // Converte o objeto para uma string JSON
+    })
+    .then(response => {
+        if (!response.ok) {
+            // Se a resposta não for OK, tenta ler o corpo como JSON para obter a mensagem de erro da API
+            return response.json().then(erroApi => {
+                // Mostra a mensagem de erro da API ou um erro genérico
+                const mensagemErro = erroApi.mensagem || `Erro ao cadastrar: ${response.status}`;
+                console.error("Erro da API:", mensagemErro);
+                if (divResposta) divResposta.innerHTML = `<p style="color: red;">${mensagemErro}</p>`;
+                throw new Error(mensagemErro); // Isso fará com que caia no .catch() abaixo
+            });
+        }
+        return response.json(); // Converte a resposta de sucesso para JSON
+    })
+    .then(data => {
+        // Se chegou aqui, a API retornou sucesso (ex: status 201)
+        console.log("Sucesso do cadastro:", data);
+        if (divResposta) divResposta.innerHTML = `<p style="color: green;">${data.mensagem || "Funcionário cadastrado com sucesso!"}</p>`;
+        
+        // Opcional: Limpar o formulário após o sucesso
+        document.getElementById("ipt_cpfFuncionario").value = "";
+        document.getElementById("ipt_nomeFuncionario").value = "";
+        document.getElementById("ipt_emailFuncionario").value = "";
+        document.getElementById("ipt_senhaTemporariaFuncionario").value = "";
+        document.getElementById("slct_nivelAcesso").value = "#"; 
+        document.getElementById("ipt_cnpjEmpresa").value = ""// Volta para a opção "Selecione"
+        if (cnpjEmpresa) cnpjEmpresa.value = "";
+
+    })
+    .catch(error => {
+        // Este catch pega erros da rede (ex: servidor offline) ou o erro lançado do .then() anterior
+        console.error("Erro geral no fetch:", error);
+        if (divResposta && !divResposta.innerHTML) { // Só mostra se não já mostrou erro da API
+             divResposta.innerHTML = `<p style="color: red;">Ocorreu um erro ao tentar cadastrar. Tente novamente.</p>`;
+        }
+    });
+  }
+
+
+</script>
+</html>
