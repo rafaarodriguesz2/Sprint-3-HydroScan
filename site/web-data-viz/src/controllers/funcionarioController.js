@@ -47,7 +47,7 @@ function cadastrarFuncionario(req, res){
 
     // 4. Chamar a função do model para salvar no banco
 
-    usuarioModel.cadastrar(nome, cpf, email, SenhaTemporaria, tipo_usuario, ativo, Empresa_CNPJ) 
+    usuarioModel.cadastrar(nome, cpf, email, SenhaTemporaria, tipo_usuario, ativo, Empresa_CNPJ ) 
     .then(
         function (resultado) {
             // Se o cadastro no banco foi bem-sucedido
