@@ -1,4 +1,23 @@
-  function login(){
+console.log(chk_mudarLogin.value);
+let login2 = null
+
+ function mudar(){
+    login2 = document.getElementById("chk_mudarLogin")
+    console.log(login2.checked);
+    
+ }
+ 
+function checkCNPJorCPF(){
+    if(!login2){
+        console.log("cnpj")
+        autenticarFuncionario()
+    }else{
+        console.log("função cpf")
+    }
+
+}
+ 
+ function login(){
     var email = ipt_email.value
     var senha = ipt_senha.value
     const listaUsuario = [ "Gabriel@sptech", "Gustavo@sptech", "Kheyla@sptech", "Leandro@sptech", "Rafael@sptech"]
@@ -20,6 +39,12 @@
   }
 
   function autenticarFuncionario(){
+
+    if (!chk_mudarLogin){
+
+    }
+
+
     var emailVar = ipt_email.value;
     var senhaVar = ipt_senha.value;
     
