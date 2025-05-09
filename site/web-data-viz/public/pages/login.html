@@ -25,7 +25,16 @@
         </section>
         <section class="div-direita">
             <h1>Login</h1>
-            <div class="formulario">
+            
+            <div class="switch">
+                CPF 
+                <input type="checkbox" id="chk_mudarLogin" class="check">
+                <label for="chk_mudarLogin" class="button"></label> 
+                 CNPJ
+            </div>
+        
+                <div class="formulario">
+                <input id="ipt_cpf" type="text" placeholder="CPF" style="display: none;">
                 <input id="ipt_email" type="text"  placeholder="Email">
                 <input id="ipt_senha" type="password"  placeholder="Password">
                 <button onclick="login()">Login</button>
