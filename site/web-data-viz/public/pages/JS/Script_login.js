@@ -10,9 +10,10 @@ let login2 = null
 function checkCNPJorCPF(){
     if(!login2){
         console.log("cnpj")
-        autenticarFuncionario()
+        login()
     }else{
         console.log("função cpf")
+        autenticarFuncionario()
     }
 
 }
