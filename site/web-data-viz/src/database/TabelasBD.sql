@@ -14,7 +14,6 @@ INSERT INTO Empresa (CNPJ, Nome, Endereco, Telefone, Email) VALUES
 ('14349678000100', 'Itaipu Geração', 'Rua das Águas, 100 - Foz do Iguaçu', '11990933799', 'contato@itaipu.com.br'),
 ('45993432000188', 'EcoPower Soluções', 'Av. Sustentável, 500 - Belo Horizonte', '11922490747', 'suporte@ecopower.com');
 
-
 -- TABELA: Usuario
 CREATE TABLE Usuario (
     idUsuario INT AUTO_INCREMENT PRIMARY KEY,

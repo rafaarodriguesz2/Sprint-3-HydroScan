@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registros - HydroScan</title>
-    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="../public/css/pages.css">
     <!-- Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" href="../img/Logo-pequena.png" type="image/x-icon">
 </head>
-
 <body>
     <header class="navbar">
         <nav class="nav-esquerda">
@@ -22,7 +21,6 @@
             <a href="../pages/sobre_nos.html">Sobre Nós</a>
             <a href="../pages/cadastrarFuncionarios.html">Cadastrar usuário</a>
             <a href="../pages/cadastrarRepresas.html">Cadastrar Represas</a>
-
         </nav>
         <nav class="nav-direita">
             <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
@@ -41,7 +39,6 @@
                         <p>Usinas Cadastradas</p>
                     </span>
                 </li>
-                
                 <li>
                     <div class="icone">
                         <i class='bx bxs-bar-chart-alt-2'></i>
@@ -91,101 +88,96 @@
                                         <p><strong>Status:</strong> <span class="status normal">Normal</span></p>
                                     </summary>
 
-                                    <!--dashboard-->
                                     <div class="container-graficos">
                                         <div class="card-grafico">
                                             <h2>Volume de Água Atual</h2>
-                                            <canvas id="graficoNivel1"></canvas>
+                                            <canvas id="sensorDigital"></canvas>
                                             <p class="descricao-grafico">
                                                 Histórico de Volume de Água
                                             </p>
                                         </div>
+                                
 
-                                         <div class="card-grafico">
-                                            <h2>Previsão de Produção Energética</h2>
-                                            <canvas id="graficoPrevisao1"></canvas>
-                                            <p class="descricao-grafico">
-                                                Previsão de Produção Energética
-                                            </p>
-                                        </div>
                                     </div>
                                 </details> 
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </main>
-
     </section>
-
-
     <footer class="footer">
         <h3>Fale conosco: sac@hydroscan.com</h3>
     </footer>
 
-   <script>
-async function obterDadosUsina1() {
-    try {
-        const resposta = await fetch('/dados/usina1'); // Altere o endpoint conforme seu back-end
-        const dados = await resposta.json();
-
-        plotarGraficoNivel(dados.meses, dados.niveis);
-        plotarGraficoPrevisao(dados.meses, dados.producao);
-
-    } catch (erro) {
-        console.error('Erro ao buscar dados da usina:', erro);
-    }
-}
-
-function plotarGraficoNivel(meses, niveis) {
-    const ctxNivel = document.getElementById('graficoNivel1').getContext('2d');
-    new Chart(ctxNivel, {
-        type: 'bar',
-        data: {
-            labels: meses,
-            datasets: [{
-                label: 'Nível Atual de Água (%)',
-                data: niveis,
-                borderColor: 'blue',
-                backgroundColor: 'lightblue',
-                borderWidth: 2
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: { beginAtZero: true }
+    <script>
+   var sensorDigital = new Chart(document.getElementById('sensorDigital').getContext('2d'), {
+            type: 'line',
+            data: {
+                datasets: [{
+                    label: 'Digital',
+                    borderColor: '#63B1BC',
+                    backgroundColor: '#0762C8'
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: '(0-1)'
+                        },
+                        beginAtZero: true
+                    }
+                }
             }
-        }
-    });
-}
+        });
 
-function plotarGraficoPrevisao(meses, producao) {
-    const ctxEnergia = document.getElementById('graficoPrevisao1').getContext('2d');
-    new Chart(ctxEnergia, {
-        type: 'line',
-        data: {
-            labels: meses,
-            datasets: [{
-                label: 'Produção de Energia (MW)',
-                data: producao,
-                borderColor: 'red',
-                backgroundColor: 'lightcoral',
-                borderWidth: 2,
-                fill: true
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: { beginAtZero: true }
-            }
+        var paginacao = {};
+        var tempo = {};
+
+        function obterDados(grafico, endpoint) {
+            // fetch('http://localhost:3300/sensores/' + endpoint)
+            
+            fetch('http://localhost:3300/sensores/digital')
+
+                .then(response => response.json())
+                .then(valores => {
+                    if (paginacao[endpoint] == null) {
+                        paginacao[endpoint] = 0;
+                    }
+                    if (tempo[endpoint] == null) {
+                        tempo[endpoint] = 0;
+                    }
+
+                    var ultimaPaginacao = paginacao[endpoint];
+                    paginacao[endpoint] = valores.length;
+                    valores = valores.slice(ultimaPaginacao);
+
+                    valores.forEach((valor) => {
+                        if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+                            grafico.data.labels.shift();
+                            grafico.data.datasets[0].data.shift();
+                        }
+
+                        grafico.data.labels.push(tempo[endpoint]++);
+                        grafico.data.datasets[0].data.push(parseFloat(valor));
+                        grafico.update();
+                    });
+                })
+                .catch(error => console.error('Erro ao obter dados:', error));
         }
-    });
-}
-    // Nessa parte ele vai chamar a função para buscar dados ao carregar a página.......
-    document.addEventListener("DOMContentLoaded", obterDadosUsina1);
+
+        setInterval(() => {
+            obterDados(sensorDigital, 'digital');
+        }, 1000);
+
 </script>
+
+
 </body>
+
 </html>
