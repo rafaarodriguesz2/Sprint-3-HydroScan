@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros - HydroScan</title>
+    <link rel="stylesheet" href="../css/pages.css">
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="../img/Logo-pequena.png" type="image/x-icon">
+</head>
+
+<body>
+    <header class="navbar">
+        <nav class="nav-esquerda">
+            <a href="../index.html">
+                <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
+            </a>
+            <a href="../pages/calculadora.html">Calculadora</a>
+            <a href="../pages/sobre_nos.html">Sobre Nós</a>
+            <a href="../pages/cadastrarFuncionarios.html">Cadastrar usuário</a>
+            <a href="../pages/cadastrarRepresas.html">Cadastrar Represas</a>
+
+        </nav>
+        <nav class="nav-direita">
+            <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
+        </nav>
+    </header>
+    <section id="container">
+        <main>
+            <!-- Indicadores Rápidos -->
+            <ul class="lista-informacoes">
+                <li>
+                    <div class="icone">
+                        <i class='bx bx-water'></i>
+                    </div>
+                    <span class="texto">
+                        <h3>5</h3>
+                        <p>Usinas Cadastradas</p>
+                    </span>
+                </li>
+                <li>
+                    <div class="icone">
+                        <i class='bx bxs-bar-chart-alt-2'></i>
+                    </div>
+                    <span class="texto">
+                        <h3>2</h3>
+                        <p>Usinas com nível da água adequado</p>
+                    </span>
+                </li>
+                <li>
+                    <div class="icone">
+                        <i class='bx bxs-error'></i>
+                    </div>
+                    <span class="texto">
+                        <h3>3</h3>
+                        <p>Usinas com alertas em nível da água</p>
+                    </span>
+                </li>
+            </ul>
+
+            <!-- Tabela de Últimos Registros -->
+            <div class="secao-tabela">
+                <div class="tabela-pedidos">
+                    <div class="cabecalho">
+                        <h3>Últimos Registros</h3>
+                        <i class='bx bx-search'></i>
+                        <i class='bx bx-filter'></i>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Reservatório</th>
+                                <th>Última Medição</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <table id="modelTable">
+
+                                <details>
+                                    <summary class="1">
+                                        <div class="div-img-nome-usina">
+                                            <p>Usina 1</p>
+                                            <img src="../img/usina1.png" alt="Reservatório logo">
+                                        </div>
+                                        <p><strong>Data:</strong> 03/04/2025</p>
+                                        <p><strong>Status:</strong> <span class="status normal">Normal</span></p>
+                                    </summary>
+
+                                    <!--dashboard-->
+                                    <div class="container-graficos">
+                                        <div class="card-grafico">
+                                            <h2>Volume de Água Atual</h2>
+                                            <canvas id="graficoNivel1"></canvas>
+                                            <p class="descricao-grafico">
+                                                Histórico de Volume de Água
+                                            </p>
+                                        </div>
+
+                                        <div class="card-grafico">
+                                            <h2>Previsão de Produção Energética</h2>
+                                            <canvas id="graficoPrevisao1"></canvas>
+                                            <p class="descricao-grafico">
+                                                Previsão de Produção Energética
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Volume de Água No Ano Passado</h2>
+                                            <canvas id="graficoHistorico1"></canvas>
+                                            <p class="descricao-grafico">
+                                                Histórico de Volume de Água
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Produção Energética</h2>
+                                            <canvas id="graficoEnergiaPassada1"></canvas>
+                                            <p class="descricao-grafico">
+                                                Previsão de Produção Energética
+                                            </p>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <details>
+                                    <summary>
+                                        <div class="div-img-nome-usina">
+                                            <p>Usina 2</p>
+                                            <img src="../img/usina2.png" alt="Reservatório logo">
+                                        </div>
+                                        <p><strong>Data:</strong> 03/04/2025</p>
+                                        <p><strong>Status:</strong> <span class="status normal">Normal</span></p>
+                                    </summary>
+
+                                    <div class="container-graficos">
+                                        <div class="card-grafico">
+                                            <h2>Volume de Água Atual</h2>
+                                            <canvas id="graficoNivel2"></canvas>
+                                            <p class="descricao-grafico">
+                                                Histórico de Volume de Água
+                                            </p>
+                                        </div>
+
+                                        <div class="card-grafico">
+                                            <h2>Previsão de Produção Energética</h2>
+                                            <canvas id="graficoPrevisao2"></canvas>
+                                            <p class="descricao-grafico">
+                                                Previsão de Produção Energética
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Volume de Água No Ano Passado</h2>
+                                            <canvas id="graficoHistorico2"></canvas>
+                                            <p class="descricao-grafico">
+                                                Histórico de Volume de Água
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Produção Energética</h2>
+                                            <canvas id="graficoEnergiaPassada2"></canvas>
+                                            <p class="descricao-grafico">
+                                                Previsão de Produção Energética
+                                            </p>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <details>
+                                    <summary>
+                                        <div class="div-img-nome-usina">
+                                            <p>Usina 3</p>
+                                            <img src="../img/usina3.png" alt="Reservatório logo">
+                                        </div>
+                                        <p><strong>Data:</strong> 03/04/2025</p>
+                                        <p><strong>Status:</strong> <span class="status alerta">Alerta</span></p>
+                                    </summary>
+
+                                    <div class="container-graficos">
+                                        <div class="card-grafico">
+                                            <h2>Volume de Água Atual</h2>
+                                            <canvas id="graficoNivel3"></canvas>
+                                            <p class="descricao-grafico">
+                                                Histórico de Volume de Água
+                                            </p>
+                                        </div>
+
+                                        <div class="card-grafico">
+                                            <h2>Previsão de Produção Energética</h2>
+                                            <canvas id="graficoPrevisao3"></canvas>
+                                            <p class="descricao-grafico">
+                                                Previsão de Produção Energética
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Volume de Água No Ano Passado</h2>
+                                            <canvas id="graficoHistorico3"></canvas>
+                                            <p class="descricao-grafico">
+                                                Histórico de Volume de Água
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Produção Energética</h2>
+                                            <canvas id="graficoEnergiaPassada3"></canvas>
+                                            <p class="descricao-grafico">
+                                                Previsão de Produção Energética
+                                            </p>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <details>
+                                    <summary>
+                                        <div class="div-img-nome-usina">
+                                            <p>Usina 4</p>
+                                            <img src="../img/usina4.png" alt="Reservatório logo">
+                                        </div>
+                                        <p><strong>Data:</strong> 03/04/2025</p>
+                                        <p><strong>Status:</strong> <span class="status alerta">Alerta</span></p>
+                                    </summary>
+
+                                    <div class="container-graficos">
+                                        <div class="card-grafico">
+                                            <h2>Volume de Água Atual</h2>
+                                            <canvas id="graficoNivel4"></canvas>
+                                            <p class="descricao-grafico">
+                                                Histórico de Volume de Água
+                                            </p>
+                                        </div>
+
+                                        <div class="card-grafico">
+                                            <h2>Previsão de Produção Energética</h2>
+                                            <canvas id="graficoPrevisao4"></canvas>
+                                            <p class="descricao-grafico">
+                                                Previsão de Produção Energética
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Volume de Água No Ano Passado</h2>
+                                            <canvas id="graficoHistorico4"></canvas>
+                                            <p class="descricao-grafico">
+                                                Histórico de Volume de Água
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Produção Energética</h2>
+                                            <canvas id="graficoEnergiaPassada4"></canvas>
+                                            <p class="descricao-grafico">
+                                                Previsão de Produção Energética
+                                            </p>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <details>
+                                    <summary>
+                                        <div class="div-img-nome-usina">
+                                            <p>Usina 5</p>
+                                            <img src="../img/usina5.png" alt="Reservatório logo">
+                                        </div>
+                                        <p><strong>Data:</strong> 03/04/2025</p>
+                                        <p><strong>Status:</strong> <span class="status alerta">Alerta</span></p>
+                                    </summary>
+
+                                    <div class="container-graficos">
+                                        <div class="card-grafico">
+                                            <h2>Volume de Água Atual</h2>
+                                            <canvas id="graficoNivel5"></canvas>
+                                            <p class="descricao-grafico">
+                                                Histórico de Volume de Água
+                                            </p>
+                                        </div>
+
+                                        <div class="card-grafico">
+                                            <h2>Previsão de Produção Energética</h2>
+                                            <canvas id="graficoPrevisao5"></canvas>
+                                            <p class="descricao-grafico">
+                                                Previsão de Produção Energética
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Volume de Água No Ano Passado</h2>
+                                            <canvas id="graficoHistorico5"></canvas>
+                                            <p class="descricao-grafico">
+                                                Histórico de Volume de Água
+                                            </p>
+                                        </div>
+                                        <div class="card-grafico">
+                                            <h2>Histórico de Produção Energética</h2>
+                                            <canvas id="graficoEnergiaPassada5"></canvas>
+                                            <p class="descricao-grafico">
+                                                Previsão de Produção Energética
+                                            </p>
+                                        </div>
+                                    </div>
+                                </details>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+
+    </section>
+
+
+    <footer class="footer">
+        <h3>Fale conosco: sac@hydroscan.com</h3>
+    </footer>
+
+
+    <script>
+        // DashBoard 1
+        const ctxReservatorio = document.getElementById('graficoHistorico1').getContext('2d');
+        const ctxEnergia = document.getElementById('graficoPrevisao1').getContext('2d');
+        const ctxNivel = document.getElementById('graficoNivel1').getContext('2d');
+        const ctxEnergiaPassada = document.getElementById('graficoEnergiaPassada1').getContext('2d');
+
+        new Chart(ctxNivel, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível Atual de Água (%)',
+                    data: [80, 75, 60, 50, 40, 30],
+                    borderColor: 'blue',
+                    backgroundColor: 'lightblue',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(ctxEnergia, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [70, 65, 55, 45, 35, 25],
+                    borderColor: 'red',
+                    backgroundColor: 'lightcoral',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(ctxReservatorio, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível dos Reservatórios (%)',
+                    data: [80, 75, 60, 50, 40, 30],
+                    backgroundColor: 'lightblue',
+                    borderColor: 'blue',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(ctxEnergiaPassada, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [80, 75, 60, 50, 40, 30],
+                    borderColor: 'red',
+                    backgroundColor: 'lightcoral',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        // DashBoard 2
+        const ctxReservatorio2 = document.getElementById('graficoHistorico2').getContext('2d');
+        const ctxEnergia2 = document.getElementById('graficoPrevisao2').getContext('2d');
+        const ctxNivel2 = document.getElementById('graficoNivel2').getContext('2d');
+        const ctxEnergiaPassada2 = document.getElementById('graficoEnergiaPassada2').getContext('2d');
+
+        new Chart(ctxNivel2, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível Atual de Água (%)',
+                    data: [75, 70, 65, 55, 45, 35],
+                    borderColor: 'blue',
+                    backgroundColor: 'lightblue',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(ctxEnergia2, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (%)',
+                    data: [65, 60, 55, 50, 40, 30],
+                    borderColor: 'red',
+                    backgroundColor: 'lightcoral',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(ctxReservatorio2, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível dos Reservatórios (%)',
+                    data: [75, 70, 65, 55, 45, 35],
+                    backgroundColor: 'lightblue',
+                    borderColor: 'blue',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(ctxEnergiaPassada2, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [75, 70, 65, 55, 45, 35],
+                    borderColor: 'red',
+                    backgroundColor: 'lightcoral',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        // DashBoard 3
+        const ctxReservatorio3 = document.getElementById('graficoHistorico3').getContext('2d');
+        const ctxEnergia3 = document.getElementById('graficoPrevisao3').getContext('2d');
+        const ctxNivel3 = document.getElementById('graficoNivel3').getContext('2d');
+        const ctxEnergiaPassada3 = document.getElementById('graficoEnergiaPassada3').getContext('2d');
+
+        new Chart(ctxNivel3, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível Atual de Água (%)',
+                    data: [70, 68, 65, 63, 60, 55],
+                    borderColor: 'blue',
+                    backgroundColor: 'lightblue',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(ctxEnergia3, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (%)',
+                    data: [60, 58, 55, 53, 50, 45],
+                    borderColor: 'red',
+                    backgroundColor: 'lightcoral',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(ctxReservatorio3, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível dos Reservatórios (%)',
+                    data: [70, 68, 65, 63, 60, 55],
+                    backgroundColor: 'lightblue',
+                    borderColor: 'blue',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(ctxEnergiaPassada3, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [70, 68, 65, 63, 60, 55],
+                    borderColor: 'red',
+                    backgroundColor: 'lightcoral',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        // DashBoard 4
+        const ctxReservatorio4 = document.getElementById('graficoHistorico4').getContext('2d');
+        const ctxEnergia4 = document.getElementById('graficoPrevisao4').getContext('2d');
+        const ctxNivel4 = document.getElementById('graficoNivel4').getContext('2d');
+        const ctxEnergiaPassada4 = document.getElementById('graficoEnergiaPassada4').getContext('2d');
+
+        new Chart(ctxNivel4, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível Atual de Água (%)',
+                    data: [85, 80, 78, 75, 72, 70],
+                    borderColor: 'blue',
+                    backgroundColor: 'lightblue',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(ctxEnergia4, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (%)',
+                    data: [75, 70, 68, 65, 62, 60],
+                    borderColor: 'red',
+                    backgroundColor: 'lightcoral',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(ctxReservatorio4, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível dos Reservatórios (%)',
+                    data: [85, 80, 78, 75, 72, 70],
+                    backgroundColor: 'lightblue',
+                    borderColor: 'blue',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(ctxEnergiaPassada4, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [85, 80, 78, 75, 72, 70],
+                    borderColor: 'red',
+                    backgroundColor: 'lightcoral',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        // DashBoard 5
+        const ctxReservatorio5 = document.getElementById('graficoHistorico5').getContext('2d');
+        const ctxEnergia5 = document.getElementById('graficoPrevisao5').getContext('2d');
+        const ctxNivel5 = document.getElementById('graficoNivel5').getContext('2d');
+        const ctxEnergiaPassada5 = document.getElementById('graficoEnergiaPassada5').getContext('2d');
+
+        new Chart(ctxNivel5, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível Atual de Água (%)',
+                    data: [90, 85, 80, 75, 70, 65],
+                    borderColor: 'blue',
+                    backgroundColor: 'lightblue',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(ctxEnergia5, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [80, 75, 70, 65, 60, 55],
+                    borderColor: 'red',
+                    backgroundColor: 'lightcoral',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(ctxReservatorio5, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Nível dos Reservatórios (%)',
+                    data: [90, 85, 80, 75, 70, 65],
+                    backgroundColor: 'lightblue',
+                    borderColor: 'blue',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        new Chart(ctxEnergiaPassada5, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Produção de Energia (MW)',
+                    data: [90, 85, 80, 75, 70, 65],
+                    borderColor: 'red',
+                    backgroundColor: 'lightcoral',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💧HydroScan💧</title>
+    <link rel="stylesheet" href="../css/login_cadastro.css">
+</head>
+
+<body>
+    <main class="container">
+        <section class="div-esquerda">
+            <div>
+                <p>Com o HydroScan,
+                    Você terá controle total sobre seus recursos, juntos iremos alcançar seus objetivos!
+                </p>
+            </div>
+            <div>
+                <a href="../index.html">
+                    <img src="../img/Logo-pequena.png" alt="Logo da empresa">
+                </a>
+            </div>
+        </section>
+        <section class="div-direita">
+            <h1>Login</h1>
+            
+            <div class="switch">
+                CPF 
+                <input type="checkbox" id="chk_mudarLogin" class="check" onchange="mudar()">
+                <label for="chk_mudarLogin" class="button"></label> 
+                CNPJ
+            </div>
+            
+        
+                <div class="formulario">
+                <input id="ipt_cpf" type="text" placeholder="CPF" style="display: none;">
+                <input id="ipt_email" type="text"  placeholder="Email">
+                <input id="ipt_senha" type="password"  placeholder="Password">
+                <button onclick="checkCNPJorCPF()">Login</button>
+                <div id="div_resposta"></div>
+                <p>Não tem conta? <a href="./cadastrar.html">Cadastrar</a></p>
+            </div>
+        </section>
+    </main>
+
+</body>
+<script src="JS/Script_login.js">
+</script>
+</html>

@@ -1,0 +1,42 @@
+/* incluindo a biblioteca */
+#include "Ultrasonic.h"
+
+/* criando uma variavel informando qual porta será responsave pela 
+"entrada e saida" do ultrassom do sensor */
+const int PINO_TRIGGER = 12;
+const int PINO_ECHO = 13;
+// float labelMax = 220.0; // Variável global para labelMax
+// float labelMin = 200.0; // Variável global para labelMin
+
+/* informando a biblioteca os parametros 
+necessarios para seu funcionamento */
+HC_SR04 sensor (PINO_TRIGGER, PINO_ECHO);
+
+/* iniciando uma ação */
+void setup() {
+  /* definindo velicidade comunicação pela entrada USB */
+  Serial.begin(9600);
+}
+
+/* iniciando outra ação com loop (fica refazendo ação pelo delay definido) */
+void loop() {
+  /* Capturando a distância do sensor */
+  float distancia = sensor.distance();
+
+  /* Limitando a distância max em 100cm */
+  if (distancia > 230.0) {
+    distancia = 230.0;
+  }
+  
+  /* Capturando os dados para o Serial Plotter */
+  Serial.println(distancia);
+  /* o \t separa os gráficos*/
+  // Serial.print(labelMax);
+  /* o \t separa os gráficos*/
+  // Serial.print("\t");
+  // Serial.println(labelMin);
+  
+
+  /* definindo o delay do loop */
+  delay(1000);
+}
