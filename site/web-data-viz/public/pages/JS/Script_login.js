@@ -1,12 +1,11 @@
 console.log(chk_mudarLogin.value);
 let login2 = null
 
- function mudar(){
+function mudar(){
     login2 = document.getElementById("chk_mudarLogin")
     console.log(login2.checked);
-    
- }
- 
+}
+
 function checkCNPJorCPF(){
     var email = ipt_email.value
     var senha = ipt_senha.value
