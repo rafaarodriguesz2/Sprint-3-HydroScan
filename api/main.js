@@ -64,7 +64,6 @@ const serial = async (
             await poolBancoDados.execute(
                 'INSERT INTO Api (nivel_da_agua) VALUES (?)',
                 [sensorDigital]
-                
             );
             console.log("valores inseridos no banco: ", sensorDigital);
 

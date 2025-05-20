@@ -40,8 +40,6 @@ function checkCNPJorCPF(){
       }else resposta =`Email ou senha incorretos`; break
     }
     div_resposta.innerHTML = resposta
-
-
   }
 
   function autenticarFuncionario(){
@@ -84,14 +82,17 @@ function checkCNPJorCPF(){
             resposta.json().then(json => {
                 console.log(json);
                 console.log(JSON.stringify(json));
-                sessionStorage.EMAIL_USUARIO = json.email;
+                sessionStorage.EMAIL_USUARIO = json.Email;
                 sessionStorage.CPF_USUARIO = json.cpf;
                 sessionStorage.NOME_USUARIO = json.nome;
-                sessionStorage.ID_USUARIO = json.id;
-                
+                sessionStorage.ID_USUARIO = json.idUsuario;
+                sessionStorage.CODIGO = json.fkCodigo_empresa;
+                sessionStorage.REPRESA = JSON.stringify(json.fkCodigo_empresa)
+            
+                console.log(json)
                 
                 setTimeout(function () {
-                    window.location = "./registros.html";
+                    window.location = "../../dashboard/dash.html";
                 }, 1000); // apenas para exibir o loading
 
             });
@@ -105,7 +106,6 @@ function checkCNPJorCPF(){
                 
             });
         }
-
     }).catch(function (erro) {
         console.log(erro);
     })

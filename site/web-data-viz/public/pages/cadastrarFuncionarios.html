@@ -26,7 +26,6 @@
     </nav>
 </header>
 
-
 <div class="formulario">
   <p class="titulo"> Cadastro de funcionário</p>
   <input type="text" id="ipt_cpfFuncionario" class="input" placeholder="Insira aqui o CPF do funcionário">
@@ -40,7 +39,7 @@
     <option value="2">2</option>
     <option value="3">3</option>
   </select>
-  <div class="div_resposta"></div>
+  <div class="div_resposta" id="div_resposta"></div>
   <button onclick="cadastroFuncionario()">Cadastrar</button>
 </div>
 
@@ -70,7 +69,6 @@
 
     console.log('Dados que serão enviados para a API:', dadosParaApi);
     
-
     const urlApi = `http://localhost:3333/funcionarios/cadastrar-funcionario`;
 
     fetch(urlApi, {
@@ -97,7 +95,7 @@
     .then(data => {
         // Se chegou aqui, a API retornou sucesso (ex: status 201)
         console.log("Sucesso do cadastro:", data);
-        if (divResposta) divResposta.innerHTML = `<p style="color: green;">${data.mensagem || "Funcionário cadastrado com sucesso!"}</p>`;
+        divResposta.innerHTML = `<p style="color: green;">${data.mensagem || "Funcionário cadastrado com sucesso!"}</p>`;
         
         // Opcional: Limpar o formulário após o sucesso
         document.getElementById("ipt_cpfFuncionario").value = "";
