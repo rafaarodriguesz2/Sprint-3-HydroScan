@@ -11,21 +11,18 @@ const SERVIDOR_PORTA = 3300;
 const HABILITAR_OPERACAO_INSERIR = true;
 
 // função para comunicação serial
-const serial = async (
-    valoresSensorDigital
-    // valoresSensorAnalogico
-) => {
+const serial = async (valoresSensorDigital) => {
 
     // conexão com o banco de dados MySQL
-    let poolBancoDados = mysql.createPool(
+    const poolBancoDados = mysql.createPool(
         {
-            host: '127.0.0.1',
-            user: 'aluno',
-            password: 'Sptech#2024',
-            database: 'hydroscan',
-            port: 3307
-        }
-    ).promise();
+    host: '127.0.0.1',
+    user: 'aluno',
+    password: 'sptech',
+    database: 'hydroscan',
+    port: 3306
+}).promise();
+
 
     // lista as portas seriais disponíveis e procura pelo Arduino
     const portas = await serialport.SerialPort.list();
@@ -53,35 +50,34 @@ const serial = async (
         const sensorDigital = parseInt(data);
         console.log("Valor que será inserido:", sensorDigital);
 
-
         // armazena os valores dos sensores nos arrays correspondentes
         valoresSensorDigital.push(sensorDigital);
 
         // insere os dados no banco de dados (se habilitado)
         if (HABILITAR_OPERACAO_INSERIR) {
 
-            // este insert irá inserir os dados na tabela "teste2"
+            // Aqui ajustamos a inserção para a tabela Leitura
+            const idSensor = 1;  // Ajuste conforme a lógica de identificação do sensor
+            const dataHora = new Date();  // Data e hora atuais
+            const statusGeracao = sensorDigital > 40 ? 'gerando' : 'parada';  // Exemplo de lógica para status de geração
+
+            // Inserção na tabela Leitura
             await poolBancoDados.execute(
-                'INSERT INTO Api (nivel_da_agua) VALUES (?)',
-                [sensorDigital]
+                'insert into Leitura (idSensor, data_hora, nivel_agua_m, status_geracao) values (?, ?, ?, ?)',
+                [idSensor, dataHora, sensorDigital, statusGeracao]
             );
-            console.log("valores inseridos no banco: ", sensorDigital);
-
+            console.log("Valores inseridos na tabela Leitura:", sensorDigital, statusGeracao);
         }
-
     });
 
     // evento para lidar com erros na comunicação serial
     arduino.on('error', (mensagem) => {
-        console.error(`Erro no arduino (Mensagem: ${mensagem}`)
+        console.error(`Erro no arduino (Mensagem: ${mensagem}`);
     });
 }
 
 // função para criar e configurar o servidor web
-const servidor = (
-    
-    valoresSensorDigital
-) => {
+const servidor = (valoresSensorDigital) => {
     const app = express();
 
     // configurações de requisição e resposta
@@ -96,10 +92,21 @@ const servidor = (
         console.log(`API executada com sucesso na porta ${SERVIDOR_PORTA}`);
     });
 
-    // define os endpoints da API para cada tipo de sensor
-    app.get('/sensores/digital', (_, response) => {
-        return response.json(valoresSensorDigital);
+    // Nesta parte ele vai pegar os dados do banco e enviar para as dashboards iziiiiiiiiiii
+    app.get('/sensores/digital', async (_, response) => {
+        try {
+            const [linhas] = await poolBancoDados.execute(
+                `select nivel_agua_m from Leitura order by data_hora desc limit 10`
+            );
+    
+            const valores = linhas.map(registro => registro.nivel_agua_m);
+            response.json(valores.reverse()); // reverse para mostrar do mais antigo ao mais recente
+        } catch (erro) {
+            console.error('Erro ao buscar dados no banco:', erro);
+            response.status(500).send('Erro ao buscar dados no banco de dados');
+        }
     });
+    
 }
 
 // função principal assíncrona para iniciar a comunicação serial e o servidor web
@@ -108,12 +115,8 @@ const servidor = (
     const valoresSensorDigital = [];
 
     // inicia a comunicação serial
-    await serial(
-        valoresSensorDigital
-    );
+    await serial(valoresSensorDigital);
 
     // inicia o servidor web
-    servidor(
-        valoresSensorDigital
-    );
+    servidor(valoresSensorDigital);
 })();

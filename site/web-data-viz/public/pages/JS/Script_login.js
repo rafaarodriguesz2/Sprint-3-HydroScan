@@ -1,5 +1,5 @@
 console.log(chk_mudarLogin.value);
-let login2 = null
+let login2 = true
 
 function mudar(){
     login2 = document.getElementById("chk_mudarLogin")
