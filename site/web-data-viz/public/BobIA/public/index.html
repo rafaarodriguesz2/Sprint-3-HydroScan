@@ -34,7 +34,9 @@
             <button onclick="gerarResposta()">Gerar Resposta</button>
         </div>
         <h3>Resposta da IA:</h3>
-        <img src="../../img/load-35-ezgif.com-speed.gif" alt="" style="height: 10vh; display: none;" id="gif">
+        <div class="loading-container" id="loading-container" style="display: none;">
+            <img src="/img/load-35-ezgif.com-speed.gif" alt="Carregando..." class="loading-gif" id="gif">
+        </div>
         <div id="resposta" class="resposta" style="display: none;"></div>
         
     </div>
@@ -46,9 +48,13 @@
         
         async function gerarResposta() {
             const pergunta = document.getElementById('pergunta').value;
-            
-            
-                gif.style.display = 'block'
+            const loadingContainer = document.getElementById('loading-container');
+            const btnPerguntar = document.getElementById('btnPerguntar');
+            const respostaDiv = document.getElementById('resposta');
+                    
+                // Mostrar carregamento com fade
+                loadingContainer.classList.add('fade-in');
+                loadingContainer.style.display = 'flex';
             
 
             const response = await fetch('/perguntar', {
@@ -61,9 +67,16 @@
 
             const data = await response.json();
 
+             // Esconder carregamento com fade
+            loadingContainer.classList.add('fade-out');
+            setTimeout(() => {
+                loadingContainer.style.display = 'none';
+                loadingContainer.classList.remove('fade-in', 'fade-out');
+            }, 300);
+
             resposta.style.display = 'block';
             document.getElementById('resposta').innerText = data.resultado;
-            gif.style.display = 'none'
+            
         }
 
     </script>

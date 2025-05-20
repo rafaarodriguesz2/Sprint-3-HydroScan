@@ -215,3 +215,40 @@ body {
     margin-bottom: 10vh;
     box-shadow: 2px 4px 9px 1px rgba(0, 0, 0, 0.25);
 }
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.loading-gif {
+    height: 15vh;
+}
+
+.loading-text {
+    margin-top: 10px;
+    color: #666;
+    font-style: italic;
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+.fade-out {
+    animation: fadeOut 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
