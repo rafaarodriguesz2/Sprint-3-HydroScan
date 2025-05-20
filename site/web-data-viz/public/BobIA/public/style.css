@@ -153,7 +153,7 @@ body {
   resize: none;
   width: 20vw;
   height: 15vh;
-  
+  border-radius: 1rem;
 }
 
 .container .pergunta{
@@ -165,6 +165,7 @@ body {
     padding-bottom: 1rem;
     border-radius: 3rem;
     margin-bottom: 2rem;
+    font-family: var(--fonte-padrao);
 }
 
 .container textarea:hover{
@@ -202,6 +203,10 @@ body {
 
 .container textarea:focus::placeholder{
   color: #00c4cc;
+}
+
+.container textarea:focus{
+  border: none;
 }
 
 .container .resposta{
