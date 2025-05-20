@@ -394,6 +394,9 @@ details summary {
     display: flex;
     flex-direction: row;
 }
+.info-ajustada {
+    transform: translateX(-160px); 
+}
 
 /* Gráficos e Cards */
 .container-graficos {
