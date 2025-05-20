@@ -12,12 +12,15 @@ CREATE TABLE Empresa (
     Telefone VARCHAR(20),
     Email VARCHAR(100),
     Codigo_empresa VARCHAR(20),
+    senha varchar(50),
     key (Codigo_empresa)
 );
 
-INSERT INTO Empresa (CNPJ, Nome, Endereco, Telefone, Email, Codigo_empresa) VALUES
-('14349678000100', 'Itaipu Geração', 'Rua das Águas, 100 - Foz do Iguaçu', '11990933799', 'contato@itaipu.com.br', 'EBC4K-2F'),
-('45993432000188', 'EcoPower Soluções', 'Av. Sustentável, 500 - Belo Horizonte', '11922490747', 'suporte@ecopower.com', 'AB92KL-9J');
+
+
+INSERT INTO Empresa (CNPJ, Nome, Endereco, Telefone, Email, Codigo_empresa, senha) VALUES
+('14349678000100', 'Itaipu Geração', 'Rua das Águas, 100 - Foz do Iguaçu', '11990933799', 'contato@itaipu.com.br', 'EBC4K-2F', 'Itaipu'),
+('45993432000188', 'EcoPower Soluções', 'Av. Sustentável, 500 - Belo Horizonte', '11922490747', 'suporte@ecopower.com', 'AB92KL-9J', 'EcoPower');
 
 
 -- TABELA: Usuario
@@ -93,6 +96,18 @@ create table Api (
 idApi int primary key auto_increment,
 nivel_da_agua int
 );
+
+CREATE TABLE Suporte(
+    id int auto_increment,
+    apiKey varchar(100),
+    tokensUtilizados bigint,
+    pergunta varchar(1000),
+    resposta varchar(3000),
+    dataHora datetime default now(),
+    primary key(id, apiKey)
+);
+
+select * from suporte;
 
 SELECT * FROM Empresa;
 SELECT * FROM Usuario;
