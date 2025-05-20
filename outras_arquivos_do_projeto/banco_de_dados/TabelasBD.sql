@@ -94,10 +94,14 @@ idApi int primary key auto_increment,
 nivel_da_agua int
 );
 
+
 SELECT * FROM Empresa;
 SELECT * FROM Usuario;
 SELECT * FROM Represa;
-SELECT * FROM Sensor;
 SELECT * FROM Leitura;
+SELECT * FROM Sensor;
 SELECT * FROM Api;
 
+INSERT INTO Represa (Nome, Localizacao, VolumeMaximo, VolumeMinimo, potencia_max_kw, fkCodigo_empresa, data_cadastro) VALUES
+('Represa ROXA', 'Vale das Águas, SP', 1991340.00, 209200.00, 5000.00, 'EBC4K-2F', NOW()),
+('Represa MARROM', 'Montanhas Azuis, MG', 866730.00, 150700.00, 4000.00, 'AB92KL-9J', NOW());
