@@ -11,17 +11,16 @@ function checkCNPJorCPF(){
     var email = ipt_email.value
     var senha = ipt_senha.value
     if (email == 'suporte@hydroscan' && senha == 'hydroscan'){
-        window.location.href = '../pages/suporte.html'
-    }else
-
-    if(!login2){
-        console.log("cnpj")
-        login()
+        window.location.href = 'http://localhost:3001'
     }else{
-        console.log("função cpf")
-        autenticarFuncionario()
+        if(!login2){
+            console.log("cnpj")
+            login()
+        }else{
+            console.log("função cpf")
+            autenticarFuncionario()
+        }
     }
-
 }
  
  function login(){

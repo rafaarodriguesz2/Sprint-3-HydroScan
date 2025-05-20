@@ -74,11 +74,11 @@ async function gerarResposta(mensagem) {
         });
         const resposta = (await modeloIA).text;
         const tokens = (await modeloIA).usageMetadata;
-        tokensUtilizados += Number((await modeloIA).usageMetadata);
+        
 
         console.log(resposta);
         console.log("Uso de Tokens:", tokens);
-        console.log("tokens restantes:", tokensRestantes);
+        
         
         enviarBD(mensagem, resposta, tokens)
         return resposta;
@@ -90,8 +90,6 @@ async function gerarResposta(mensagem) {
 
 function enviarBD(pergunta, resposta, tokens){
     const apiKey = chatIA.apiKey;
-    
-    const divResposta = document.getElementById("div_WDV")
 
     const dadosParaApi = {
         'apiKeyServer': apiKey,
@@ -102,9 +100,9 @@ function enviarBD(pergunta, resposta, tokens){
 
     console.log('Dados que serão enviados para a API:', dadosParaApi);
 
-    const urlApi = `http://localhost:3333/funcionarios/cadastrar-funcionario`;
+    const urlApi = `http://localhost:3333/bobia/enviar`;
 
-    etch(urlApi, {
+    fetch(urlApi, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -119,7 +117,7 @@ function enviarBD(pergunta, resposta, tokens){
                 // Mostra a mensagem de erro da API ou um erro genérico
                 const mensagemErro = erroApi.mensagem || `Erro ao enviar a mensagem: ${response.status}`;
                 console.error("Erro da API:", mensagemErro);
-                if (divResposta) divResposta.innerHTML = `<p style="color: red;">${mensagemErro}</p>`;
+                console.log(`${mensagemErro}`);
                 throw new Error(mensagemErro); // Isso fará com que caia no .catch() abaixo
             });
         }
@@ -128,16 +126,15 @@ function enviarBD(pergunta, resposta, tokens){
     .then(data => {
         // Se chegou aqui, a API retornou sucesso (ex: status 201)
         console.log("Sucesso do cadastro:", data);
-        if (divResposta) divResposta.innerHTML = `<p style="color: green;">${data.mensagem || "Funcionário cadastrado com sucesso!"}</p>`;
+        console.log(`${data.mensagem || "Funcionário cadastrado com sucesso!"}`);
         
 
     })
     .catch(error => {
         // Este catch pega erros da rede (ex: servidor offline) ou o erro lançado do .then() anterior
         console.error("Erro geral no fetch:", error);
-        if (divResposta && !divResposta.innerHTML) { // Só mostra se não já mostrou erro da API
-             divResposta.innerHTML = `<p style="color: red;">Ocorreu um erro ao tentar enviar a mensagem. Tente novamente.</p>`;
-        }
+        console.log('Ocorreu um erro ao tentar enviar a mensagem. Tente novamente.');
+        
     });
   
 }
