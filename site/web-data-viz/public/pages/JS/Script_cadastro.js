@@ -1,60 +1,86 @@
-function cadastro() {
-  var cpf = ipt_cpf.value;
-  var cnpj = ipt_cnpj.value;
-  var senha = ipt_senha.value;
-  var confirmeSenha = ipt_confirmeSenha.value;
 
-  var resposta1 = '';
-  var resposta2 = '';
-  var resposta3 = '';
-  var resposta4 = '';
-  
-  // Verificação do CPF
-  for (var contador = 0; contador < cpf.length; contador++) {
-    var cpfDigitos = cpf[contador];
+function cadastroEmpresa(){
+    const cpnj = document.getElementById("ipt_cnpj").value;
+    const nome = document.getElementById("ipt_nomeCompleto").value;
+    const email = document.getElementById("ipt_email").value;
+    const senhaTemporaria = document.getElementById("ipt_senha").value;
+    const confirmeSenha = document.getElementById("ipt_confirmeSenha").value;
+    const telefone = document.getElementById("ipt_telefone").value;
+    const codigoEmpresa = document.getElementById("ipt_codigoEmpresa").value;
+    const endereco = document.getElementById("ipt_endereco").value;
 
-    console.log(cpfDigitos);
+    const divResposta = document.getElementById("div_resposta")
 
-    if (isNaN(cpfDigitos)) {
-      resposta1 = `Por favor insira somente números no (CPF)<br>`;
-      console.log("Tem letra no (CPF)");
-      break;
-    } else {
-      console.log("Tem número");
+    if (!cpnj || !nome || !email || !senhaTemporaria || !confirmeSenha || !telefone || !codigoEmpresa || !endereco) {
+    alert("Por favor, preencha todos os campos!");
+    }else if (cpnj.length != 14){
+      alert ('O CNPJ deve ter 14 caracteres')
     }
-  }
 
-  // Verificação do CNPJ
-  for (var i = 0; i < cnpj.length; i++) {
-    var cnpjDigitos = cnpj[i];
+    if (senhaTemporaria != confirmeSenha){
+      alert ('As duas senhas devem ser iguais!')
+    }else{
 
-    console.log(cnpjDigitos);
+    const dadosParaApi = {
+        'cpnjServer': cpnj,                            // No controller: cpf
+        'nomeServer': nome,                          // No controller: nome
+        'emailServer': email,                        // No controller: email
+        'SenhaServer': senhaTemporaria,    // No controller: SenhaTemporaria (S e T maiúsculos)
+        'telefoneServer': telefone,
+        'codigoServer': codigoEmpresa,
+        'enderecoServer': endereco
 
-    if (isNaN(cnpjDigitos)) {
-      resposta2 = `Por favor insira somente números no (CNPJ)<br>`;
-      console.log("Tem letra no (CNPJ)");
-      break;
-    } else {
-      console.log("Tem número");
-    }
-  }
+    };
 
-  // Verificar se as senhas são iguais
-  if (senha !== confirmeSenha) {
-    resposta3 = `As senhas não são iguais<br>`;
-  }
+    console.log('Dados que serão enviados para a API:', dadosParaApi);
+    
+    const urlApi = `http://localhost:3333/empresas/cadastrar`;
 
-  // Verificar se as senhas têm pelo menos 5 caracteres
-  if (senha.length < 5 || confirmeSenha.length < 5) {
-    resposta4 = `A senha deve ter pelo menos 5 caracteres<br>`;
-  }
+    fetch(urlApi, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+          
+        },
+        body: JSON.stringify(dadosParaApi) // Converte o objeto para uma string JSON
+    })
+    .then(response => {
+        if (!response.ok) {
+            // Se a resposta não for OK, tenta ler o corpo como JSON para obter a mensagem de erro da API
+            return response.json().then(erroApi => {
+                // Mostra a mensagem de erro da API ou um erro genérico
+                const mensagemErro = erroApi.mensagem || `Erro ao cadastrar: ${response.status}`;
+                console.error("Erro da API:", mensagemErro);
+                if (divResposta) divResposta.innerHTML = `<p style="color: red;">${mensagemErro}</p>`;
+                throw new Error(mensagemErro); // Isso fará com que caia no .catch() abaixo
+            });
+        }
+        return response.json(); // Converte a resposta de sucesso para JSON
+    })
+    .then(data => {
+        // Se chegou aqui, a API retornou sucesso (ex: status 201)
+        console.log("Sucesso do cadastro:", data);
+        divResposta.innerHTML = `<p style="color: green;">${data.mensagem || "Funcionário cadastrado com sucesso!"}</p>`;
+        
+        // Opcional: Limpar o formulário após o sucesso
+        document.getElementById("ipt_cnpj").value = "";
+        document.getElementById("ipt_nomeCompleto").value = "";
+        document.getElementById("ipt_email").value = "";
+        document.getElementById("ipt_senha").value = "";
+        document.getElementById("ipt_confirmeSenha").value = ""; 
+        document.getElementById("ipt_telefone").value = "";
+        document.getElementById("ipt_codigoEmpresa").value = ""; 
+        document.getElementById("ipt_endereco").value = ""
+        
+        window.location.href = './login.html'
 
-  div_resposta1.innerHTML = resposta1;
-  div_resposta2.innerHTML = resposta2;
-  div_resposta3.innerHTML = resposta3;
-  div_resposta4.innerHTML = resposta4;
-
-  if(resposta1 == '' && resposta2 == '' && resposta3 == '' && resposta4 == ''){
-    window.location = "../pages/login.html"
+    })
+    .catch(error => {
+        // Este catch pega erros da rede (ex: servidor offline) ou o erro lançado do .then() anterior
+        console.error("Erro geral no fetch:", error);
+        if (divResposta && !divResposta.innerHTML) { // Só mostra se não já mostrou erro da API
+             divResposta.innerHTML = `<p style="color: red;">Ocorreu um erro ao tentar cadastrar. Tente novamente.</p>`;
+        }
+    });
   }
 }
