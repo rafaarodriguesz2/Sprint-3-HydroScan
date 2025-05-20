@@ -8,6 +8,12 @@ let login2 = null
  }
  
 function checkCNPJorCPF(){
+    var email = ipt_email.value
+    var senha = ipt_senha.value
+    if (email == 'suporte@hydroscan' && senha == 'hydroscan'){
+        window.location.href = '../pages/suporte.html'
+    }else
+
     if(!login2){
         console.log("cnpj")
         login()
