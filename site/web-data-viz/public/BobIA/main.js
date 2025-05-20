@@ -7,10 +7,6 @@ const path = require("path");
 // carregando as variáveis de ambiente do projeto do arquivo .env
 require("dotenv").config();
 
-// criando variavel que guarda quantos tokens foram utilizados e quantos ainda restam
-let tokensUtilizados = 121
-let tokensRestantes = 1000000000 - tokensUtilizados
-
 // configurando o servidor express
 const app = express();
 const PORTA_SERVIDOR = process.env.PORTA;

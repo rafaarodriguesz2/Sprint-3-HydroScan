@@ -47,9 +47,9 @@
         async function gerarResposta() {
             const pergunta = document.getElementById('pergunta').value;
             
-            gif.style.display = 'block'
-
-
+            
+                gif.style.display = 'block'
+            
 
             const response = await fetch('/perguntar', {
                 method: 'POST',
