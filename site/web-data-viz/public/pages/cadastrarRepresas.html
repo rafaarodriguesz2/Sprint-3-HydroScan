@@ -33,15 +33,15 @@
     <p class="titulo"> Cadastro de Represas</p>
     <input type="text" id="ipt_nome" class="input" placeholder="Insira o nome da represa">
     <input type="text" id="ipt_localizacao" class="input" placeholder="Insira a localização da represa">
-    <input type="text" id="ipt_volume_maximo" class="input" placeholder="Insira o volume máximo da represa">
-    <input type="text" id="ipt_volume_minimo" class="input" placeholder="Insira o volume mínimo da represa">
+    <input type="text" id="ipt_volume_maximo" class="input" placeholder="Insira o volume máximo da represa em M³">
+    <input type="text" id="ipt_volume_minimo" class="input" placeholder="Insira o volume mínimo da represa em M³">
     <input type="text" id="ipt_potencia_maxima" class="input" placeholder="Insira a potência instalada em MW/h">
-    <input type="text" id="ipt_cnpj" class="input" placeholder="Insira o cnpj da empresa responsável">
+    <input type="text" id="ipt_cnpj" class="input" placeholder="Insira o código da empresa responsável">
     <button onclick="cadastroRepresa()">Cadastrar</button>
-    <div class="div_resposta"></div>
+    <div class="div_resposta" id="div_resposta"></div>
   </div>
 
-
+  
   <footer class="footer">
     <h3>Fale conosco: sac@hydroscan.com</h3>
   </footer>
@@ -65,7 +65,7 @@
       volumeMaximo: Number(volumeMaximo),           // No controller: tipo_usuario
       volumeMinimo: Number(volumeMinimo),           // No controller: Empresa_CNPJ (E, C, N, P, J maiúsculos)
       potenciaMaxima: Number(potenciaMaxima),
-      cnpj:Number(cnpj)
+      cnpj: cnpj
     };
 
     console.log('Dados que serão enviados para a API:', dadosParaApi);
@@ -97,13 +97,14 @@
       .then(data => {
         // Se chegou aqui, a API retornou sucesso (ex: status 201)
         console.log("Sucesso do cadastro:", data);
+        divResposta.innerHTML = `<p style="color: green;">Represa cadastrada com sucesso!</p>`
 
         // Opcional: Limpar o formulário após o sucesso
         document.getElementById("ipt_nome").value = "";
         document.getElementById("ipt_localizacao").value = "";
         document.getElementById("ipt_volume_maximo").value = "";
         document.getElementById("ipt_volume_minimo").value = "";
-        document.getElementById("ipt_potencia_maxima").value = "#";
+        document.getElementById("ipt_potencia_maxima").value = "";
         document.getElementById("ipt_cnpj").value = "";
       })
       .catch(error => {
