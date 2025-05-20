@@ -1,4 +1,4 @@
-var database = require("../database/config")
+var database = require("../database/config");
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql 
 function cadastrarRepresa(nome, localizacao, volumeMaximo, volumeMinimo, potenciaMaxima, cnpj) {
@@ -13,6 +13,15 @@ function cadastrarRepresa(nome, localizacao, volumeMaximo, volumeMinimo, potenci
     return database.executar(instrucaoSql);
 }
 
+function buscarRepresas(codigo) {
+
+  var instrucaoSql = `SELECT * FROM Represa WHERE fkCodigo_empresa = '${codigo}'`;
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 module.exports = {
-    cadastrarRepresa
+    cadastrarRepresa,
+    buscarRepresas
 };
