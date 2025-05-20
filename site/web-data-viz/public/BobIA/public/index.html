@@ -3,25 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BobIA</title>
+    <title>Suporte HYDscan</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="../../img/Logo-pequena.png" type="image/x-icon">
 </head>
 <body>
+    <header class="navbar">
+    <nav class="nav-esquerda">
+        <a href="../../index.html">
+            <img class="img-logo" src="../../img/Logo-pequena.png" alt="Logo da empresa">
+        </a>
+        <a href="../pages/calculadora.html">Calculadora</a>
+        <a href="../pages/sobre_nos.html">Sobre Nós</a>
+        <a href="" class="agora">Suporte</a>
+        <a href="">Jira</a>
+    </nav>
+    <nav class="nav-direita">
+        <img class="img-perfil" src="../../img/icone-perfil.png" alt="icone do perfil">
+    </nav>
+    </header>
 
-    <div id="container">
-        <h1>BobIA</h1>
-        <textarea id="pergunta" type="text" placeholder="Digite a pergunta..."></textarea>
-        <br><br>
-        <button onclick="gerarResposta()">Gerar Resposta</button>
+    <div id="container" class="container">
+        <div class="pergunta">
+            <h1>BobIA</h1>
+            <textarea id="pergunta" type="text" placeholder="Digite a pergunta..."></textarea>
+            <br><br>
+            <button onclick="gerarResposta()">Gerar Resposta</button>
+        </div>
         <h3>Resposta da IA:</h3>
-        <div id="resposta"></div>
-        <div class="respostaWDV" id="div_WDV"></div>
+        <img src="../../img/load-35-ezgif.com-speed.gif" alt="" style="height: 10vh; display: none;" id="gif">
+        <div id="resposta" class="resposta" style="display: none;"></div>
+        
     </div>
+
+ 
+
     <script src="main.js"></script>
     <script>
         
         async function gerarResposta() {
             const pergunta = document.getElementById('pergunta').value;
+            
+            gif.style.display = 'block'
+
+
 
             const response = await fetch('/perguntar', {
                 method: 'POST',
@@ -35,6 +63,7 @@
 
             resposta.style.display = 'block';
             document.getElementById('resposta').innerText = data.resultado;
+            gif.style.display = 'none'
         }
 
     </script>
