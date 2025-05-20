@@ -6,7 +6,7 @@ function cadastrarRepresa(nome, localizacao, volumeMaximo, volumeMinimo, potenci
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO Represa (Nome, Localizacao, VolumeMaximo, VolumeMinimo, potencia_max_kw, FkEmpresa) VALUES ('${nome}', '${localizacao}','${volumeMaximo}', '${volumeMinimo}', '${potenciaMaxima}', '${cnpj}');
+        INSERT INTO Represa (Nome, Localizacao, VolumeMaximo, VolumeMinimo, potencia_max_kw, fkCodigo_empresa) VALUES ('${nome}', '${localizacao}','${volumeMaximo}', '${volumeMinimo}', '${potenciaMaxima}', '${cnpj}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
