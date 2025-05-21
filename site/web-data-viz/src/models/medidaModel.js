@@ -2,24 +2,33 @@ var database = require("../database/config");
 
 function buscarUltimasMedidas(Codigo, limite_linhas) {
 
-    var instrucaoSql = `SELECT 
-                    Nome
-                    FROM Represa
-                    WHERE fkCodigo_empresa = ${Codigo}
-                    ORDER BY id DESC LIMIT ${limite_linhas}`;
+    var instrucaoSql = `
+                    SELECT 
+                    l.idLeitura,
+                    l.data_hora,
+                    l.nivel_agua_m,
+                    r.Nome AS nome_represa,
+                    r.fkCodigo_empresa
+                    FROM Leitura l
+                    INNER JOIN Sensor s ON l.idSensor = s.idSensor
+                    INNER JOIN Represa r ON s.Represa_idRepresa = r.idRepresa
+                    WHERE r.idRepresa = 1;`;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idAquario) {
+function buscarMedidasEmTempoReal(idRepresa) {
 
     var instrucaoSql = `SELECT 
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, 
-                        fk_aquario 
-                        FROM medida WHERE fk_aquario = ${idAquario} 
-                    ORDER BY id DESC LIMIT 1`;
+    l.idLeitura,
+    l.data_hora,
+    l.nivel_agua_m,
+    r.Nome AS nome_represa,
+    r.fkCodigo_empresa
+    FROM Leitura l
+    INNER JOIN Sensor s ON l.idSensor = s.idSensor
+    INNER JOIN Represa r ON s.Represa_idRepresa = r.idRepresa
+    WHERE r.idRepresa = 1`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

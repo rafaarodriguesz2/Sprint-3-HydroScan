@@ -120,9 +120,16 @@ body {
   position: relative;
   top: 0;
   left: 20%;
-  background-color: #161618;
+  background-color: #0000ca;
   height: 100vh;
   overflow: auto;
+}
+
+.janela{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
 }
 
 .area-parametros-alerta {
@@ -426,3 +433,4 @@ canvas {
   margin-bottom: 100px;
   cursor: pointer;
 }
+

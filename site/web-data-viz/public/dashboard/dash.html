@@ -84,13 +84,7 @@
                                         <div class="hello">
                                             <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
                                         </div>
-                                        <div class="btn-nav">
-                                            <button onclick="exibirRepresasDoUsuario()">Gráficos</button>
-                                        </div>
 
-                                        <div class="btn-logout" onclick="limparSessao()">
-                                            <h3>Sair</h3>
-                                        </div>
 
                                         <div class="dash">
                                             <div id="alerta">
@@ -102,6 +96,11 @@
                                             <div id="graficos">
                                             </div>
                                         </div>
+
+                                        <div class="btn-logout" onclick="limparSessao()">
+                                            <h3>Sair</h3>
+                                        </div>
+
                                     </div>
                                 </div>
                         </tbody>
@@ -144,7 +143,7 @@
             const item = represas[i];
 
             document.getElementById("btnAquario").innerHTML += `
-            <button class="btn-chart" onclick="exibirAquario(${item.idRepresa})" id="btnAquario${item.idRepresa}">${item.Nome}</button>
+            <button class="btn-chart btn" onclick="obterDadosGrafico(${item.idRepresa})" id="btnAquario${item.idRepresa}">${item.Nome}</button>
         `;
 
             document.getElementById("graficos").innerHTML += `
@@ -160,8 +159,7 @@
                 </div>
             </div>
         `;
-
-            // obterDadosGrafico(item.idRepresa);
+            obterDadosGrafico(item.idRepresa);
         }
 
         // if (represas.length > 0) {
@@ -169,43 +167,50 @@
         // }
     }
 
-    function alterarTitulo(idRepresa) {
-        var tituloAquario = document.getElementById(`tituloAquario${idRepresa}`)
-        var descricao = JSON.parse(sessionStorage.represas).find(item => item.id == idRepresa).descricao;
-        tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
-    }
+    // function alterarTitulo(idRepresa) {
+    //     var tituloAquario = document.getElementById(`tituloAquario${idRepresa}`)
+    //     var descricao = JSON.parse(sessionStorage.represas).find(item => item.id == idRepresa).descricao;
+    //     tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
+    // }
 
-    function exibirAquario(idRepresa) {
-        let todosOsGraficos = JSON.parse(sessionStorage.REPRESAS);
+    // function exibirAquario(idRepresa) {
+    //     let todosOsGraficos = JSON.parse(sessionStorage.REPRESA);
 
-        for (i = 0; i < todosOsGraficos.length; i++) {
-            // exibindo - ou não - o gráfico
-            if (todosOsGraficos[i].id != idRepresa) {
-                let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
-                if (elementoAtual.classList.contains("display-block")) {
-                    elementoAtual.classList.remove("display-block")
-                }
-                elementoAtual.classList.add("display-none")
+    //     console.log(todosOsGraficos);
 
-                // alterando estilo do botão
-                let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`)
-                if (btnAtual.classList.contains("btn-pink")) {
-                    btnAtual.classList.remove("btn-pink")
-                }
-                btnAtual.classList.add("btn-white")
-            }
-        }
+    //     for (let i = 0; i < todosOsGraficos.length; i++) {
+    //         if (todosOsGraficos[i].idRepresa != idRepresa) {
+    //             let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].idRepresa}`);
+    //             if (elementoAtual) {
+    //                 if (elementoAtual.classList.contains("display-block")) {
+    //                     elementoAtual.classList.remove("display-block");
+    //                 }
+    //                 elementoAtual.classList.add("display-none");
+    //             }
 
-        // exibindo - ou não - o gráfico
-        let graficoExibir = document.getElementById(`grafico${idRepresa}`)
-        graficoExibir.classList.remove("display-none")
-        graficoExibir.classList.add("display-block")
+    //             let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].idRepresa}`);
+    //             if (btnAtual) {
+    //                 if (btnAtual.classList.contains("btn-pink")) {
+    //                     btnAtual.classList.remove("btn-pink");
+    //                 }
+    //                 btnAtual.classList.add("btn-white");
+    //             }
+    //         }
+    //     }
 
-        // alterando estilo do botão
-        let btnExibir = document.getElementById(`btnAquario${idRepresa}`)
-        btnExibir.classList.remove("btn-white")
-        btnExibir.classList.add("btn-pink")
-    }
+    //     // exibir o gráfico da represa clicada
+    //     let graficoClicado = document.getElementById(`grafico${idRepresa}`);
+    //     if (graficoClicado) {
+    //         graficoClicado.classList.remove("display-none");
+    //         graficoClicado.classList.add("display-block");
+    //     }
+
+    //     let btnClicado = document.getElementById(`btnAquario${idRepresa}`);
+    //     if (btnClicado) {
+    //         btnClicado.classList.remove("btn-white");
+    //         btnClicado.classList.add("btn-pink");
+    //     }
+    // }
 
     //  O gráfico é construído com três funções:
     //  1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
@@ -220,9 +225,15 @@
     //      Para ajustar o "select", ajuste o comando sql em src/models
 
 
-    function obterDadosGrafico(idRepresa) {
+    function obterDadosGrafico() {
 
-        alterarTitulo(idRepresa)
+        let represas = JSON.parse(sessionStorage.REPRESA);
+
+        // Exemplo: acessar o id da primeira represa
+        let idRepresa = represas[0].idRepresa;
+
+        console.log(idRepresa)
+        // alterarTitulo(idRepresa)
 
         fetch(`/medidas/ultimas/${idRepresa}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
@@ -245,8 +256,6 @@
     //  Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
     //  Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
     //  A função *plotarGrafico* também invoca a função *atualizarGrafico*
-
-
 
 
     function plotarGrafico(resposta, idRepresa) {
