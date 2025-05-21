@@ -12,8 +12,8 @@ function checkCNPJorCPF(){
     if (email == 'suporte@hydroscan' && senha == 'hydroscan'){
         window.location.href = 'http://localhost:3001'
     }else{
-        if(!login2){
-            console.log("cnpj")
+        if(login2.checked){
+            console.log("função cnpj")
             autenticarEmpresa()
         }else{
             console.log("função cpf")
@@ -38,7 +38,7 @@ function checkCNPJorCPF(){
     console.log("FORM LOGIN: ", emailVar);
     console.log("FORM SENHA: ", senhaVar);
 
-    fetch("/funcionarios/autenticar-funcionario", {
+    fetch("/empresas/autenticar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -56,12 +56,11 @@ function checkCNPJorCPF(){
             resposta.json().then(json => {
                 console.log(json);
                 console.log(JSON.stringify(json));
-                sessionStorage.EMAIL_USUARIO = json.Email;
+                sessionStorage.EMAIL_USUARIO = json.email;
                 sessionStorage.CPF_USUARIO = json.cpf;
                 sessionStorage.NOME_USUARIO = json.nome;
-                sessionStorage.ID_USUARIO = json.idUsuario;
-                sessionStorage.CODIGO = json.fkCodigo_empresa;
-                sessionStorage.REPRESA = JSON.stringify(json.fkCodigo_empresa)
+                sessionStorage.CODIGO = json.Codigo_empresa;
+                sessionStorage.REPRESA = JSON.stringify(json.fkCodigo_empresa);
             
                 console.log(json)
                 
