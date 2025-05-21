@@ -343,6 +343,9 @@
                         console.log(dados.labels[dados.labels.length - 1])
                         console.log("---------------------------------------------------------------")
                     } else {
+                        myChart.data.labels = [];
+                        myChart.data.datasets[0].data = [];
+
                         //   tirando e colocando valores no gráfico
                         dados.labels.shift();  //apagar o primeiro
                         dados.labels.push(novoRegistro[0].data_hora);  //incluir um novo momento
