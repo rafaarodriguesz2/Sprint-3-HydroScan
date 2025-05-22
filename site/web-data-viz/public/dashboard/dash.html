@@ -99,6 +99,7 @@
                                             </div>
                                         </div>
 
+
                                         <div class="btn-logout" onclick="limparSessao()">
                                             <h3>Sair</h3>
                                         </div>
@@ -144,22 +145,38 @@
         for (let i = 0; i < represas.length; i++) {
             const item = represas[i];
 
-            document.getElementById("btnAquario").innerHTML += `
-            <button class="btn-chart btn" onclick="obterDadosGrafico(${item.idRepresa})" id="btnAquario${item.idRepresa}">${item.Nome}</button>
-        `;
+        //     document.getElementById("btnAquario").innerHTML += `
+        //     <button class="btn-chart btn" onclick="obterDadosGrafico(${item.idRepresa})" id="btnAquario${item.idRepresa}">${item.Nome}</button>
+        // `;
 
             document.getElementById("graficos").innerHTML += `
-            <div id="grafico${item.idRepresa}" class="display-none">
-                <h3 class="tituloGraficos">
-                    <span id="tituloAquario${item.idRepresa}">${item.Nome}</span>
-                </h3>
-                <div class="graph">
-                    <canvas id="myChartCanvas${item.idRepresa}"></canvas>
+            <details>
+                <summary class="1">
+                    <div class="div-img-nome-usina">
+                        <span id="tituloAquario${item.idRepresa}">${item.Nome}</span>
+                        <img src="../img/usina1.png" alt="Reservatório logo">
+                    </div>
+                    <p><strong>Data:</strong> 03/04/2025</p>
+                    <p><strong>Status:</strong> <span class="status normal">Normal</span></p>
+                </summary>
+
+                <div class="card-grafico">
+                    <h2>Volume de Água Atual</h2>
+                    <div id="grafico${item.idRepresa}" class="display-none">
+                        <h3 class="tituloGraficos">
+                        </h3>
+                        <div class="graph">
+                            <canvas id="myChartCanvas${item.idRepresa}"></canvas>
+                        </div>
+                        <div class="label-captura">
+                            <p id="avisoCaptura${item.idRepresa}" style="color: white"></p>
+                        </div>
+                    </div>
+                    <p class="descricao-grafico">
+                        Histórico de Volume de Água
+                    </p>
                 </div>
-                <div class="label-captura">
-                    <p id="avisoCaptura${item.idRepresa}" style="color: white"></p>
-                </div>
-            </div>
+            </details>
         `;
             obterDadosGrafico(item.idRepresa);
         }
