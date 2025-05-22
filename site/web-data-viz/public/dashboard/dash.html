@@ -39,7 +39,7 @@
                         <i class='bx bx-water'></i>
                     </div>
                     <span class="texto">
-                        <h3>5</h3>
+                        <div id="usinas-cadastradas"></div>
                         <p>Usinas Cadastradas</p>
                     </span>
                 </li>
@@ -48,7 +48,7 @@
                         <i class='bx bxs-bar-chart-alt-2'></i>
                     </div>
                     <span class="texto">
-                        <h3>2</h3>
+                        <h3>X</h3>
                         <p>Usinas com nível da água adequado</p>
                     </span>
                 </li>
@@ -57,7 +57,7 @@
                         <i class='bx bxs-error'></i>
                     </div>
                     <span class="texto">
-                        <h3>3</h3>
+                        <h3>X</h3>
                         <p>Usinas com alertas em nível da água</p>
                     </span>
                 </li>
@@ -101,7 +101,7 @@
 
 
                                         <div class="btn-logout" onclick="limparSessao()">
-                                            <h3>Sair</h3>
+                                            <h3 style="cursor: pointer;">Sair</h3>
                                         </div>
 
                                     </div>
@@ -142,12 +142,12 @@
 
         console.log(represas)
 
+        document.getElementById("usinas-cadastradas").innerHTML += `
+        <h3>${represas.length}</h3>
+        `
+
         for (let i = 0; i < represas.length; i++) {
             const item = represas[i];
-
-            //     document.getElementById("btnAquario").innerHTML += `
-            //     <button class="btn-chart btn" onclick="obterDadosGrafico(${item.idRepresa})" id="btnAquario${item.idRepresa}">${item.Nome}</button>
-            // `;
 
             document.getElementById("graficos").innerHTML += `
             <details>
