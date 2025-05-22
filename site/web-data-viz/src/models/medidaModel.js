@@ -28,7 +28,7 @@ function buscarMedidasEmTempoReal(idRepresa) {
     FROM Leitura l
     INNER JOIN Sensor s ON l.idSensor = s.idSensor
     INNER JOIN Represa r ON s.Represa_idRepresa = r.idRepresa
-    WHERE r.idRepresa = 1`;
+    WHERE r.idRepresa = '${idRepresa}'`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

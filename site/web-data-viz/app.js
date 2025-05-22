@@ -22,8 +22,9 @@ var medidasRouter = require("./src/routes/medidas");
 var aquariosRouter = require("./src/routes/aquarios");
 var empresasRouter = require("./src/routes/empresas");
 var funcionariosRouter = require("./src/routes/funcionarios");
-var represas = require("./src/routes/represas")
-var bobiaRouter = require("./src/routes/bobia")
+var represas = require("./src/routes/represas");
+var bobiaRouter = require("./src/routes/bobia");
+var sensorRouter = require("./src/routes/sensores")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,6 +41,7 @@ app.use("/empresas", empresasRouter);
 app.use("/funcionarios", funcionariosRouter)
 app.use("/represas", represas)
 app.use("/bobia", bobiaRouter)
+app.use("/sensores", sensorRouter)
 
 app.listen(PORTA_APP, function () {
     console.log(`
