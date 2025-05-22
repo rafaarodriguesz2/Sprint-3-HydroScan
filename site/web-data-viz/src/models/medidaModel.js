@@ -12,7 +12,8 @@ function buscarUltimasMedidas(Codigo, limite_linhas) {
                     FROM Leitura l
                     INNER JOIN Sensor s ON l.idSensor = s.idSensor
                     INNER JOIN Represa r ON s.Represa_idRepresa = r.idRepresa
-                    WHERE r.idRepresa = 1;`;
+                    WHERE r.idRepresa = 1
+                    ORDER BY l.data_hora DESC LIMIT 20`;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
@@ -28,7 +29,8 @@ function buscarMedidasEmTempoReal(idRepresa) {
     FROM Leitura l
     INNER JOIN Sensor s ON l.idSensor = s.idSensor
     INNER JOIN Represa r ON s.Represa_idRepresa = r.idRepresa
-    WHERE r.idRepresa = 1`;
+    WHERE r.idRepresa = 1
+    ORDER BY l.data_hora DESC LIMIT 20;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

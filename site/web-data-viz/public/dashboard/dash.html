@@ -145,9 +145,9 @@
         for (let i = 0; i < represas.length; i++) {
             const item = represas[i];
 
-        //     document.getElementById("btnAquario").innerHTML += `
-        //     <button class="btn-chart btn" onclick="obterDadosGrafico(${item.idRepresa})" id="btnAquario${item.idRepresa}">${item.Nome}</button>
-        // `;
+            //     document.getElementById("btnAquario").innerHTML += `
+            //     <button class="btn-chart btn" onclick="obterDadosGrafico(${item.idRepresa})" id="btnAquario${item.idRepresa}">${item.Nome}</button>
+            // `;
 
             document.getElementById("graficos").innerHTML += `
             <details>
@@ -303,7 +303,7 @@
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
             labels.push(registro.data_hora);
-            dados.datasets[0].data.push(registro.nivel_agua_m);
+            dados.datasets[0].data.push(Number(registro.nivel_agua_m));
         }
 
         console.log('----------------------------------------------')
@@ -336,55 +336,49 @@
     //       Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //       Para ajustar o "select", ajuste o comando sql em src/models
     function atualizarGrafico(idRepresa, dados, myChart) {
+        fetch(`/medidas/tempo-real/${idRepresa}`, { cache: 'no-store' })
+            .then(response => {
+                if (response.ok) {
+                    response.json().then(novoRegistro => {
 
-        fetch(`/medidas/tempo-real/${idRepresa}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (novoRegistro) {
+                        alertar(novoRegistro, idRepresa);
+                        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                        console.log(`Dados atuais do gráfico:`);
+                        console.log(dados);
 
-                    obterdados(idRepresa);
-                    alertar(novoRegistro, idRepresa);
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico:`);
-                    console.log(dados);
+                        let avisoCaptura = document.getElementById(`avisoCaptura${idRepresa}`);
+                        avisoCaptura.innerHTML = "";
 
-                    let avisoCaptura = document.getElementById(`avisoCaptura${idRepresa}`)
-                    avisoCaptura.innerHTML = ""
+                        const dataHoraNovo = new Date(novoRegistro[0].data_hora).getTime();
+                        const dataHoraUltimo = new Date(dados.labels[dados.labels.length - 1]).getTime();
 
-                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-                        console.log("---------------------------------------------------------------")
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-                        console.log("Horário do novo dado capturado:")
-                        console.log(novoRegistro[0].momento_grafico)
-                        console.log("Horário do último dado capturado:")
-                        console.log(dados.labels[dados.labels.length - 1])
-                        console.log("---------------------------------------------------------------")
-                    } else {
-                        myChart.data.labels = [];
-                        myChart.data.datasets[0].data = [];
+                        if (dataHoraNovo == dataHoraUltimo) {
+                            console.log("Não há dados novos para captura, o gráfico não atualizará.");
+                            avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Dado mais atual já exibido. Gráfico não atualizado.";
+                        } else {
+                            // Remove o primeiro label e dado para manter o gráfico sincronizado
+                            dados.labels.shift();
+                            dados.datasets[0].data.shift();
 
-                        //   tirando e colocando valores no gráfico
-                        dados.labels.shift();  //apagar o primeiro
-                        dados.labels.push(novoRegistro[0].data_hora);  //incluir um novo momento
+                            console.log(novoRegistro[0].data_hora)
+                            console.log(Number(novoRegistro[0].nivel_agua_m))
+                            // Adiciona o novo dado com a data completa (data + hora)
+                            dados.labels.push(novoRegistro[0].data_hora);
+                            dados.datasets[0].data.push(Number(novoRegistro[0].nivel_agua_m));
 
-                        dados.datasets[0].data.shift();   //apagar o primeiro de umidade
-                        dados.datasets[0].data.push(Number(novoRegistro[0].nivel_agua_m));  //incluir uma nova medida de umidade
-                        myChart.update();
-                    }
+                            myChart.update();
+                        }
 
-                    //Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idRepresa, dados, myChart), 2000);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                //Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(idRepresa, dados, myChart), 2000);
-            }
-        })
-            .catch(function (error) {
+                        setTimeout(() => atualizarGrafico(idRepresa, dados, myChart), 2000);
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                    setTimeout(() => atualizarGrafico(idRepresa, dados, myChart), 2000);
+                }
+            })
+            .catch(error => {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-
     }
 
 </script>
