@@ -124,7 +124,6 @@
 
 
 
-
     </body>
 
 </html>
@@ -133,6 +132,8 @@
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
     let proximaAtualizacao;
+    let idRepresaClickada = null
+    let nomeRepresaClickada = null
 
     window.onload = exibirRepresasDoUsuario();
 
@@ -151,7 +152,7 @@
 
             document.getElementById("graficos").innerHTML += `
             <details>
-                <summary class="1">
+                <summary class="1" onclick="puxarDadosRepresa('${item.idRepresa}', '${item.Nome}')">
                     <div class="div-img-nome-usina">
                         <span id="tituloAquario${item.idRepresa}">${item.Nome}</span>
                         <img src="../img/usina1.png" alt="Reservatório logo">
@@ -178,7 +179,7 @@
                 </div>
             </details>
         `;
-            obterDadosGrafico(item.idRepresa);
+            
         }
 
         // if (represas.length > 0) {
@@ -247,20 +248,19 @@
     function obterDadosGrafico() {
 
         let represas = JSON.parse(sessionStorage.REPRESA);
+        console.log('Represas:', represas);
+        
 
-        // Exemplo: acessar o id da primeira represa
-        let idRepresa = represas[0].idRepresa;
+        console.log(idRepresaClickada)
+        // alterarTitulo(idRepresaClickada)
 
-        console.log(idRepresa)
-        // alterarTitulo(idRepresa)
-
-        fetch(`/medidas/ultimas/${idRepresa}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/medidas/ultimas/${idRepresaClickada}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
 
-                    plotarGrafico(resposta, idRepresa);
+                    plotarGrafico(resposta, idRepresaClickada);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -379,6 +379,14 @@
             .catch(error => {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
+    }
+
+    function puxarDadosRepresa(idRepresa, nomeRepresa){
+        idRepresaClickada = idRepresa
+        nomeRepresaClickada = nomeRepresa
+
+        console.log(`ID da represa ${nomeRepresaClickada} é ${idRepresaClickada}`);
+        obterDadosGrafico();
     }
 
 </script>
