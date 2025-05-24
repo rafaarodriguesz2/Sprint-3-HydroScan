@@ -13,10 +13,15 @@ function cadastrarRepresa(nome, localizacao, volumeMaximo, volumeMinimo, potenci
 }
 
 function buscarRepresas(codigo) {
-  var instrucaoSql = `SELECT * FROM Represa WHERE fkCodigo_empresa = 'EBC4K-2F'`;
+  var instrucaoSql = `SELECT * FROM Represa WHERE fkCodigo_empresa = '${codigo}'`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
-  return database.executar(instrucaoSql);
+  return database.executar(instrucaoSql)
+   .then(resultado => resultado) // se vazio, retorna []
+    .catch(erro => {
+      console.error("Erro ao buscar represas", erro);
+      return []; // <- ESSA LINHA GARANTE QUE VAI RETORNAR []
+    });
 }
 
 module.exports = {

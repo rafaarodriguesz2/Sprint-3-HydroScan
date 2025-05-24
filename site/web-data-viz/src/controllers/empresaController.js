@@ -1,4 +1,4 @@
-var EmpresaModel = require("../models/EmpresaModel")
+var EmpresaModel = require("../models/empresaModel")
 var represaModel = require("../models/represaModel");
 
 function cadastrar(req, res) {
@@ -69,11 +69,18 @@ function autenticar(req, res) {
                                     cpf: resultado[0].cpf,
                                     email: resultado[0].email,
                                     fkCodigo_empresa: resultado[0].fkCodigo_empresa,
-                                    fkCodigo_empresa: resultadoAquarios
+                                    fkCodigo_empresa: resultadoAquarios 
                                 });
                                 console.log(res.json)
                             } else {
-                                res.status(204).json({ aquarios: [] });
+                                res.status(200).json({
+                                    idUsuario: resultado[0].idUsuario,
+                                    nome: resultado[0].nome,
+                                    cpf: resultado[0].cpf,
+                                    email: resultado[0].email,
+                                    fkCodigo_empresa: resultado[0].fkCodigo_empresa,
+                                    fkCodigo_empresa: []
+                                });
                             }
                         })
                 } else if (resultado.length == 0) { // Nenhum usuário encontrado ou senha incorreta

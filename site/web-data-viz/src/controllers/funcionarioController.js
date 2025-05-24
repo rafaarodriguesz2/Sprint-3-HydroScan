@@ -100,17 +100,25 @@ function autenticarFuncionario(req, res) {
                     represaModel.buscarRepresas(resultado[0].fkCodigo_empresa)
                         .then((resultadoAquarios) => {
                             if (resultadoAquarios.length > 0) {
+                                console.log("tem represa")
                                 res.json({
                                     idUsuario: resultado[0].idUsuario,
                                     nome: resultado[0].nome,
                                     cpf: resultado[0].cpf,
                                     email: resultado[0].email,
-                                    fkCodigo_empresa: resultado[0].fkCodigo_empresa,
-                                    fkCodigo_empresa: resultadoAquarios
+                                    codigo: resultado[0].fkCodigo_empresa,
+                                    represas: resultadoAquarios
                                 });
                                 console.log(res.json)
                             } else {
-                                res.status(204).json({ aquarios: [] });
+                                res.status(200).json({
+                                    idUsuario: resultado[0].idUsuario,
+                                    nome: resultado[0].nome,
+                                    cpf: resultado[0].cpf,
+                                    email: resultado[0].email,
+                                    codigo: resultado[0].fkCodigo_empresa,
+                                    represas: []
+                                });
                             }
                         })
                 } else if (resultado.length == 0) { // Nenhum usuário encontrado ou senha incorreta
