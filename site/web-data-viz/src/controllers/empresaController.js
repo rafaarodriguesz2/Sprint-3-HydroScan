@@ -65,11 +65,11 @@ function autenticar(req, res) {
                             if (resultadoAquarios.length > 0) {
                                 res.json({
                                     idUsuario: resultado[0].idUsuario,
-                                    nome: resultado[0].nome,
-                                    cpf: resultado[0].cpf,
-                                    email: resultado[0].email,
-                                    fkCodigo_empresa: resultado[0].fkCodigo_empresa,
-                                    fkCodigo_empresa: resultadoAquarios 
+                                    nome: resultado[0].Nome,
+                                    cnpj: resultado[0].CNPJ,
+                                    email: resultado[0].Email,
+                                    codigo: resultado[0].fkCodigo_empresa,
+                                    represas: resultadoAquarios 
                                 });
                                 console.log(res.json)
                             } else {

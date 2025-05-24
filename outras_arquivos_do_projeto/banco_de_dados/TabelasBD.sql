@@ -39,8 +39,8 @@ CREATE TABLE Usuario (
 
 
 INSERT INTO Usuario (CPF, Nome, Email, Senha_hash, tipo_usuario, ativo, fkCodigo_empresa) VALUES
-('19945623881', 'João Silva', 'joao@itaipu.com.br', 'hashed_senha_joao', 'admin', 1, 'EBC4K-2F'),
-('11967579030', 'Maria Souza', 'maria@ecopower.com', 'hashed_senha_maria', 'operador', 1, 'AB92KL-9J');
+('19945623881', 'João Silva', 'joao@itaipu.com.br', '123', 'admin', 1, 'EBC4K-2F'),
+('11967579030', 'Maria Souza', 'maria@ecopower.com', '123', 'operador', 1, 'AB92KL-9J');
 
 
 -- TABELA: Represa
@@ -57,9 +57,12 @@ CREATE TABLE Represa (
 );
 
 INSERT INTO Represa (Nome, Localizacao, VolumeMaximo, VolumeMinimo, potencia_max_kw, fkCodigo_empresa, data_cadastro) VALUES
-('Represa Azul', 'Vale das Águas, SP', 1991340.00, 209200.00, 5000.00, 'EBC4K-2F', NOW()),
+('Represa Azul', 'Vale das Águas, SP', 29000, 5000,500, 'EBC4K-2F', NOW()),
 ('Represa Verde', 'Montanhas Azuis, MG', 866730.00, 150700.00, 4000.00, 'AB92KL-9J', NOW());
 
+INSERT INTO Represa (Nome, Localizacao, VolumeMaximo, VolumeMinimo, potencia_max_kw, fkCodigo_empresa, data_cadastro) VALUES
+('Represa ROXA', 'Vale das Águas, SP', 1991340.00, 209200.00, 5000.00, 'EBC4K-2F', NOW()),
+('Represa MARROM', 'Montanhas Azuis, MG', 866730.00, 150700.00, 4000.00, 'AB92KL-9J', NOW());
 
 -- TABELA: Sensor
 CREATE TABLE if not exists Sensor (
@@ -87,15 +90,34 @@ CREATE TABLE Leitura (
     FOREIGN KEY (idSensor) REFERENCES Sensor(idSensor)
 );
 
+
+
 INSERT INTO Leitura (idSensor, data_hora, nivel_agua_m, status_geracao) VALUES
-(1, NOW(), 42.50, 'gerando'),
-(1, NOW() - INTERVAL 1 DAY, 41.80, 'gerando'),
-(2, NOW(), 35.20, 'parada');
+-- Sensor 1 - de 5m a 95m
+(1, NOW() - INTERVAL 0 HOUR, 95.00, 'gerando'),
+(1, NOW() - INTERVAL 1 HOUR, 70.50, 'gerando'),
+(1, NOW() - INTERVAL 2 HOUR, 45.20, 'gerando'),
+(1, NOW() - INTERVAL 3 HOUR, 20.80, 'manutenção'),
+(1, NOW() - INTERVAL 4 HOUR, 5.00, 'parada'),
+
+-- Sensor 2 - de 3m a 88m
+(2, NOW() - INTERVAL 0 HOUR, 88.00, 'gerando'),
+(2, NOW() - INTERVAL 1 HOUR, 66.00, 'gerando'),
+(2, NOW() - INTERVAL 2 HOUR, 40.00, 'parada'),
+(2, NOW() - INTERVAL 3 HOUR, 22.50, 'parada'),
+(2, NOW() - INTERVAL 4 HOUR, 3.00, 'manutenção'),
+
+(3, NOW() - INTERVAL 0 HOUR, 88.00, 'gerando'),
+(3, NOW() - INTERVAL 1 HOUR, 66.00, 'gerando'),
+(3, NOW() - INTERVAL 2 HOUR, 40.00, 'parada'),
+(3, NOW() - INTERVAL 3 HOUR, 22.50, 'parada'),
+(3, NOW() - INTERVAL 4 HOUR, 3.00, 'manutenção');
 
 create table Api (
 idApi int primary key auto_increment,
 nivel_da_agua int
 );
+
 
 
 CREATE TABLE Suporte(
@@ -108,6 +130,27 @@ CREATE TABLE Suporte(
     primary key(id, apiKey)
 );
 
+CREATE TABLE Energia (
+    idProducao INT PRIMARY KEY AUTO_INCREMENT,
+    fk_represa INT,
+    data_hora DATETIME,
+    energia_mwh DECIMAL(10, 2),
+    FOREIGN KEY (fk_represa) REFERENCES represa(idRepresa)
+);
+
+INSERT INTO Energia (fk_represa, data_hora, energia_mwh) VALUES
+(1, '2025-05-23 08:00:00', 120.50),
+(1, '2025-05-23 12:00:00', 135.75),
+(1, '2025-05-23 16:00:00', 140.20),
+(1, '2025-05-23 20:00:00', 130.10),
+(1, '2025-05-24 00:00:00', 110.60),
+(2, '2025-05-23 08:00:00', 90.30),
+(2, '2025-05-23 12:00:00', 95.40),
+(2, '2025-05-23 16:00:00', 99.70),
+(2, '2025-05-23 20:00:00', 97.50),
+(2, '2025-05-24 00:00:00', 85.20);
+
+
 select * from suporte;
 
 SELECT * FROM Empresa;
@@ -116,7 +159,4 @@ SELECT * FROM Represa;
 SELECT * FROM Leitura;
 SELECT * FROM Sensor;
 SELECT * FROM Api;
-
-INSERT INTO Represa (Nome, Localizacao, VolumeMaximo, VolumeMinimo, potencia_max_kw, fkCodigo_empresa, data_cadastro) VALUES
-('Represa ROXA', 'Vale das Águas, SP', 1991340.00, 209200.00, 5000.00, 'EBC4K-2F', NOW()),
-('Represa MARROM', 'Montanhas Azuis, MG', 866730.00, 150700.00, 4000.00, 'AB92KL-9J', NOW());
+SELECT * FROM Energia;

@@ -57,10 +57,10 @@ function checkCNPJorCPF(){
                 console.log(json);
                 console.log(JSON.stringify(json));
                 sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.CPF_USUARIO = json.cpf;
+                sessionStorage.CPF_USUARIO = json.cnpj;
                 sessionStorage.NOME_USUARIO = json.nome;
-                sessionStorage.CODIGO = json.Codigo_empresa;
-                sessionStorage.REPRESA = JSON.stringify(json.fkCodigo_empresa);
+                sessionStorage.CODIGO = json.codigo;
+                sessionStorage.REPRESA = JSON.stringify(json.represas);
             
                 console.log(json)
                 
