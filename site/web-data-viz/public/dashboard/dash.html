@@ -137,8 +137,11 @@
     let volumeMinimo = 0;
     let potenciaMaxima = 0;
     let nivelDaAguaAtual = 0;
-    let idRepresaClickada = null
-    let nomeRepresaClickada = null
+    let energiaGerada = 0;
+    let idRepresaClickada = null;
+    let nomeRepresaClickada = null;
+    let dados = {};
+    let dadosEnergia = {};
 
 
     window.onload = exibirRepresasDoUsuario();
@@ -147,7 +150,7 @@
         console.log("REPRESA no sessionStorage:", sessionStorage.REPRESA);
         var represas = JSON.parse(sessionStorage.REPRESA);
 
-        console.log(represas)
+        console.log(represas, "REPRESAS")
 
         document.getElementById("usinas-cadastradas").innerHTML += `
         <h3>${represas.length}</h3>
@@ -205,8 +208,9 @@
 
         let represas = JSON.parse(sessionStorage.REPRESA);
         console.log('Represas:', represas);
-
-
+        
+        
+        console.log(energiaGerada, "obter dados GRAFICO")
         console.log(idRepresaClickada)
         // alterarTitulo(idRepresaClickada)
 
@@ -240,17 +244,36 @@
 
         console.log('iniciando plotagem do gráfico...');
 
+        dadosRepresa();
+        console.log(energiaGerada, "PLOTAR GRAFICO")
+
+
         //   Criando estrutura para plotar gráfico - labels
         let labels = [];
+        let labels2 = [];
 
         //   Criando estrutura para plotar gráfico - dados
-        let dados = {
+        dados = {
             labels: labels,
             datasets: [{
                 label: 'Nivel atual da agua',
                 data: [],
                 fill: false,
-                borderColor: 'rgb(75, 192, 192)',
+                borderColor: 'blue',
+                backgroundColor: 'lightblue',
+                borderWidth: 2,
+                tension: 0.1
+            }]
+        };
+        dadosEnergia = {
+            labels: labels2,
+            datasets: [{
+                label: 'Produçâo de energia',
+                data: [],
+                fill: false,
+                borderColor: 'red',
+                backgroundColor: 'lightcoral',
+                borderWidth: 2,
                 tension: 0.1
             }]
         };
@@ -266,6 +289,8 @@
             const dataRecebida = registro.data_hora;
             const data = new Date(dataRecebida);
 
+
+
             const dataFormatada = data.toLocaleString('pt-BR', {
                 day: '2-digit',
                 month: '2-digit',
@@ -275,44 +300,53 @@
             });
 
             labels.push(dataFormatada);
+            labels2.push(dataFormatada);
             dados.datasets[0].data.push(Number(registro.nivel_agua_m));
+            dadosEnergia.datasets[0].data.push(Number(registro.nivel_agua_m));
         }
 
         console.log('----------------------------------------------')
         console.log('O gráfico será plotado com os respectivos valores:')
         console.log('Labels:')
         console.log(labels)
+        console.log('labels2', labels2)
         console.log('Dados:')
-        console.log(dados.datasets)
+        console.log(dados.datasets) 
+        console.log(dadosEnergia.datasets, "Dados energia")
         console.log('----------------------------------------------')
 
         //   Criando estrutura para plotar gráfico - config
-        const config = {
+        const configLine = {
             type: 'line',
-            data: dados,
+            data: dadosEnergia,
         };
+
+        const configBar = {
+            type: 'bar',
+            data: dados,
+        }
 
         //   Adicionando gráfico criado em div na tela
         let myChart = new Chart(
             document.getElementById(`myChartCanvas${idRepresa}`),
-            config
+            configBar
         );
 
         let myChart2 = new Chart(
             document.getElementById(`myChartCanvas2`),
-            config
+            configLine
         );
         let myChart3 = new Chart(
             document.getElementById(`myChartCanvas3`),
-            config
+            configBar
         );
         let myChart4 = new Chart(
             document.getElementById(`myChartCanvas4`),
-            config
+            configLine
         );
-    
 
-        setTimeout(() => atualizarGrafico(idRepresa, dados, myChart), 2000);
+
+        setTimeout(() => atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia), 2000);
     }
 
 
@@ -321,16 +355,16 @@
 
     //       Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //       Para ajustar o "select", ajuste o comando sql em src/models
-    function atualizarGrafico(idRepresa, dados, myChart) {
+    function atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia) {
         fetch(`/medidas/tempo-real/${idRepresa}`, { cache: 'no-store' })
             .then(response => {
                 if (response.ok) {
                     response.json().then(novoRegistro => {
 
                         alertar(novoRegistro, idRepresa);
-                        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                        console.log(`Dados atuais do gráfico:`);
-                        console.log(dados);
+                        // console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                        // console.log(`Dados atuais do gráfico:`);
+                        // console.log(dados);
 
                         let avisoCaptura = document.getElementById(`avisoCaptura${idRepresa}`);
                         avisoCaptura.innerHTML = "";
@@ -342,9 +376,15 @@
                             console.log("Não há dados novos para captura, o gráfico não atualizará.");
                             avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Dado mais atual já exibido. Gráfico não atualizado.";
                         } else {
+                            dadosRepresa()
+                            console.log(energiaGerada)
+
                             // Remove o primeiro label e dado para manter o gráfico sincronizado
                             dados.labels.shift();
                             dados.datasets[0].data.shift();
+                            console.log('valor da variável antes do shift:', dadosEnergia.labels);
+                            dadosEnergia.labels.shift();
+                            dadosEnergia.datasets[0].data.shift();
 
 
                             const dataRecebida = novoRegistro[0].data_hora;
@@ -358,19 +398,22 @@
                                 minute: '2-digit'
                             });
 
-                            console.log(novoRegistro[0].data_hora)
-                            console.log(Number(novoRegistro[0].nivel_agua_m))
+                            // console.log(novoRegistro[0].data_hora)
+                            // console.log(Number(novoRegistro[0].nivel_agua_m))
                             // Adiciona o novo dado com a data completa (data + hora)
+                            dadosEnergia.labels.push(dataFormatada)
+                            dadosEnergia.datasets[0].data.push(Number(energiaGerada));
                             dados.labels.push(dataFormatada);
                             dados.datasets[0].data.push(Number(novoRegistro[0].nivel_agua_m));
                             nivelDaAguaAtual = Number(novoRegistro[0].nivel_agua_m)
                             myChart.update();
+                            myChart2.update();
                         }
-                        setTimeout(() => atualizarGrafico(idRepresa, dados, myChart), 2000);
+                        setTimeout(() => atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia), 2000);
                     });
                 } else {
                     console.error('Nenhum dado encontrado ou erro na API');
-                    setTimeout(() => atualizarGrafico(idRepresa, dados, myChart), 2000);
+                    setTimeout(() => atualizarGrafico(idRepresa, dados, myChart,dadosEnergia), 2000);
                 }
             })
             .catch(error => {
@@ -386,18 +429,20 @@
                     let informacoesRepresas = JSON.stringify(resposta)
                     informacoesRepresas = JSON.parse(informacoesRepresas)
 
-                    let volumeMaximo = informacoesRepresas[0].VolumeMaximo
-                    let volumeMinimo = informacoesRepresas[0].VolumeMinimo
-                    let potenciaMaxima = informacoesRepresas[0].potencia_max_kw
+                    volumeMaximo = informacoesRepresas[0].VolumeMaximo
+                    volumeMinimo = informacoesRepresas[0].VolumeMinimo
+                    potenciaMaxima = informacoesRepresas[0].potencia_max_kw
 
-                    let energiaGerada = ((nivelDaAguaAtual / 100) * volumeMaximo) * potenciaMaxima * 720
-                    console.log(energiaGerada)
+                    energiaGerada = ((nivelDaAguaAtual / 100) * volumeMaximo) * potenciaMaxima / 10000
 
-                    console.log(volumeMaximo)
-                    console.log(volumeMinimo)
-                    console.log(potenciaMaxima)
-                    console.log(nivelDaAguaAtual)
+                    // console.log(volumeMaximo)
+                    // console.log(volumeMinimo)
+                    // console.log(potenciaMaxima)
+                    // console.log(nivelDaAguaAtual)
+                    // console.log("Energia Gerada", energiaGerada)
 
+        
+                    
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');

@@ -13,7 +13,7 @@ function cadastrarRepresa(nome, localizacao, volumeMaximo, volumeMinimo, potenci
 }
 
 function buscarRepresas(codigo) {
-  var instrucaoSql = `SELECT * FROM Represa WHERE Nome = 'Represa Azul'`;
+  var instrucaoSql = `SELECT * FROM Represa WHERE fkCodigo_empresa = 'EBC4K-2F'`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);

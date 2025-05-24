@@ -135,12 +135,11 @@ function checkCNPJorCPF(){
                 sessionStorage.CODIGO = json.fkCodigo_empresa;
                 sessionStorage.REPRESA = JSON.stringify(json.fkCodigo_empresa)
             
-                console.log(json)
+                console.log( JSON.stringify(json.fkCodigo_empresa))
                 
                 setTimeout(function () {
                     window.location = "../../dashboard/dash.html";
                 }, 1000); // apenas para exibir o loading
-
             });
 
         } else {
