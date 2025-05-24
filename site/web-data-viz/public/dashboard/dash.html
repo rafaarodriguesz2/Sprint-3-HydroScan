@@ -99,6 +99,7 @@
                                             </div>
                                         </div>
 
+                                        <button onclick="dadosRepresa()">Buscar represas</button>
 
                                         <div class="btn-logout" onclick="limparSessao()">
                                             <h3 style="cursor: pointer;">Sair</h3>
@@ -133,6 +134,10 @@
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
     let proximaAtualizacao;
+    let volumeMaximo = 0;
+    let volumeMinimo = 0;
+    let potenciaMaxima = 0;
+    let nivelDaAguaAtual = 0;
 
     window.onload = exibirRepresasDoUsuario();
 
@@ -168,6 +173,15 @@
                         <div class="graph">
                             <canvas id="myChartCanvas${item.idRepresa}"></canvas>
                         </div>
+                        <div class="graph">
+                            <canvas id="myChartCanvas2"></canvas>
+                        </div>
+                        <div class="graph">
+                            <canvas id="myChartCanvas3"></canvas>
+                        </div>
+                        <div class="graph">
+                            <canvas id="myChartCanvas4"></canvas>
+                        </div>
                         <div class="label-captura">
                             <p id="avisoCaptura${item.idRepresa}" style="color: white"></p>
                         </div>
@@ -181,68 +195,7 @@
             obterDadosGrafico(item.idRepresa);
         }
 
-        // if (represas.length > 0) {
-        //     exibirAquario(represas[0].idRepresa)
-        // }
     }
-
-    // function alterarTitulo(idRepresa) {
-    //     var tituloAquario = document.getElementById(`tituloAquario${idRepresa}`)
-    //     var descricao = JSON.parse(sessionStorage.represas).find(item => item.id == idRepresa).descricao;
-    //     tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
-    // }
-
-    // function exibirAquario(idRepresa) {
-    //     let todosOsGraficos = JSON.parse(sessionStorage.REPRESA);
-
-    //     console.log(todosOsGraficos);
-
-    //     for (let i = 0; i < todosOsGraficos.length; i++) {
-    //         if (todosOsGraficos[i].idRepresa != idRepresa) {
-    //             let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].idRepresa}`);
-    //             if (elementoAtual) {
-    //                 if (elementoAtual.classList.contains("display-block")) {
-    //                     elementoAtual.classList.remove("display-block");
-    //                 }
-    //                 elementoAtual.classList.add("display-none");
-    //             }
-
-    //             let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].idRepresa}`);
-    //             if (btnAtual) {
-    //                 if (btnAtual.classList.contains("btn-pink")) {
-    //                     btnAtual.classList.remove("btn-pink");
-    //                 }
-    //                 btnAtual.classList.add("btn-white");
-    //             }
-    //         }
-    //     }
-
-    //     // exibir o gráfico da represa clicada
-    //     let graficoClicado = document.getElementById(`grafico${idRepresa}`);
-    //     if (graficoClicado) {
-    //         graficoClicado.classList.remove("display-none");
-    //         graficoClicado.classList.add("display-block");
-    //     }
-
-    //     let btnClicado = document.getElementById(`btnAquario${idRepresa}`);
-    //     if (btnClicado) {
-    //         btnClicado.classList.remove("btn-white");
-    //         btnClicado.classList.add("btn-pink");
-    //     }
-    // }
-
-    //  O gráfico é construído com três funções:
-    //  1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-    //  2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-    //  3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
-    //  Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-    //  para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-    //  A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-    //      Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //      Para ajustar o "select", ajuste o comando sql em src/models
-
 
     function obterDadosGrafico() {
 
@@ -257,10 +210,16 @@
         fetch(`/medidas/ultimas/${idRepresa}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
 
+                    let informacoesLeitura = JSON.stringify(resposta)
+                    informacoesLeitura = JSON.parse(informacoesLeitura)
+
+                    console.log(informacoesLeitura[0].nivel_agua_m)
                     plotarGrafico(resposta, idRepresa);
+
+
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -291,8 +250,7 @@
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.1
-            }
-            ]
+            }]
         };
 
         console.log('----------------------------------------------')
@@ -302,7 +260,19 @@
         //   Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
-            labels.push(registro.data_hora);
+
+            const dataRecebida = registro.data_hora;
+            const data = new Date(dataRecebida);
+
+            const dataFormatada = data.toLocaleString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            labels.push(dataFormatada);
             dados.datasets[0].data.push(Number(registro.nivel_agua_m));
         }
 
@@ -326,6 +296,11 @@
             config
         );
 
+        let myChart2 = new Chart(
+            document.getElementById(`myChartCanvas2`),
+            config
+        );
+        
         setTimeout(() => atualizarGrafico(idRepresa, dados, myChart), 2000);
     }
 
@@ -360,12 +335,24 @@
                             dados.labels.shift();
                             dados.datasets[0].data.shift();
 
+
+                            const dataRecebida = novoRegistro[0].data_hora;
+                            const data = new Date(dataRecebida);
+
+                            const dataFormatada = data.toLocaleString('pt-BR', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            });
+
                             console.log(novoRegistro[0].data_hora)
                             console.log(Number(novoRegistro[0].nivel_agua_m))
                             // Adiciona o novo dado com a data completa (data + hora)
-                            dados.labels.push(novoRegistro[0].data_hora);
+                            dados.labels.push(dataFormatada);
                             dados.datasets[0].data.push(Number(novoRegistro[0].nivel_agua_m));
-
+                            nivelDaAguaAtual = Number(novoRegistro[0].nivel_agua_m)
                             myChart.update();
                         }
 
@@ -379,6 +366,38 @@
             .catch(error => {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
+    }
+
+    function dadosRepresa() {
+        fetch(`/represas/buscar-represas`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    let informacoesRepresas = JSON.stringify(resposta)
+                    informacoesRepresas = JSON.parse(informacoesRepresas)
+
+                    let volumeMaximo = informacoesRepresas[0].VolumeMaximo
+                    let volumeMinimo = informacoesRepresas[0].VolumeMinimo
+                    let potenciaMaxima = informacoesRepresas[0].potencia_max_kw
+
+                    let energiaGerada = ((nivelDaAguaAtual / 100) * volumeMaximo) * potenciaMaxima * 720
+                    console.log(energiaGerada)
+
+                    console.log(volumeMaximo)
+                    console.log(volumeMinimo)
+                    console.log(potenciaMaxima)
+                    console.log(nivelDaAguaAtual)
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
     }
 
 </script>
