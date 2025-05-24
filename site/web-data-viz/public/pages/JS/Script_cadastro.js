@@ -12,13 +12,13 @@ function cadastroEmpresa(){
     const divResposta = document.getElementById("div_resposta")
 
     if (!cpnj || !nome || !email || !senhaTemporaria || !confirmeSenha || !telefone || !codigoEmpresa || !endereco) {
-    alert("Por favor, preencha todos os campos!");
+    div_resposta.innerHTML = `<p style="color: red;">Ambos os campos devem estar preenchidos</p>`
     }else if (cpnj.length != 14){
-      alert ('O CNPJ deve ter 14 caracteres')
+        div_resposta.innerHTML = `<p style="color: red;">O CNPJ deve ter 14 caracteres</p>`
     }
 
     if (senhaTemporaria != confirmeSenha){
-      alert ('As duas senhas devem ser iguais!')
+      div_resposta.innerHTML = `<p style="color: red;">As duas senhas devem ser iguais!</p>`
     }else{
 
     const dadosParaApi = {
@@ -60,7 +60,7 @@ function cadastroEmpresa(){
     .then(data => {
         // Se chegou aqui, a API retornou sucesso (ex: status 201)
         console.log("Sucesso do cadastro:", data);
-        divResposta.innerHTML = `<p style="color: green;">${data.mensagem || "Funcionário cadastrado com sucesso!"}</p>`;
+        divResposta.innerHTML = `<p style="color: green;">${data.mensagem || "Empresa cadastrada com sucesso!"}</p>`;
         
         // Opcional: Limpar o formulário após o sucesso
         document.getElementById("ipt_cnpj").value = "";

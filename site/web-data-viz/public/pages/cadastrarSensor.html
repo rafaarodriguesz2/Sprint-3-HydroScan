@@ -33,7 +33,7 @@
   <input type="text" id="ipt_localInstalação" class="input" placeholder="Insira aqui o local de instalção do sensor">
   <input type="date" id="ipt_dataInstalação" class="input" style="font-family: 'Poppins';">
   <select name="slct_nivelAcesso" id="slct_represa">
-    <option value="#" selected disabled>Selecione um nivel de acceso</option>
+    <option value="#" selected disabled>Selecione a represa correspondente</option>
     
   </select>
   <div class="div_resposta" id="div_resposta"></div>
@@ -103,7 +103,7 @@
     .then(data => {
         // Se chegou aqui, a API retornou sucesso (ex: status 201)
         console.log("Sucesso do cadastro:", data);
-        divResposta.innerHTML = `<p style="color: green;">${data.mensagem || "Funcionário cadastrado com sucesso!"}</p>`;
+        divResposta.innerHTML = `<p style="color: green;">${data.mensagem || "Sensor cadastrado com sucesso!"}</p>`;
         
         // Opcional: Limpar o formulário após o sucesso
         document.getElementById("ipt_modeloSensor").value = "";
