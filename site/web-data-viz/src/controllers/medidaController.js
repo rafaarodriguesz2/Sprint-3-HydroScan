@@ -2,13 +2,12 @@ var medidaModel = require("../models/medidaModel");
 
 function buscarUltimasMedidas(req, res) {
 
-    const limite_linhas = 7;
+    const idRepresa = req.params.idRepresa;
 
-    var codigo = req.params.fkCodigo_empresa;
+    console.log(`Dentro do controller (buscarUltimasMedidas): idRepresa esta ${idRepresa}`);
 
-    console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidas(codigo, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidas(idRepresa).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -24,11 +23,11 @@ function buscarUltimasMedidas(req, res) {
 
 function buscarMedidasEmTempoReal(req, res) {
 
-    var idAquario = req.params.idAquario;
+    const idRepresa = req.params.idRepresa;
 
-    console.log(`Recuperando medidas em tempo real`);
+    console.log(`Dentro do controller (buscarMedidasEmTempoReal): idRepresa esta ${idRepresa}`);
 
-    medidaModel.buscarMedidasEmTempoReal(idAquario).then(function (resultado) {
+    medidaModel.buscarMedidasEmTempoReal(idRepresa).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

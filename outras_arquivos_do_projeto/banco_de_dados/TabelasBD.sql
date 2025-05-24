@@ -46,7 +46,7 @@ INSERT INTO Usuario (CPF, Nome, Email, Senha_hash, tipo_usuario, ativo, fkCodigo
 -- TABELA: Represa
 CREATE TABLE Represa (
     idRepresa INT AUTO_INCREMENT PRIMARY KEY,
-    Nome VARCHAR(100),
+    Nome VARCHAR(100) unique key,
     Localizacao VARCHAR(200),
     VolumeMaximo DECIMAL(10,2),
     VolumeMinimo DECIMAL(10,2),
@@ -62,19 +62,19 @@ INSERT INTO Represa (Nome, Localizacao, VolumeMaximo, VolumeMinimo, potencia_max
 
 
 -- TABELA: Sensor
-CREATE TABLE Sensor (
+CREATE TABLE if not exists Sensor (
     idSensor INT AUTO_INCREMENT PRIMARY KEY,
     modelo VARCHAR(45),
-    status VARCHAR(20),
+    status VARCHAR(20) default 'ativo',
     local_instalacao VARCHAR(100),
-    Represa_idRepresa INT,
-    data_instalacao DATETIME,
-    FOREIGN KEY (Represa_idRepresa) REFERENCES Represa(idRepresa)
+    nome_represa varchar(100),
+    data_instalacao date,
+    FOREIGN KEY (nome_represa) REFERENCES Represa(nome)
 );
 
-INSERT INTO Sensor (modelo, status, local_instalacao, Represa_idRepresa, data_instalacao) VALUES
-('HC-SR04', 'ativo', 'Entrada Norte', 1, NOW()),
-('MB7360', 'ativo', 'Centro Hidráulico', 2, NOW());
+INSERT INTO Sensor (modelo, status, local_instalacao, nome_represa, data_instalacao) VALUES
+('HC-SR04', 'ativo', 'Entrada Norte', 'Represa Azul', NOW()),
+('MB7360', 'ativo', 'Centro Hidráulico', 'Represa Verde', NOW());
 
 
 -- TABELA: Leitura

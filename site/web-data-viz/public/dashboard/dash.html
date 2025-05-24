@@ -125,7 +125,6 @@
 
 
 
-
     </body>
 
 </html>
@@ -138,6 +137,9 @@
     let volumeMinimo = 0;
     let potenciaMaxima = 0;
     let nivelDaAguaAtual = 0;
+    let idRepresaClickada = null
+    let nomeRepresaClickada = null
+
 
     window.onload = exibirRepresasDoUsuario();
 
@@ -156,7 +158,7 @@
 
             document.getElementById("graficos").innerHTML += `
             <details>
-                <summary class="1">
+                <summary class="1" onclick="puxarDadosRepresa('${item.idRepresa}', '${item.Nome}')">
                     <div class="div-img-nome-usina">
                         <span id="tituloAquario${item.idRepresa}">${item.Nome}</span>
                         <img src="../img/usina1.png" alt="Reservatório logo">
@@ -170,17 +172,19 @@
                     <div id="grafico${item.idRepresa}" class="display-none">
                         <h3 class="tituloGraficos">
                         </h3>
-                        <div class="graph">
-                            <canvas id="myChartCanvas${item.idRepresa}"></canvas>
-                        </div>
-                        <div class="graph">
-                            <canvas id="myChartCanvas2"></canvas>
-                        </div>
-                        <div class="graph">
-                            <canvas id="myChartCanvas3"></canvas>
-                        </div>
-                        <div class="graph">
-                            <canvas id="myChartCanvas4"></canvas>
+                        <div class="container-graficos">
+                            <div class="graph">
+                                <canvas id="myChartCanvas${item.idRepresa}"></canvas>
+                            </div>
+                            <div class="graph">
+                                <canvas id="myChartCanvas2"></canvas>
+                            </div>
+                            <div class="graph">
+                                <canvas id="myChartCanvas3"></canvas>
+                            </div>
+                            <div class="graph">
+                                <canvas id="myChartCanvas4"></canvas>
+                            </div>
                         </div>
                         <div class="label-captura">
                             <p id="avisoCaptura${item.idRepresa}" style="color: white"></p>
@@ -192,7 +196,7 @@
                 </div>
             </details>
         `;
-            obterDadosGrafico(item.idRepresa);
+
         }
 
     }
@@ -200,14 +204,13 @@
     function obterDadosGrafico() {
 
         let represas = JSON.parse(sessionStorage.REPRESA);
+        console.log('Represas:', represas);
 
-        // Exemplo: acessar o id da primeira represa
-        let idRepresa = represas[0].idRepresa;
 
-        console.log(idRepresa)
-        // alterarTitulo(idRepresa)
+        console.log(idRepresaClickada)
+        // alterarTitulo(idRepresaClickada)
 
-        fetch(`/medidas/ultimas/${idRepresa}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/medidas/ultimas/${idRepresaClickada}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -217,9 +220,8 @@
                     informacoesLeitura = JSON.parse(informacoesLeitura)
 
                     console.log(informacoesLeitura[0].nivel_agua_m)
-                    plotarGrafico(resposta, idRepresa);
-
-
+                    // plotarGrafico(resposta, idRepresa);
+                    plotarGrafico(resposta, idRepresaClickada);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -300,7 +302,16 @@
             document.getElementById(`myChartCanvas2`),
             config
         );
-        
+        let myChart3 = new Chart(
+            document.getElementById(`myChartCanvas3`),
+            config
+        );
+        let myChart4 = new Chart(
+            document.getElementById(`myChartCanvas4`),
+            config
+        );
+    
+
         setTimeout(() => atualizarGrafico(idRepresa, dados, myChart), 2000);
     }
 
@@ -355,7 +366,6 @@
                             nivelDaAguaAtual = Number(novoRegistro[0].nivel_agua_m)
                             myChart.update();
                         }
-
                         setTimeout(() => atualizarGrafico(idRepresa, dados, myChart), 2000);
                     });
                 } else {
@@ -367,7 +377,6 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
-
     function dadosRepresa() {
         fetch(`/represas/buscar-represas`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
@@ -397,7 +406,14 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
+    }
 
+    function puxarDadosRepresa(idRepresa, nomeRepresa) {
+        idRepresaClickada = idRepresa
+        nomeRepresaClickada = nomeRepresa
+
+        console.log(`ID da represa ${nomeRepresaClickada} é ${idRepresaClickada}`);
+        obterDadosGrafico();
     }
 
 </script>

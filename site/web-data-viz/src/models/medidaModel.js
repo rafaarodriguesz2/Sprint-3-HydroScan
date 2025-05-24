@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(Codigo, limite_linhas) {
+function buscarUltimasMedidas(idRepresa) {
 
     var instrucaoSql = `
                     SELECT 
@@ -11,8 +11,8 @@ function buscarUltimasMedidas(Codigo, limite_linhas) {
                     r.fkCodigo_empresa
                     FROM Leitura l
                     INNER JOIN Sensor s ON l.idSensor = s.idSensor
-                    INNER JOIN Represa r ON s.Represa_idRepresa = r.idRepresa
-                    WHERE r.idRepresa = 1
+                    INNER JOIN Represa r ON s.nome_represa = r.nome
+                    WHERE r.idRepresa = ${idRepresa}
                     ORDER BY l.data_hora DESC LIMIT 20`;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -28,9 +28,8 @@ function buscarMedidasEmTempoReal(idRepresa) {
     r.fkCodigo_empresa
     FROM Leitura l
     INNER JOIN Sensor s ON l.idSensor = s.idSensor
-    INNER JOIN Represa r ON s.Represa_idRepresa = r.idRepresa
-
-    WHERE r.idRepresa = 1
+    INNER JOIN Represa r ON s.nome_represa = r.nome
+    WHERE r.idRepresa = ${idRepresa}
     ORDER BY l.data_hora DESC LIMIT 20;`;
 
 
