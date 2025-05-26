@@ -28,7 +28,7 @@ function checkCNPJorCPF(){
     
 
     if (emailVar == "" || senhaVar == "") {
-        div_resposta.innerHTML = "Ambos os campos devem estar preenchidos";
+        div_resposta.innerHTML = `<p style="color: red;">Ambos os campos devem estar preenchidos</p>`
         return false;
     }
     else {
@@ -54,29 +54,32 @@ function checkCNPJorCPF(){
             console.log(resposta);
 
             resposta.json().then(json => {
-                console.log(json);
-                console.log(JSON.stringify(json));
-                sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.CPF_USUARIO = json.cnpj;
-                sessionStorage.NOME_USUARIO = json.nome;
-                sessionStorage.CODIGO = json.codigo;
-                sessionStorage.REPRESA = JSON.stringify(json.represas);
+                console.log('Antes do stringfy', json);
+                console.log('Depois do stringfy', JSON.stringify(json));
+                sessionStorage.EMAIL_USUARIO = json.Email;
+                sessionStorage.CNPJ_USUARIO = json.CNPJ;
+                sessionStorage.NOME_USUARIO = json.Nome;
+                sessionStorage.CODIGO = json.fkCodigo_empresa[0].fkCodigo_empresa;
+                sessionStorage.REPRESA = JSON.stringify(json.fkCodigo_empresa);
             
                 console.log(json)
                 
+                div_resposta.innerHTML = `<p style="color: green;">Usúario reconhecido</p>`
+
                 setTimeout(function () {
-                    window.location = "../../dashboard/dash.html";
+                    window.location = "../../dashboard/dash-CNPJ.html";
                 }, 1000); // apenas para exibir o loading
 
             });
 
         } else {
 
+            
             console.log("Houve um erro ao tentar realizar o login!");
 
             resposta.text().then(texto => {
                 console.error(texto);
-                
+                div_resposta.innerHTML = `<p style="color: red;">Usúario não foi reconhecido</p>`
             });
         }
     }).catch(function (erro) {
@@ -100,7 +103,7 @@ function checkCNPJorCPF(){
     
 
     if (emailVar == "" || senhaVar == "") {
-        div_resposta.innerHTML = "Ambos os campos devem estar preenchidos";
+        div_resposta.innerHTML = `<p style="color: red;">Ambos os campos devem estar preenchidos</p>`;
         return false;
     }
     else {
@@ -132,23 +135,34 @@ function checkCNPJorCPF(){
                 sessionStorage.CPF_USUARIO = json.cpf;
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.ID_USUARIO = json.idUsuario;
-                sessionStorage.CODIGO = json.codigo;
-                sessionStorage.REPRESA = JSON.stringify(json.represas)
-            
-                console.log( JSON.stringify(json.fkCodigo_empresa))
+                sessionStorage.CODIGO = json.fkCodigo_empresa;
+                sessionStorage.REPRESA = JSON.stringify(json.fkCodigo_empresa);
+                sessionStorage.NIVEL_ACESSO = json.nivelAcesso;
+                let nivelDeAcesso = sessionStorage.NIVEL_ACESSO
+                console.log(json)
                 
+                div_resposta.innerHTML = `<p style="color: green;">Usúario reconhecido</p>`
+
                 setTimeout(function () {
-                    window.location = "../../dashboard/dash.html";
+                    if (nivelDeAcesso == '3'){
+                        window.location = "../../dashboard/dash-CPF3.html";
+                    }else if (nivelDeAcesso == '2'){
+                        window.location = "../../dashboard/dash-CPF2.html";
+                    }else {
+                        window.location = "../../dashboard/dash-CPF1.html"
+                    }
                 }, 1000); // apenas para exibir o loading
             });
 
         } else {
 
+            
+
             console.log("Houve um erro ao tentar realizar o login!");
 
             resposta.text().then(texto => {
                 console.error(texto);
-                
+                div_resposta.innerHTML = `<p style="color: red;">Email ou senha incorretos</p>`
             });
         }
     }).catch(function (erro) {

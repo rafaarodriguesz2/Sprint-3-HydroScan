@@ -75,9 +75,9 @@ function autenticar(req, res) {
                             } else {
                                 res.status(200).json({
                                     idUsuario: resultado[0].idUsuario,
-                                    nome: resultado[0].nome,
-                                    cpf: resultado[0].cpf,
-                                    email: resultado[0].email,
+                                    Nome: resultado[0].Nome,
+                                    CNPJ: resultado[0].CNPJ,
+                                    Email: resultado[0].Email,
                                     fkCodigo_empresa: resultado[0].fkCodigo_empresa,
                                     fkCodigo_empresa: []
                                 });

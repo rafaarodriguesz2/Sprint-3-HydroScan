@@ -106,8 +106,9 @@ function autenticarFuncionario(req, res) {
                                     nome: resultado[0].nome,
                                     cpf: resultado[0].cpf,
                                     email: resultado[0].email,
-                                    codigo: resultado[0].fkCodigo_empresa,
-                                    represas: resultadoAquarios
+                                    nivelAcesso:resultado[0].nivel_acesso,
+                                    fkCodigo_empresa: resultado[0].fkCodigo_empresa,
+                                    fkCodigo_empresa: resultadoAquarios
                                 });
                                 console.log(res.json)
                             } else {

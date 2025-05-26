@@ -30,7 +30,7 @@ CREATE TABLE Usuario (
     Nome VARCHAR(100),
     Email VARCHAR(100),
     Senha_hash VARCHAR(255),
-    tipo_usuario VARCHAR(20),
+    nivel_acesso VARCHAR(20),
     ativo TINYINT,
     fkCodigo_empresa VARCHAR(20),
     precisa_alterar_senha boolean default true,
@@ -38,9 +38,10 @@ CREATE TABLE Usuario (
 );
 
 
-INSERT INTO Usuario (CPF, Nome, Email, Senha_hash, tipo_usuario, ativo, fkCodigo_empresa) VALUES
-('19945623881', 'João Silva', 'joao@itaipu.com.br', 'hashed_senha_joao', 'admin', 1, 'EBC4K-2F'),
-('11967579030', 'Maria Souza', 'maria@ecopower.com', 'hashed_senha_maria', 'operador', 1, 'AB92KL-9J');
+INSERT INTO Usuario (CPF, Nome, Email, Senha_hash, nivel_acesso, ativo, fkCodigo_empresa) VALUES
+('19945623881', 'João Silva', 'joao@itaipu.com.br', '123', '3', 1, 'EBC4K-2F'),
+('11967579030', 'Maria Souza', 'maria@ecopower.com', '123', '1', 1, 'AB92KL-9J'),
+('12345678911', 'Gabriel Furtado', 'Gabriel@cosan.com', '123', '2', 1, 'AB92KL-9J');
 
 
 -- TABELA: Represa
