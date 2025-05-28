@@ -139,8 +139,8 @@
     window.onload = exibirRepresasDoUsuario();
 
     function exibirRepresasDoUsuario() {
-        console.log("REPRESA no sessionStorage:", sessionStorage.REPRESA);
-        var represas = JSON.parse(sessionStorage.REPRESA);
+        console.log("REPRESA no sessionStorage:", sessionStorage.REPRESAS);
+        var represas = JSON.parse(sessionStorage.REPRESAS);
 
         console.log(represas)
 
@@ -185,7 +185,7 @@
 
     function obterDadosGrafico() {
 
-        let represas = JSON.parse(sessionStorage.REPRESA);
+        let represas = JSON.parse(sessionStorage.REPRESAS);
         console.log('Represas:', represas);
         
 
@@ -265,7 +265,6 @@
         );
 
         ultimaMedida = Number(dados.datasets[dados.datasets.length - 1].data[dados.datasets[dados.datasets.length - 1].data.length - 1]),
-        console.log('ultimaMedida: ', ultimaMedida),
 
         setTimeout(() => atualizarGrafico(idRepresa, dados, myChart, ultimaMedida), 
         2000);

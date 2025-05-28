@@ -64,7 +64,6 @@ function autenticar(req, res) {
                         .then((resultadoAquarios) => {
                             if (resultadoAquarios.length > 0) {
                                 res.json({
-                                    idUsuario: resultado[0].idUsuario,
                                     nome: resultado[0].Nome,
                                     cnpj: resultado[0].CNPJ,
                                     email: resultado[0].Email,
@@ -79,7 +78,7 @@ function autenticar(req, res) {
                                     CNPJ: resultado[0].CNPJ,
                                     Email: resultado[0].Email,
                                     fkCodigo_empresa: resultado[0].fkCodigo_empresa,
-                                    fkCodigo_empresa: []
+                                    
                                 });
                             }
                         })
