@@ -67,7 +67,7 @@ function checkCNPJorCPF(){
                 div_resposta.innerHTML = `<p style="color: green;">Usúario reconhecido</p>`
 
                 setTimeout(function () {
-                    window.location = "../../dashboard/dash-CNPJ.html";
+                    window.location = "../../dashboard/dash.html";
                 }, 1000); // apenas para exibir o loading
 
             });
@@ -144,20 +144,11 @@ function checkCNPJorCPF(){
                 div_resposta.innerHTML = `<p style="color: green;">Usúario reconhecido</p>`
 
                 setTimeout(function () {
-                    if (nivelDeAcesso == '3'){
-                        window.location = "../../dashboard/dash-CPF3.html";
-                    }else if (nivelDeAcesso == '2'){
-                        window.location = "../../dashboard/dash-CPF2.html";
-                    }else {
-                        window.location = "../../dashboard/dash-CPF1.html"
-                    }
+                   window.location = `../../dashboard/dash.html`
                 }, 1000); // apenas para exibir o loading
             });
 
         } else {
-
-            
-
             console.log("Houve um erro ao tentar realizar o login!");
 
             resposta.text().then(texto => {

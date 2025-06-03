@@ -125,6 +125,10 @@ body {
 
 /* ------------------ CONTEÚDO PRINCIPAL ------------------ */
 
+.hide{
+    display: none;
+}
+
 #container {
 	width: 100%;
 	padding: 36px 24px;
