@@ -56,14 +56,14 @@ function cadastrarRepresa(req, res){
 }
 
 function buscarRepresas(req, res) {
-  var codigo2 = req.body.fkCodigo_empresa
-  console.log(codigo2)
 
-  represaModel.buscarRepresas().then((resultado) => {
+    let idRepresa = req.params.idRepresa
+
+represaModel.buscarRepresas(idRepresa).then((resultado) => {
     if (resultado.length > 0) {
       res.status(200).json(resultado);
     } else {
-      res.status(204).json([]);
+      res.status(200).json([]);
     }
   }).catch(function (erro) {
     console.log(erro);
@@ -71,8 +71,6 @@ function buscarRepresas(req, res) {
     res.status(500).json(erro.sqlMessage);
   });
 }
-
-
 
 
 module.exports = {

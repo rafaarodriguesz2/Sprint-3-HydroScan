@@ -88,8 +88,6 @@
                                         <div class="hello">
                                             <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
                                         </div>
-
-
                                         <div class="dash">
                                             <div id="alerta">
                                             </div>
@@ -100,13 +98,9 @@
                                             <div id="graficos">
                                             </div>
                                         </div>
-
-                                        <button onclick="dadosRepresa()">Buscar represas</button>
-
                                         <div class="btn-logout" onclick="limparSessao()">
                                             <h3 style="cursor: pointer;">Sair</h3>
                                         </div>
-
                                     </div>
                                 </div>
                         </tbody>
@@ -147,26 +141,29 @@
     let navSensor = document.getElementById("a-sensor")
     let navRepresas = document.getElementById("a-represa")
     let navFuncionarios = document.getElementById("a-funcionarios")
+    let navDash = document.getElementById("a-dash")
 
     window.onload = exibirRepresasDoUsuario();
-
-    
 
     function nivelDeAcesso(){
         console.log("chegou aqui ")
         if(sessionStorage.NIVEL_ACESSO == 1){
             navSensor.classList.remove("hide")
-        }
-
-        if(sessionStorage.NIVEL_ACESSO == 2){
+            navDash.classList.remove("hide")
+        }else if(sessionStorage.NIVEL_ACESSO == 2){
             navSensor.classList.remove("hide")
             navRepresas.classList.remove("hide")
-        }
-
-        if(sessionStorage.NIVEL_ACESSO == 3){
+            navDash.classList.remove("hide")
+        }else if(sessionStorage.NIVEL_ACESSO == 3){
             navSensor.classList.remove("hide")
             navRepresas.classList.remove("hide")
             navFuncionarios.classList.remove("hide")
+            navDash.classList.remove("hide")
+        }else{
+            navSensor.classList.remove("hide")
+            navRepresas.classList.remove("hide")
+            navFuncionarios.classList.remove("hide")
+            navDash.classList.remove("hide")
         }
     }
 
@@ -232,10 +229,10 @@
 
     function obterDadosGrafico() {
 
-        let represas = JSON.parse(sessionStorage.REPRESAS);
-        console.log('Represas:', represas);
-        
-        
+        // let represas = JSON.parse(sessionStorage.REPRESAS);
+        console.log(sessionStorage.REPRESA)
+        // console.log('Represas:', represas);
+    
         console.log(energiaGerada, "obter dados GRAFICO")
         console.log(idRepresaClickada)
         // alterarTitulo(idRepresaClickada)
@@ -262,16 +259,16 @@
             });
     }
 
-    //  Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-    //  Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-    //  A função *plotarGrafico* também invoca a função *atualizarGrafico*
-
     function plotarGrafico(resposta, idRepresa) {
 
-        console.log('iniciando plotagem do gráfico...');
+        let energia = nivelDaAguaAtual * 256
+
+        console.log(energia)
+
+        // console.log('iniciando plotagem do gráfico...');
 
         dadosRepresa();
-        console.log(energiaGerada, "PLOTAR GRAFICO")
+        // console.log(energiaGerada, "PLOTAR GRAFICO")
 
 
         //   Criando estrutura para plotar gráfico - labels
@@ -314,8 +311,6 @@
 
             const dataRecebida = registro.data_hora;
             const data = new Date(dataRecebida);
-
-
 
             const dataFormatada = data.toLocaleString('pt-BR', {
                 day: '2-digit',
@@ -371,17 +366,11 @@
             configLine
         );
 
-        ultimaMedida = Number(dados.datasets[dados.datasets.length - 1].data[dados.datasets[dados.datasets.length - 1].data.length - 1]),
+        // ultimaMedida = Number(dados.datasets[dados.datasets.length - 1].data[dados.datasets[dados.datasets.length - 1].data.length - 1]),
 
         setTimeout(() => atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia), 2000);
     }
 
-
-    //   Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-    //   buscando a última medida inserida em tabela contendo as capturas, 
-
-    //       Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //       Para ajustar o "select", ajuste o comando sql em src/models
     function atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia) {
         fetch(`/medidas/tempo-real/${idRepresa}`, { cache: 'no-store' })
             .then(response => {
@@ -447,9 +436,11 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
+
     function dadosRepresa() {
-        fetch(`/represas/buscar-represas`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/represas/buscar-represas${idRepresaClickada}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
+                console.log(response)
                 response.json().then(function (resposta) {
                     // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
@@ -462,11 +453,12 @@
 
                     energiaGerada = ((nivelDaAguaAtual / 100) * volumeMaximo) * potenciaMaxima / 10000
 
-                    // console.log(volumeMaximo)
-                    // console.log(volumeMinimo)
-                    // console.log(potenciaMaxima)
-                    // console.log(nivelDaAguaAtual)
-                    // console.log("Energia Gerada", energiaGerada)
+
+                    console.log(volumeMaximo)
+                    console.log(volumeMinimo)
+                    console.log(potenciaMaxima)
+                    console.log(nivelDaAguaAtual)
+                    console.log("Energia Geradaaaaaaaaaaaaa", energiaGerada)
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');

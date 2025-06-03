@@ -8,7 +8,7 @@ router.post("/cadastrar-represa", function (req, res) {
   represaController.cadastrarRepresa(req, res);
 });
 
-router.get("/buscar-represas", function(req, res){
+router.get("/buscar-represas:idRepresa", function(req, res){
   represaController.buscarRepresas(req,res);
 })
 

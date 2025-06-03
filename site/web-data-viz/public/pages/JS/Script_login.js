@@ -56,14 +56,13 @@ function checkCNPJorCPF(){
             resposta.json().then(json => {
                 console.log('Antes do stringfy', json);
                 console.log('Depois do stringfy', JSON.stringify(json));
-                sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.CNPJ_USUARIO = json.cnpj;
-                sessionStorage.NOME_USUARIO = json.nome;
-                sessionStorage.CODIGO = json.codigo;
+                sessionStorage.EMAIL_USUARIO = json.Email;
+                sessionStorage.CNPJ_USUARIO = json.CNPJ;
+                sessionStorage.NOME_USUARIO = json.Nome;
+                sessionStorage.CODIGO = json.fkCodigo_empresa;
                 const represas = json.represas; 
                 sessionStorage.setItem('REPRESA', JSON.stringify(represas));
-                
-            
+                console.log(sessionStorage.CODIGO)
                 console.log(json)
                 
                 div_resposta.innerHTML = `<p style="color: green;">Usúario reconhecido</p>`
@@ -99,11 +98,9 @@ function checkCNPJorCPF(){
 
     }
 
-
     var emailVar = ipt_email.value;
     var senhaVar = ipt_senha.value;
     
-
     if (emailVar == "" || senhaVar == "") {
         div_resposta.innerHTML = `<p style="color: red;">Ambos os campos devem estar preenchidos</p>`;
         return false;
@@ -116,7 +113,7 @@ function checkCNPJorCPF(){
     console.log("FORM SENHA: ", senhaVar);
 
     fetch("/funcionarios/autenticar-funcionario", {
-        method: "POST",
+        method: "GET",
         headers: {
             "Content-Type": "application/json"
         },
@@ -137,10 +134,9 @@ function checkCNPJorCPF(){
                 sessionStorage.CPF_USUARIO = json.cpf;
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.ID_USUARIO = json.idUsuario;
-                sessionStorage.CODIGO = json.fkCodigo_empresa;
+                sessionStorage.CODIGO = json.codigo;
                 sessionStorage.REPRESA = JSON.stringify(json.fkCodigo_empresa);
                 sessionStorage.NIVEL_ACESSO = json.nivelAcesso;
-                let nivelDeAcesso = sessionStorage.NIVEL_ACESSO
                 console.log(json)
                 
                 div_resposta.innerHTML = `<p style="color: green;">Usúario reconhecido</p>`
