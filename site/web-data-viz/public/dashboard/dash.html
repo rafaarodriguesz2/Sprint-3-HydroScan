@@ -168,11 +168,9 @@
             navRepresas.classList.remove("hide")
             navFuncionarios.classList.remove("hide")
         }
-
     }
 
     function exibirRepresasDoUsuario() {
-
         nivelDeAcesso();
 
         console.log("REPRESA no sessionStorage:", sessionStorage.REPRESA);
@@ -234,7 +232,7 @@
 
     function obterDadosGrafico() {
 
-        let represas = JSON.parse(sessionStorage.REPRESA);
+        let represas = JSON.parse(sessionStorage.REPRESAS);
         console.log('Represas:', represas);
         
         
@@ -373,6 +371,7 @@
             configLine
         );
 
+        ultimaMedida = Number(dados.datasets[dados.datasets.length - 1].data[dados.datasets[dados.datasets.length - 1].data.length - 1]),
 
         setTimeout(() => atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia), 2000);
     }
