@@ -12,4 +12,9 @@ router.get("/buscar-represas:idRepresa", function(req, res){
   represaController.buscarRepresas(req,res);
 })
 
+router.get("/buscar-infoRepresas:idRepresa", function(req, res){
+  represaController.buscarInfoRepresas(req,res);
+})
+
+
 module.exports = router;

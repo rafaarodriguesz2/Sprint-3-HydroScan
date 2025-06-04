@@ -113,7 +113,7 @@ function checkCNPJorCPF(){
     console.log("FORM SENHA: ", senhaVar);
 
     fetch("/funcionarios/autenticar-funcionario", {
-        method: "GET",
+        method: "POST",
         headers: {
             "Content-Type": "application/json"
         },

@@ -12,7 +12,19 @@ function cadastrarRepresa(nome, localizacao, volumeMaximo, volumeMinimo, potenci
     return database.executar(instrucaoSql);
 }
 
-function buscarRepresas(idRepresa) {
+function buscarRepresas(codigo) {
+  var instrucaoSql = `SELECT * FROM Represa WHERE fkCodigo_empresa = '${codigo}'`;
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql)
+   .then(resultado => resultado) // se vazio, retorna []
+    .catch(erro => {
+      console.error("Erro ao buscar represas", erro);
+      return []; // <- ESSA LINHA GARANTE QUE VAI RETORNAR []
+    });
+}
+
+function buscarInfoRepresas(idRepresa) {
   var instrucaoSql = `SELECT * FROM Represa WHERE idRepresa = ${idRepresa}`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -26,5 +38,6 @@ function buscarRepresas(idRepresa) {
 
 module.exports = {
     cadastrarRepresa,
-    buscarRepresas
+    buscarRepresas,
+    buscarInfoRepresas
 };

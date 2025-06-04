@@ -438,7 +438,7 @@
     }
 
     function dadosRepresa() {
-        fetch(`/represas/buscar-represas${idRepresaClickada}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/represas/buscar-infoRepresas${idRepresaClickada}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 console.log(response)
                 response.json().then(function (resposta) {
