@@ -13,7 +13,7 @@
 <body>
   <header class="navbar">
     <nav class="nav-esquerda">
-        <a href="../index.html">
+        <a onclick="sair()">
             <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
         </a>
         <a href="./CadastrarFuncionario.html">Cadastrar Funcionarios</a>
@@ -44,6 +44,11 @@
 </footer>
 </body>
 <script>
+
+  function sair(){
+    sessionStorage.clear()
+    window.location = "../index.html"
+  }
 
   function puxarRepresas(){
     const represas = JSON.parse(sessionStorage.REPRESA)

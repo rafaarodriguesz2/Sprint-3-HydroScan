@@ -15,7 +15,7 @@
 <body>
   <header class="navbar">
     <nav class="nav-esquerda">
-      <a href="../index.html">
+      <a onclick="sair()">
         <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
       </a>
       <a href="../pages/cadastrarFuncionarios.html">Cadastrar Funcionarios</a>
@@ -48,6 +48,11 @@
 </body>
 <script>
   console.log(14349678000100)
+
+  function sair(){
+    sessionStorage.clear()
+    window.location = "../index.html"
+  }
 
   function cadastroRepresa() {
     const nome = document.getElementById("ipt_nome").value;

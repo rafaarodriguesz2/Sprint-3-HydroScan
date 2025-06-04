@@ -17,12 +17,12 @@
 <body>
     <header class="navbar">
         <nav class="nav-esquerda">
-            <a href="../index.html">
+            <a onclick="sair()">
                 <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
             </a>
             <a href="../pages/calculadora.html" class="hide">Calculadora</a>
             <a href="../pages/sobre_nos.html" class="hide">Sobre Nós</a>
-            <a href="../pages/cadastrarSensor.html" class="hide" id="a-funcionarios">Cadastrar Funcionários</a>
+            <a href="../pages/cadastrarFuncionarios.html" class="hide" id="a-funcionarios">Cadastrar Funcionários</a>
             <a href="../pages/cadastrarRepresas.html" class="hide" id="a-represa">Cadastrar Represas</a>
             <a href="../pages/cadastrarSensor.html" class="hide" id="a-sensor">Cadastrar Sensor</a>
             <a href="./dash.html" class="hide" id="a-dash">Dashboards</a>
@@ -98,7 +98,7 @@
                                             <div id="graficos">
                                             </div>
                                         </div>
-                                        <div class="btn-logout" onclick="limparSessao()">
+                                        <div class="btn-logout" onclick="sair()">
                                             <h3 style="cursor: pointer;">Sair</h3>
                                         </div>
                                     </div>
@@ -165,6 +165,11 @@
             navFuncionarios.classList.remove("hide")
             navDash.classList.remove("hide")
         }
+    }
+
+    function sair(){
+        sessionStorage.clear()
+        window.location = "../index.html"
     }
 
     function exibirRepresasDoUsuario() {

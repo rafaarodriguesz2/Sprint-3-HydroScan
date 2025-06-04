@@ -15,10 +15,10 @@
 <body>
   <header class="navbar">
     <nav class="nav-esquerda">
-      <a href="../index.html">
+      <a onclick="sair()">
         <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
       </a>
-      <a href="./CadastrarFuncionario.html" class="agora">Cadastrar Funcionario</a>
+      <a href="./cadastrarFuncionarios.html" class="agora">Cadastrar Funcionario</a>
       <a href="./cadastrarRepresas.html">Cadastrar Represas</a>
       <a href="./cadastrarSensor.html">Cadastrar Sensor</a>
       <a href="../dashboard/dash.html" class="agora">Dashboards</a>
@@ -51,6 +51,12 @@
   </footer>
 </body>
 <script>
+
+  function sair(){
+    sessionStorage.clear()
+    window.location = "../index.html"
+  }
+
   function cadastroFuncionario() {
     const cpf = document.getElementById("ipt_cpfFuncionario").value;
     const nome = document.getElementById("ipt_nomeFuncionario").value;
