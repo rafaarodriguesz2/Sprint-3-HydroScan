@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Perguntas Frequentes</title>
+</head>
+<body>
+  <h1>Perguntas Frequentes</h1>
+
+  <ul>
+    <li><strong>perguntas?</strong> Respostas</li>
+    <li><strong>perguntas?</strong> Respostas</li>
+
+  </ul>
+
+  <h2>Envie sua dúvida</h2>
+  <form id="formPergunta">
+    <textarea id="inputPergunta" rows="4" cols="50" placeholder="Digite sua dúvida aqui..."></textarea><br />
+    <button type="submit">Enviar</button>
+  </form>
+
+  <p id="mensagem"></p>
+
+  <script>
+    document.getElementById('formPergunta').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const pergunta = document.getElementById('inputPergunta').value;
+
+      const resposta = await fetch('/perguntas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pergunta })
+      });
+
+      const dados = await resposta.json();
+      document.getElementById('mensagem').textContent = dados.mensagem;
+    });
+  </script>
+</body>
+</html>

@@ -25,6 +25,7 @@ var funcionariosRouter = require("./src/routes/funcionarios");
 var represas = require("./src/routes/represas");
 var bobiaRouter = require("./src/routes/bobia");
 var sensorRouter = require("./src/routes/sensores")
+const perguntasRouter = require('./src/routes/perguntas');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -42,6 +43,7 @@ app.use("/funcionarios", funcionariosRouter)
 app.use("/represas", represas)
 app.use("/bobia", bobiaRouter)
 app.use("/sensores", sensorRouter)
+app.use('/perguntas', perguntasRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
@@ -59,3 +61,10 @@ app.listen(PORTA_APP, function () {
     \tSe .:producao:. você está se conectando ao banco remoto. \n\n
     \t\tPara alterar o ambiente, comente ou descomente as linhas 1 ou 2 no arquivo 'app.js'\n\n`);
 });
+const session = require('express-session');
+
+app.use(session({
+  secret: 'seuSegredo',
+  resave: false,
+  saveUninitialized: true
+}));
