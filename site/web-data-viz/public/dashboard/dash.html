@@ -143,6 +143,11 @@
     let navDash = document.getElementById("a-dash")
     let ultimaMedida;
     let qtdRepresas;
+    let represasKPI = []
+    let kpiAdequado = 0
+    let kpiAlerta = 0
+    let status;
+    
 
     window.onload = exibirRepresasDoUsuario();
 
@@ -188,6 +193,7 @@
 
         for (let i = 0; i < represas.length; i++) {
             const item = represas[i];
+            const represaDaVez = item.idRepresa
 
             document.getElementById("graficos").innerHTML += `
             <details>
@@ -230,6 +236,7 @@
             </details>
         `;
 
+        represasKPI += {represaDaVez: 'normal'}
         }
 
     }
@@ -373,19 +380,17 @@
             configLine
         );
 
-        ultimaMedida = Number(dados.datasets[dados.datasets.length - 1].data[dados.datasets[dados.datasets.length - 1].data.length - 1]),
-        console.log("Ultima medida: ", ultimaMedida, idRepresaClickada);
+        
+        
         
 
         setTimeout(() => {
-            atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia);
-            if (idRepresaClickada != null){
-                ajustarKPIs(ultimaMedida, idRepresaClickada);
-            }
+            atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia, ultimaMedida);
+            ultimaMedida = Number(dados.datasets[dados.datasets.length - 1].data[dados.datasets[dados.datasets.length - 1].data.length - 1]);
         }, 2000);
     }
 
-    function atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia) {
+    function atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia, ultimaMedida) {
         fetch(`/medidas/tempo-real/${idRepresa}`, { cache: 'no-store' })
             .then(response => {
                 if (response.ok) {
@@ -439,6 +444,9 @@
                             myChart.update();
                             myChart2.update();
                         }
+
+                        ajustarKPIs(Number(novoRegistro[0].nivel_agua_m))
+
                         setTimeout(() => atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia), 2000);
                     });
                 } else {
@@ -451,41 +459,53 @@
             });
     }
 
-    function ajustarKPIs(ultimaMedida, idRepresa){
+    function ajustarKPIs(ultimaMedida){
+        console.log('Ajustando KPIs, Ultima medida: ', ultimaMedida);
+        
         // verificando se a represa esta com o nivel adequado e exibindo na KPI
-        let kpiAdequado = 0
-        let kpiAlerta = 0
-        let status;
-
+        kpiAdequado = 0
+        kpiAlerta = 0
+        
 
         // se não estiver
         if (ultimaMedida <= 50){
-            kpiAlerta ++
-            h3_kpiAlerta.innerHTML = kpiAlerta
-            status = 'atencao'
+            represasKPI[idRepresaClickada].idRepresaClickada = 'atencao'
+            console.log('status mudado: ', represasKPI);
+            
         }else if (ultimaMedida <= 100 ){ // mudar esse valor para o real posteriormente 
-            kpiAlerta ++
-            h3_kpiAlerta.innerHTML = kpiAlerta
-            status = 'alerta'
+            represasKPI[idRepresaClickada].idRepresaClickada = 'alerta'
+            console.log('status mudado: ', represasKPI);
         }else {
-            kpiAdequado ++
-            h3_kpiAdequado.innerHTML = kpiAdequado
-            status = 'adequado'
+            represasKPI[idRepresaClickada].idRepresaClickada = 'adequado'
+            console.log('status mudado: ', represasKPI);
         }
-        console.log();
+        
+        for (let index = 0; index < represasKPI.length; index++) {
+            const element = represasKPI[index];
+            
+            if (element == 'atencao' || element == 'alerta'){
+                kpiAlerta ++
+            }else kpiAdequado ++
+        }
+        
+        h3_kpiAdequado.innerHTML = kpiAdequado
+        h3_kpiAlerta.innerHTML = kpiAlerta
         
 
         // alterando o status da represa
-        const idDinamico = "statusRepresa" + idRepresa;
-        const elementoStatus = document.getElementById(idDinamico);
-        if (status == "alerta"){
-            elementoStatus.classList.replace("normal", status)
-            elementoStatus.innerHTML = "Alerta"
-        }else if (status == "atencao"){
-            elementoStatus.classList.replace("normal", status)
-            elementoStatus.innerHTML = "Atenção"
+        if (idRepresaClickada != null){
+            const idDinamico = "statusRepresa" + idRepresaClickada;
+            const elementoStatus = document.getElementById(idDinamico);
+            if (represasKPI[idRepresaClickada].idRepresaClickada == "alerta"){
+                elementoStatus.classList.replace("normal", represasKPI[idRepresaClickada].idRepresaClickada)
+                elementoStatus.innerHTML = "Alerta"
+            }else if (represasKPI[idRepresaClickada].idRepresaClickada == "atencao"){
+                elementoStatus.classList.replace("normal", represasKPI[idRepresaClickada].idRepresaClickada)
+                elementoStatus.innerHTML = "Atenção"
+            }
         }
 
+        
     }
 
     function dadosRepresa() {
