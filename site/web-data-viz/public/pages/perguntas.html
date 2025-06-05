@@ -1,16 +1,51 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>Perguntas Frequentes</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>| Perguntas Frequentes</title>
+  <link rel="stylesheet" href="../css/faq.css">
+  <link rel="icon" href="../img/Logo-pequena.png" type="image/x-icon">
 </head>
+
 <body>
-  <h1>Perguntas Frequentes</h1>
+  <header class="navbar">
+    <nav class="nav-esquerda">
+      <a onclick="sair()">
+        <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
+      </a>
+      <a href="../pages/calculadora.html">Calculadora</a>
+      <a href="../pages/sobre_nos.html">Sobre Nós</a>
+      <a href="../pages/cadastrarFuncionarios.html" id="a-funcionarios">Cadastrar Funcionários</a>
+      <a href="../pages/cadastrarRepresas.html" id="a-represa">Cadastrar Represas</a>
+      <a href="../pages/cadastrarSensor.html" id="a-sensor">Cadastrar Sensor</a>
+      <a href="./dash.html" id="a-dash">Dashboards</a>
+      <a href="./perguntas.html">FAQ</a>
+    </nav>
+    <nav class="nav-direita">
+      <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
+    </nav>
+  </header>
 
   <ul>
-    <li><strong>perguntas?</strong> Respostas</li>
-    <li><strong>perguntas?</strong> Respostas</li>
-
+    <h1>Perguntas Frequentes</h1>
+    <li class="faq-item">
+      <div class="pergunta" onclick="aparecerResposta(this)">
+        <strong>Quais são os requisitos para cadastrar uma represa?</strong>
+      </div>
+      <div class="resposta">
+        Você precisa ter acesso ao painel administrativo para registrar novos dados de represas.
+      </div>
+    </li>
+    <li class="faq-item">
+      <div class="pergunta" onclick="aparecerResposta(this)">
+        <strong>Como posso cadastrar um sensor?</strong>
+      </div>
+      <div class="resposta">
+        Para cadastrar um sensor, você deve estar logado e ter permissões para editar dados de sensores.
+      </div>
+    </li>
   </ul>
 
   <h2>Envie sua dúvida</h2>
@@ -20,7 +55,7 @@
   </form>
 
   <p id="mensagem"></p>
-
+  <script src="./JS/perguntas.js"></script>
   <script>
     document.getElementById('formPergunta').addEventListener('submit', async function (e) {
       e.preventDefault();
@@ -35,6 +70,25 @@
       const dados = await resposta.json();
       document.getElementById('mensagem').textContent = dados.mensagem;
     });
+
+
+
+
+
+
+    function aparecerResposta(element) {
+      // Encontre a div com a resposta correspondente
+      const resposta = element.nextElementSibling;
+
+      // Alterna a visibilidade da resposta
+      resposta.classList.toggle('show');
+
+      // Adiciona ou remove o efeito de destaque na pergunta
+      element.classList.toggle('active');
+    }
+
+
   </script>
 </body>
+
 </html>
