@@ -143,7 +143,7 @@
     let navDash = document.getElementById("a-dash")
     let ultimaMedida;
     let qtdRepresas;
-    let represasKPI = []
+    let represasKPI = {}
     let kpiAdequado = 0
     let kpiAlerta = 0
     let status;
@@ -231,7 +231,7 @@
             </details>
         `;
 
-        represasKPI += {represaDaVez: 'normal'}
+        represasKPI[represaDaVez] = 'normal';
         }
 
     }
@@ -448,54 +448,59 @@
             });
     }
 
-    function ajustarKPIs(ultimaMedida){
-        console.log('Ajustando KPIs, Ultima medida: ', ultimaMedida);
-        
-        // verificando se a represa esta com o nivel adequado e exibindo na KPI
-        kpiAdequado = 0
-        kpiAlerta = 0
-        
+    function ajustarKPIs(ultimaMedida) {
+    console.log('Ajustando KPIs para represa', idRepresaClickada, 'com a medida:', ultimaMedida);
 
-        // se não estiver
-        if (ultimaMedida <= 50){
-            represasKPI[idRepresaClickada].idRepresaClickada = 'atencao'
-            console.log('status mudado: ', represasKPI);
-            
-        }else if (ultimaMedida <= 100 ){ // mudar esse valor para o real posteriormente 
-            represasKPI[idRepresaClickada].idRepresaClickada = 'alerta'
-            console.log('status mudado: ', represasKPI);
-        }else {
-            represasKPI[idRepresaClickada].idRepresaClickada = 'adequado'
-            console.log('status mudado: ', represasKPI);
-        }
-        
-        for (let index = 0; index < represasKPI.length; index++) {
-            const element = represasKPI[index];
-            
-            if (element == 'atencao' || element == 'alerta'){
-                kpiAlerta ++
-            }else kpiAdequado ++
-        }
-        
-        h3_kpiAdequado.innerHTML = kpiAdequado
-        h3_kpiAlerta.innerHTML = kpiAlerta
-        
+    if (ultimaMedida <= 50) {
+        represasKPI[idRepresaClickada] = 'atencao';
+    } else if (ultimaMedida <= 100) {
+        represasKPI[idRepresaClickada] = 'alerta';
+    } else {
+        represasKPI[idRepresaClickada] = 'adequado';
+    }
+    console.log('Objeto de status atualizado:', represasKPI);
 
-        // alterando o status da represa
-        if (idRepresaClickada != null){
-            const idDinamico = "statusRepresa" + idRepresaClickada;
-            const elementoStatus = document.getElementById(idDinamico);
-            if (represasKPI[idRepresaClickada].idRepresaClickada == "alerta"){
-                elementoStatus.classList.replace("normal", represasKPI[idRepresaClickada].idRepresaClickada)
-                elementoStatus.innerHTML = "Alerta"
-            }else if (represasKPI[idRepresaClickada].idRepresaClickada == "atencao"){
-                elementoStatus.classList.replace("normal", represasKPI[idRepresaClickada].idRepresaClickada)
-                elementoStatus.innerHTML = "Atenção"
+
+    
+    kpiAdequado = 0;
+    kpiAlerta = 0;
+
+    for (const status of Object.values(represasKPI)) {
+        // 'status' aqui é a string: 'adequado', 'alerta', ou 'atencao'
+        if (status === 'atencao' || status === 'alerta') {
+            kpiAlerta++;
+        } else {
+            kpiAdequado++;
+        }
+    }
+    h3_kpiAdequado.innerHTML = kpiAdequado;
+    h3_kpiAlerta.innerHTML = kpiAlerta;
+
+    if (idRepresaClickada != null) {
+        const idDinamico = "statusRepresa" + idRepresaClickada;
+        const elementoStatus = document.getElementById(idDinamico);
+
+        if (elementoStatus) {
+            // Pega o status atual diretamente do objeto
+            const statusAtual = represasKPI[idRepresaClickada];
+
+            // Remove todas as classes de status possíveis para evitar acúmulo
+            elementoStatus.classList.remove("normal", "alerta", "atencao");
+
+            // Adiciona a classe correta e atualiza o texto
+            if (statusAtual === "alerta") {
+                elementoStatus.classList.add("alerta");
+                elementoStatus.innerHTML = "Alerta";
+            } else if (statusAtual === "atencao") {
+                elementoStatus.classList.add("atencao");
+                elementoStatus.innerHTML = "Atenção";
+            } else {
+                elementoStatus.classList.add("normal"); // ou "normal" se preferir
+                elementoStatus.innerHTML = "Adequado";
             }
         }
-
-        
     }
+}
 
     function dadosRepresa() {
         fetch(`/represas/buscar-infoRepresas${idRepresaClickada}`, { cache: 'no-store' }).then(function (response) {
