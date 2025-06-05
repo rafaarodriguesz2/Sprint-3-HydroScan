@@ -50,7 +50,7 @@
                         <i class='bx bxs-bar-chart-alt-2'></i>
                     </div>
                     <span class="texto">
-                        <h3>X</h3>
+                        <h3 id="h3_kpiAdequado">X</h3>
                         <p>Usinas com nível da água adequado</p>
                     </span>
                 </li>
@@ -59,7 +59,7 @@
                         <i class='bx bxs-error'></i>
                     </div>
                     <span class="texto">
-                        <h3>X</h3>
+                        <h3 id="h3_kpiAlerta"></h3>
                         <p>Usinas com alertas em nível da água</p>
                     </span>
                 </li>
@@ -142,6 +142,8 @@
     let navRepresas = document.getElementById("a-represa")
     let navFuncionarios = document.getElementById("a-funcionarios")
     let navDash = document.getElementById("a-dash")
+    let ultimaMedida;
+    let qtdRepresas;
 
     window.onload = exibirRepresasDoUsuario();
 
@@ -183,6 +185,7 @@
         document.getElementById("usinas-cadastradas").innerHTML += `
         <h3>${represas.length}</h3>
         `
+        qtdRepresas = represas.length
 
         for (let i = 0; i < represas.length; i++) {
             const item = represas[i];
@@ -195,7 +198,7 @@
                         <img src="../img/usina1.png" alt="Reservatório logo">
                     </div>
                     <p><strong>Data:</strong> 03/04/2025</p>
-                    <p><strong>Status:</strong> <span class="status normal">Normal</span></p>
+                    <p><strong>Status:</strong> <span class="status normal" id="statusRepresa${item.idRepresa}">Normal</span></p>
                 </summary>
 
                 <div class="card-grafico">
@@ -371,9 +374,16 @@
             configLine
         );
 
-        // ultimaMedida = Number(dados.datasets[dados.datasets.length - 1].data[dados.datasets[dados.datasets.length - 1].data.length - 1]),
+        ultimaMedida = Number(dados.datasets[dados.datasets.length - 1].data[dados.datasets[dados.datasets.length - 1].data.length - 1]),
+        console.log("Ultima medida: ", ultimaMedida, idRepresaClickada);
+        
 
-        setTimeout(() => atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia), 2000);
+        setTimeout(() => {
+            atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia);
+            if (idRepresaClickada != null){
+                ajustarKPIs(ultimaMedida, idRepresaClickada);
+            }
+        }, 2000);
     }
 
     function atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia) {
@@ -442,6 +452,43 @@
             });
     }
 
+    function ajustarKPIs(ultimaMedida, idRepresa){
+        // verificando se a represa esta com o nivel adequado e exibindo na KPI
+        let kpiAdequado = 0
+        let kpiAlerta = 0
+        let status;
+
+
+        // se não estiver
+        if (ultimaMedida <= 50){
+            kpiAlerta ++
+            h3_kpiAlerta.innerHTML = kpiAlerta
+            status = 'atencao'
+        }else if (ultimaMedida <= 100 ){ // mudar esse valor para o real posteriormente 
+            kpiAlerta ++
+            h3_kpiAlerta.innerHTML = kpiAlerta
+            status = 'alerta'
+        }else {
+            kpiAdequado ++
+            h3_kpiAdequado.innerHTML = kpiAdequado
+            status = 'adequado'
+        }
+        console.log();
+        
+
+        // alterando o status da represa
+        const idDinamico = "statusRepresa" + idRepresa;
+        const elementoStatus = document.getElementById(idDinamico);
+        if (status == "alerta"){
+            elementoStatus.classList.replace("normal", status)
+            elementoStatus.innerHTML = "Alerta"
+        }else if (status == "atencao"){
+            elementoStatus.classList.replace("normal", status)
+            elementoStatus.innerHTML = "Atenção"
+        }
+
+    }
+
     function dadosRepresa() {
         fetch(`/represas/buscar-infoRepresas${idRepresaClickada}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
@@ -481,5 +528,6 @@
         console.log(`ID da represa ${nomeRepresaClickada} é ${idRepresaClickada}`);
         obterDadosGrafico();
     }
+
 
 </script>
