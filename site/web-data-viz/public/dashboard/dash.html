@@ -212,12 +212,7 @@
                             <div class="graph">
                                 <canvas id="myChartCanvas2"></canvas>
                             </div>
-                            <div class="graph">
-                                <canvas id="myChartCanvas3"></canvas>
-                            </div>
-                            <div class="graph">
-                                <canvas id="myChartCanvas4"></canvas>
-                            </div>
+
                         </div>
                         <div class="label-captura">
                             <p id="avisoCaptura${item.idRepresa}" style="color: white"></p>
@@ -364,14 +359,8 @@
             document.getElementById(`myChartCanvas2`),
             configLine
         );
-        let myChart3 = new Chart(
-            document.getElementById(`myChartCanvas3`),
-            configBar
-        );
-        let myChart4 = new Chart(
-            document.getElementById(`myChartCanvas4`),
-            configLine
-        );
+
+
 
         ultimaMedida = Number(dados.datasets[dados.datasets.length - 1].data[dados.datasets[dados.datasets.length - 1].data.length - 1]),
         console.log("Ultima medida: ", ultimaMedida, idRepresaClickada);
