@@ -28,51 +28,59 @@
     </nav>
   </header>
 
-  <ul>
-    <h1>Perguntas Frequentes</h1>
-    <li class="faq-item">
-      <div class="pergunta" onclick="aparecerResposta(this)">
-        <strong>Quais são os requisitos para cadastrar uma represa?</strong>
-      </div>
-      <div class="resposta">
-        Você precisa ter acesso ao painel administrativo para registrar novos dados de represas.
-      </div>
-    </li>
-    <li class="faq-item">
-      <div class="pergunta" onclick="aparecerResposta(this)">
-        <strong>Como posso cadastrar um sensor?</strong>
-      </div>
-      <div class="resposta">
-        Para cadastrar um sensor, você deve estar logado e ter permissões para editar dados de sensores.
-      </div>
-    </li>
-  </ul>
+  <div class="container-perguntas">
+    <div class="formulario">
+      <h2>Envie sua pergunta</h2>
+      <form id="formPerguntas">
+          <label for="inputPergunta">Sua pergunta:</label>
+          <textarea id="inputPergunta" rows="4" placeholder="Digite sua pergunta aqui..."></textarea>
+          <button type="button" onclick="enviarPergunta()">Enviar</button>
+      </form>
+      <p id="mensagemEnvio"></p>
+  </div>
 
-  <h2>Envie sua dúvida</h2>
-  <form id="formPergunta">
-    <textarea id="inputPergunta" rows="4" cols="50" placeholder="Digite sua dúvida aqui..."></textarea><br />
-    <button type="submit">Enviar</button>
-  </form>
-
-  <p id="mensagem"></p>
+    <!-- Perguntas frequentes -->
+    <div class="faq">
+        <h2>Perguntas Frequentes</h2>
+        <details>
+            <summary>Como faço para enviar uma pergunta?</summary>
+            <p>Você pode enviar uma pergunta utilizando o campo de texto ao lado e clicando no botão "Enviar".</p>
+        </details>
+        <details>
+            <summary>Onde posso ver as perguntas enviadas?</summary>
+            <p>As perguntas enviadas podem ser visualizadas na seção de perguntas do site.</p>
+        </details>
+        <details>
+            <summary>O que acontece se minha pergunta não for enviada?</summary>
+            <p>Se sua pergunta não for enviada, verifique sua conexão com a internet ou tente novamente mais tarde.</p>
+        </details>
+    </div>
+</div>
+  
   <script src="./JS/perguntas.js"></script>
   <script>
-    document.getElementById('formPergunta').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      const pergunta = document.getElementById('inputPergunta').value;
+function enviarPergunta() {
+    const pergunta = document.getElementById('inputPergunta').value;
 
-      const resposta = await fetch('/perguntas', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    fetch("/perguntas", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({ pergunta })
-      });
-
-      const dados = await resposta.json();
-      document.getElementById('mensagem').textContent = dados.mensagem;
+    })
+    .then(res => res.json())
+    .then(res => {
+        document.getElementById("mensagemEnvio").innerText = res.mensagem || "Pergunta enviada com sucesso!";
+        document.getElementById("mensagemEnvio").style.color = "green"; // Mensagem de sucesso :D
+        document.getElementById("inputPergunta").value = ""; // Limpa o campo do textoooo
+    })
+    .catch(err => {
+        document.getElementById("mensagemEnvio").innerText = "Erro ao enviar pergunta.";
+        document.getElementById("mensagemEnvio").style.color = "red"; // Mensagem de erro :/
+        console.error('Erro ao enviar pergunta:', err);
     });
-
-
-
+}
 
 
 

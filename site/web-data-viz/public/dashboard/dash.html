@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registros - HydroScan</title>
     <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="./styles/dash.css">
     <!-- Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -13,6 +14,7 @@
     <script src="../js/sessao.js"></script>
     <link rel="icon" href="../img/Logo-pequena.png" type="image/x-icon">
 </head>
+
 <body>
     <header class="navbar">
         <nav class="nav-esquerda">
@@ -25,7 +27,7 @@
             <a href="../pages/cadastrarRepresas.html" class="hide" id="a-represa">Cadastrar Represas</a>
             <a href="../pages/cadastrarSensor.html" class="hide" id="a-sensor">Cadastrar Sensor</a>
             <a href="./dash.html" class="hide" id="a-dash"><b>Dashboards</b></a>
-            
+
         </nav>
         <nav class="nav-direita">
             <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
@@ -147,25 +149,25 @@
     let kpiAdequado = 0
     let kpiAlerta = 0
     let status;
-    
+
 
     window.onload = exibirRepresasDoUsuario();
 
-    function nivelDeAcesso(){
+    function nivelDeAcesso() {
         console.log("chegou aqui ")
-        if(sessionStorage.NIVEL_ACESSO == 1){
+        if (sessionStorage.NIVEL_ACESSO == 1) {
             navSensor.classList.remove("hide")
             navDash.classList.remove("hide")
-        }else if(sessionStorage.NIVEL_ACESSO == 2){
+        } else if (sessionStorage.NIVEL_ACESSO == 2) {
             navSensor.classList.remove("hide")
             navRepresas.classList.remove("hide")
             navDash.classList.remove("hide")
-        }else if(sessionStorage.NIVEL_ACESSO == 3){
+        } else if (sessionStorage.NIVEL_ACESSO == 3) {
             navSensor.classList.remove("hide")
             navRepresas.classList.remove("hide")
             navFuncionarios.classList.remove("hide")
             navDash.classList.remove("hide")
-        }else{
+        } else {
             navSensor.classList.remove("hide")
             navRepresas.classList.remove("hide")
             navFuncionarios.classList.remove("hide")
@@ -173,7 +175,7 @@
         }
     }
 
-    function sair(){
+    function sair() {
         sessionStorage.clear()
         window.location = "../index.html"
     }
@@ -206,32 +208,41 @@
                     <p><strong>Status:</strong> <span class="status normal" id="statusRepresa${item.idRepresa}">Normal</span></p>
                 </summary>
 
-                <div class="card-grafico">
+
+
+
+                <div class="container-card-grafico">
+                    <div class="card-grafico">
                     <h2>Volume de Água Atual</h2>
                     <div id="grafico${item.idRepresa}" class="display-none">
                         <h3 class="tituloGraficos">
                         </h3>
-                        <div class="container-graficos">
                             <div class="graph">
                                 <canvas id="myChartCanvas${item.idRepresa}"></canvas>
                             </div>
-                            <div class="graph">
-                                <canvas id="myChartCanvas2"></canvas>
+                            <div class="label-captura">
+                                <p id="avisoCaptura${item.idRepresa}" style="color: white"></p>
                             </div>
-
-                        </div>
-                        <div class="label-captura">
-                            <p id="avisoCaptura${item.idRepresa}" style="color: white"></p>
-                        </div>
-                    </div>
-                    <p class="descricao-grafico">
+                            </div>
+                            <p class="descricao-grafico">
                         Histórico de Volume de Água
                     </p>
+                    </div>
+                    <div class = "card-grafico">
+                        <h2>Produção de energia</h2>
+                        <div class="graph">
+                            <canvas id="myChartCanvas2"></canvas>
+                        </div>
+                        <p class="descricao-grafico">
+                            Histórico de Produção de Energia
+                        </p>
+                    </div>
                 </div>
+                
             </details>
         `;
 
-        represasKPI[represaDaVez] = 'normal';
+            represasKPI[represaDaVez] = 'normal';
         }
 
     }
@@ -241,7 +252,7 @@
         // let represas = JSON.parse(sessionStorage.REPRESAS);
         console.log(sessionStorage.REPRESA)
         // console.log('Represas:', represas);
-    
+
         console.log(energiaGerada, "obter dados GRAFICO")
         console.log(idRepresaClickada)
         // alterarTitulo(idRepresaClickada)
@@ -305,7 +316,7 @@
                 fill: false,
                 borderColor: 'red',
                 backgroundColor: 'lightcoral',
-                borderWidth: 2,
+                borderWidth: 1,
                 tension: 0.1
             }]
         };
@@ -341,7 +352,7 @@
         console.log(labels)
         console.log('labels2', labels2)
         console.log('Dados:')
-        console.log(dados.datasets) 
+        console.log(dados.datasets)
         console.log(dadosEnergia.datasets, "Dados energia")
         console.log('----------------------------------------------')
 
@@ -369,9 +380,9 @@
 
 
 
-        
-        
-        
+
+
+
 
         setTimeout(() => {
             atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia, ultimaMedida);
@@ -400,6 +411,7 @@
                             console.log("Não há dados novos para captura, o gráfico não atualizará.");
                             avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Dado mais atual já exibido. Gráfico não atualizado.";
                         } else {
+                            
                             dadosRepresa()
                             console.log(energiaGerada)
 
@@ -409,7 +421,6 @@
                             console.log('valor da variável antes do shift:', dadosEnergia.labels);
                             dadosEnergia.labels.shift();
                             dadosEnergia.datasets[0].data.shift();
-
 
                             const dataRecebida = novoRegistro[0].data_hora;
                             const data = new Date(dataRecebida);
@@ -440,7 +451,7 @@
                     });
                 } else {
                     console.error('Nenhum dado encontrado ou erro na API');
-                    setTimeout(() => atualizarGrafico(idRepresa, dados, myChart,dadosEnergia), 2000);
+                    setTimeout(() => atualizarGrafico(idRepresa, dados, myChart, dadosEnergia), 2000);
                 }
             })
             .catch(error => {
@@ -449,58 +460,58 @@
     }
 
     function ajustarKPIs(ultimaMedida) {
-    console.log('Ajustando KPIs para represa', idRepresaClickada, 'com a medida:', ultimaMedida);
+        console.log('Ajustando KPIs para represa', idRepresaClickada, 'com a medida:', ultimaMedida);
 
-    if (ultimaMedida <= 50) {
-        represasKPI[idRepresaClickada] = 'atencao';
-    } else if (ultimaMedida <= 100) {
-        represasKPI[idRepresaClickada] = 'alerta';
-    } else {
-        represasKPI[idRepresaClickada] = 'adequado';
-    }
-    console.log('Objeto de status atualizado:', represasKPI);
-
-
-    
-    kpiAdequado = 0;
-    kpiAlerta = 0;
-
-    for (const status of Object.values(represasKPI)) {
-        // 'status' aqui é a string: 'adequado', 'alerta', ou 'atencao'
-        if (status === 'atencao' || status === 'alerta') {
-            kpiAlerta++;
+        if (ultimaMedida <= 50) {
+            represasKPI[idRepresaClickada] = 'atencao';
+        } else if (ultimaMedida <= 100) {
+            represasKPI[idRepresaClickada] = 'alerta';
         } else {
-            kpiAdequado++;
+            represasKPI[idRepresaClickada] = 'adequado';
         }
-    }
-    h3_kpiAdequado.innerHTML = kpiAdequado;
-    h3_kpiAlerta.innerHTML = kpiAlerta;
+        console.log('Objeto de status atualizado:', represasKPI);
 
-    if (idRepresaClickada != null) {
-        const idDinamico = "statusRepresa" + idRepresaClickada;
-        const elementoStatus = document.getElementById(idDinamico);
 
-        if (elementoStatus) {
-            // Pega o status atual diretamente do objeto
-            const statusAtual = represasKPI[idRepresaClickada];
 
-            // Remove todas as classes de status possíveis para evitar acúmulo
-            elementoStatus.classList.remove("normal", "alerta", "atencao");
+        kpiAdequado = 0;
+        kpiAlerta = 0;
 
-            // Adiciona a classe correta e atualiza o texto
-            if (statusAtual === "alerta") {
-                elementoStatus.classList.add("alerta");
-                elementoStatus.innerHTML = "Alerta";
-            } else if (statusAtual === "atencao") {
-                elementoStatus.classList.add("atencao");
-                elementoStatus.innerHTML = "Atenção";
+        for (const status of Object.values(represasKPI)) {
+            // 'status' aqui é a string: 'adequado', 'alerta', ou 'atencao'
+            if (status === 'atencao' || status === 'alerta') {
+                kpiAlerta++;
             } else {
-                elementoStatus.classList.add("normal"); // ou "normal" se preferir
-                elementoStatus.innerHTML = "Adequado";
+                kpiAdequado++;
+            }
+        }
+        h3_kpiAdequado.innerHTML = kpiAdequado;
+        h3_kpiAlerta.innerHTML = kpiAlerta;
+
+        if (idRepresaClickada != null) {
+            const idDinamico = "statusRepresa" + idRepresaClickada;
+            const elementoStatus = document.getElementById(idDinamico);
+
+            if (elementoStatus) {
+                // Pega o status atual diretamente do objeto
+                const statusAtual = represasKPI[idRepresaClickada];
+
+                // Remove todas as classes de status possíveis para evitar acúmulo
+                elementoStatus.classList.remove("normal", "alerta", "atencao");
+
+                // Adiciona a classe correta e atualiza o texto
+                if (statusAtual === "alerta") {
+                    elementoStatus.classList.add("alerta");
+                    elementoStatus.innerHTML = "Alerta";
+                } else if (statusAtual === "atencao") {
+                    elementoStatus.classList.add("atencao");
+                    elementoStatus.innerHTML = "Atenção";
+                } else {
+                    elementoStatus.classList.add("normal"); // ou "normal" se preferir
+                    elementoStatus.innerHTML = "Adequado";
+                }
             }
         }
     }
-}
 
     function dadosRepresa() {
         fetch(`/represas/buscar-infoRepresas${idRepresaClickada}`, { cache: 'no-store' }).then(function (response) {

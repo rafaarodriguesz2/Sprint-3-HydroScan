@@ -11,6 +11,8 @@ function enviarPergunta() {
     .then(res => res.json())
     .then(res => {
       document.getElementById("mensagemEnvio").innerText = res.mensagem || "Pergunta enviada com sucesso!";
+      console.log('Pergunta enviada!');
+      
       document.getElementById("inputPergunta").value = "";
     })
     .catch(err => {
