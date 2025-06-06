@@ -56,6 +56,7 @@ const serial = async (valoresSensorDigital) => {
         if (HABILITAR_OPERACAO_INSERIR) {
 
             // Aqui ajustamos a inserção para a tabela Leitura
+            const idSensor2 = 2;
             const idSensor = 1;  // Ajuste conforme a lógica de identificação do sensor
             const dataHora = new Date();  // Data e hora atuais
             const statusGeracao = sensorDigital > 40 ? 'gerando' : 'parada';  // Exemplo de lógica para status de geração
@@ -64,6 +65,10 @@ const serial = async (valoresSensorDigital) => {
             await poolBancoDados.execute(
                 'insert into Leitura (idSensor, data_hora, nivel_agua_m, status_geracao) values (?, ?, ?, ?)',
                 [idSensor, dataHora, sensorDigital, statusGeracao]
+            );
+            await poolBancoDados.execute(
+                'insert into Leitura (idSensor, data_hora, nivel_agua_m, status_geracao) values (?, ?, ?, ?)',
+                [idSensor2, dataHora, sensorDigital, statusGeracao]
             );
             console.log("Valores inseridos na tabela Leitura:", sensorDigital, statusGeracao);
         }
