@@ -114,15 +114,12 @@
     </section>
 
 
+
+
     <footer class="footer">
         <h3>Fale conosco: sac@hydroscan.com</h3>
     </footer>
 
-    <body>
-
-
-
-    </body>
 
 </html>
 
@@ -208,56 +205,54 @@
                     <p><strong>Status:</strong> <span class="status normal" id="statusRepresa${item.idRepresa}">Normal</span></p>
                 </summary>
 
-
-
-
-                <div class="container-card-grafico">
-                    <div class="card-grafico">
-                    <h2>Volume de Água Atual</h2>
-                    <div id="grafico${item.idRepresa}" class="display-none">
-                        <h3 class="tituloGraficos">
-                        </h3>
-                            <div class="graph">
-                                <canvas id="myChartCanvas${item.idRepresa}"></canvas>
-                            </div>
-                            <div class="label-captura">
-                                <p id="avisoCaptura${item.idRepresa}" style="color: white"></p>
-                            </div>
-                            </div>
-                            <p class="descricao-grafico">
-                        Histórico de Volume de Água
-                    </p>
-                    </div>
-                    <div class = "card-grafico">
-                        <h2>Produção de energia</h2>
-                        <div class="graph">
-                            <canvas id="myChartCanvas2"></canvas>
-                        </div>
-                        <p class="descricao-grafico">
-                            Histórico de Produção de Energia
-                        </p>
+        <div class="container-card-grafico">
+            <div class="card-grafico">
+            <h2>Volume de Água Atual</h2>
+            <div id="grafico${item.idRepresa}" class="display-none">
+                <h3 class="tituloGraficos">
+                </h3>
+                    <div class="graph">
+                        <canvas id="myChartCanvas${item.idRepresa}"></canvas>
                     </div>
                 </div>
-                
-            </details>
-        `;
+                <div class="label-captura">
+                    <p id="avisoCaptura${item.idRepresa}" style="color: white"></p>
+                </div>
+                <p class="descricao-grafico">
+                Histórico de Volume de Água
+                </p>
+            </div>
+            
+            <div class = "card-grafico">
+                <h2>Produção de energia</h2>
+                <div class="graph">
+                        <canvas id="myChartCanvas2${item.idRepresa}"></canvas>
+                </div>
+                <p class="descricao-grafico">
+                    Histórico de Produção de Energia
+                </p>
+            </div>
+            </div>
+
+        
+    </details>
+        `;}
 
             represasKPI[represaDaVez] = 'normal';
-        }
-
     }
 
-    function obterDadosGrafico() {
+    function obterDadosGrafico(idRepresaClickada, nomeRepresa) {
 
         // let represas = JSON.parse(sessionStorage.REPRESAS);
         console.log(sessionStorage.REPRESA)
         // console.log('Represas:', represas);
 
         console.log(energiaGerada, "obter dados GRAFICO")
-        console.log(idRepresaClickada)
-        // alterarTitulo(idRepresaClickada)
+        console.log(nomeRepresa)
+        // alterarTitulo(nomeRepresa)
+        console.log("ID REPRESA = ", idRepresaClickada)
 
-        fetch(`/medidas/ultimas/${idRepresaClickada}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/medidas/ultimas/${nomeRepresa}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -268,7 +263,7 @@
 
                     console.log(informacoesLeitura[0].nivel_agua_m)
                     // plotarGrafico(resposta, idRepresa);
-                    plotarGrafico(resposta, idRepresaClickada);
+                    plotarGrafico(resposta, idRepresaClickada, nomeRepresa);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -279,7 +274,7 @@
             });
     }
 
-    function plotarGrafico(resposta, idRepresa) {
+    function plotarGrafico(resposta, idRepresa, nomeRepresa) {
 
         let energia = nivelDaAguaAtual * 256
 
@@ -374,24 +369,30 @@
         );
 
         let myChart2 = new Chart(
-            document.getElementById(`myChartCanvas2`),
+            document.getElementById(`myChartCanvas2${idRepresa}`),
             configLine
         );
 
-
-
-
-
-
+        // let myChart3 = new Chart(
+        //     document.getElementById(`myChartCanvas3${idRepresa}`),
+        //     configBar
+        // );
+        // let myChart4 = new Chart(
+        //     document.getElementById(`myChartCanvas4${idRepresa}`),
+        //     configLine
+        // );
 
         setTimeout(() => {
-            atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia, ultimaMedida);
+            atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia, ultimaMedida, nomeRepresa);
             ultimaMedida = Number(dados.datasets[dados.datasets.length - 1].data[dados.datasets[dados.datasets.length - 1].data.length - 1]);
         }, 2000);
     }
 
-    function atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia, ultimaMedida) {
-        fetch(`/medidas/tempo-real/${idRepresa}`, { cache: 'no-store' })
+    function atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia, ultimaMedida, nomeRepresa) {
+
+        console.log("NOME DA REPRESAAAAAAAA", nomeRepresa)
+
+        fetch(`/medidas/tempo-real/${nomeRepresa}`, { cache: 'no-store' })
             .then(response => {
                 if (response.ok) {
                     response.json().then(novoRegistro => {
@@ -444,14 +445,14 @@
                             myChart.update();
                             myChart2.update();
                         }
-
                         ajustarKPIs(Number(novoRegistro[0].nivel_agua_m))
 
-                        setTimeout(() => atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia), 2000);
+                        setTimeout(() => atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia, ultimaMedida, nomeRepresa), 2000);
+
                     });
                 } else {
                     console.error('Nenhum dado encontrado ou erro na API');
-                    setTimeout(() => atualizarGrafico(idRepresa, dados, myChart, dadosEnergia), 2000);
+                    setTimeout(() => atualizarGrafico(idRepresa, dados, myChart, myChart2, dadosEnergia, ultimaMedida, nomeRepresa), 2000);
                 }
             })
             .catch(error => {
@@ -530,11 +531,11 @@
                     energiaGerada = ((nivelDaAguaAtual / 100) * volumeMaximo) * potenciaMaxima / 10000
 
 
-                    console.log(volumeMaximo)
-                    console.log(volumeMinimo)
-                    console.log(potenciaMaxima)
-                    console.log(nivelDaAguaAtual)
-                    console.log("Energia Geradaaaaaaaaaaaaa", energiaGerada)
+                    // console.log(volumeMaximo)
+                    // console.log(volumeMinimo)
+                    // console.log(potenciaMaxima)
+                    // console.log(nivelDaAguaAtual)
+                    // console.log("Energia Geradaaaaaaaaaaaaa", energiaGerada)
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -550,7 +551,7 @@
         nomeRepresaClickada = nomeRepresa
 
         console.log(`ID da represa ${nomeRepresaClickada} é ${idRepresaClickada}`);
-        obterDadosGrafico();
+        obterDadosGrafico(idRepresa, nomeRepresa);
     }
 
 
