@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,61 +11,94 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="icon" href="../img/Logo-pequena.png" type="image/x-icon">
 </head>
+
 <body>
   <header class="navbar">
     <nav class="nav-esquerda">
-        <a onclick="sair()">
-            <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
-        </a>
-        <a href="./CadastrarFuncionario.html">Cadastrar Funcionarios</a>
-        <a href="./cadastrarRepresas.html">Cadastrar Represas</a>
-        <a href="./cadastrarSensor.html" class="agora">Cadastrar Sensor</a>
-        <a href="../dashboard/dash.html">Dashboards</a>
+      <a onclick="sair()">
+        <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
+      </a>
+      <a href="./cadastrarFuncionarios.html" id="a-funcionarios" class="hide">Cadastrar Funcionarios</a>
+      <a href="./cadastrarRepresas.html" id="a-represa" class="hide">Cadastrar Represas</a>
+      <a href="./cadastrarSensor.html" class="agora hide" id="a-sensor">Cadastrar Sensor</a>
+      <a href="../dashboard/dash.html" id="a-dash" class="hide">Dashboards</a>
+      <a href="../pages/perguntas.html" id="a-faq" class="hide">FAQ</a>
     </nav>
     <nav class="nav-direita">
-        <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
+      <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
     </nav>
-</header>
+  </header>
 
-<div class="formulario">
-  <p class="titulo"> Cadastro de sensor</p>
-  <input type="text" id="ipt_modeloSensor" class="input" placeholder="Insira aqui o modelo do sensor: ">
-  <input type="text" id="ipt_localInstalação" class="input" placeholder="Insira aqui o local de instalção do sensor">
-  <input type="date" id="ipt_dataInstalação" class="input" style="font-family: 'Poppins';">
-  <select name="slct_nivelAcesso" id="slct_represa">
-    <option value="#" selected disabled>Selecione a represa correspondente</option>
-    
-  </select>
-  <div class="div_resposta" id="div_resposta"></div>
-  <button onclick="cadastroFuncionario()">Cadastrar</button>
-</div>
+  <div class="formulario">
+    <p class="titulo"> Cadastro de sensor</p>
+    <input type="text" id="ipt_modeloSensor" class="input" placeholder="Insira aqui o modelo do sensor: ">
+    <input type="text" id="ipt_localInstalação" class="input" placeholder="Insira aqui o local de instalção do sensor">
+    <input type="date" id="ipt_dataInstalação" class="input" style="font-family: 'Poppins';">
+    <select name="slct_nivelAcesso" id="slct_represa">
+      <option value="#" selected disabled>Selecione a represa correspondente</option>
 
-<footer class="footer">
-  <h3>Fale conosco: sac@hydroscan.com</h3>
-</footer>
+    </select>
+    <div class="div_resposta" id="div_resposta"></div>
+    <button onclick="cadastroFuncionario()">Cadastrar</button>
+  </div>
+
+  <footer class="footer">
+    <h3>Fale conosco: sac@hydroscan.com</h3>
+  </footer>
 </body>
 <script>
 
-  function sair(){
+  let navSensor = document.getElementById("a-sensor")
+  let navRepresas = document.getElementById("a-represa")
+  let navFuncionarios = document.getElementById("a-funcionarios")
+  let navDash = document.getElementById("a-dash")
+  let navFaq = document.getElementById("a-faq")
+
+  window.onload = nivelDeAcesso();
+
+  function nivelDeAcesso() {
+    console.log("chegou aqui ")
+    if (sessionStorage.NIVEL_ACESSO == 1) {
+      navSensor.classList.remove("hide")
+      navDash.classList.remove("hide")
+      navFaq.classList.remove("hide")
+    } else if (sessionStorage.NIVEL_ACESSO == 2) {
+      navSensor.classList.remove("hide")
+      navRepresas.classList.remove("hide")
+      navDash.classList.remove("hide")
+      navFaq.classList.remove("hide")
+    } else if (sessionStorage.NIVEL_ACESSO == 3) {
+      navSensor.classList.remove("hide")
+      navRepresas.classList.remove("hide")
+      navFuncionarios.classList.remove("hide")
+      navDash.classList.remove("hide")
+      navFaq.classList.remove("hide")
+    } else {
+      navSensor.classList.remove("hide")
+      navRepresas.classList.remove("hide")
+      navFuncionarios.classList.remove("hide")
+      navDash.classList.remove("hide")
+      navFaq.classList.remove("hide")
+    }
+  }
+
+  function sair() {
     sessionStorage.clear()
     window.location = "../index.html"
   }
 
-  function puxarRepresas(){
+  function puxarRepresas() {
     const represas = JSON.parse(sessionStorage.REPRESA)
     console.log(represas);
-    
 
-    represas.forEach((item) =>{
-        slct_represa.innerHTML +=`
+    represas.forEach((item) => {
+      slct_represa.innerHTML += `
         <option value="${item.Nome}">${item.Nome}</option>
         `
-
     })
-    
   }
 
-  function cadastroFuncionario(){
+  function cadastroFuncionario() {
     const modeloSensor = document.getElementById("ipt_modeloSensor").value;
     const localInstalação = document.getElementById("ipt_localInstalação").value;
     const dataInstalação = document.getElementById("ipt_dataInstalação").value;
@@ -73,64 +107,65 @@
     const divResposta = document.getElementById("div_resposta")
 
     const dadosParaApi = {
-        'modeloSensorServer': modeloSensor,                            
-        'localInstalaçãoServer': localInstalação,                          
-        'dataInstalaçãoServer': dataInstalação,                                    
-        'represaServer': represa,                          
+      'modeloSensorServer': modeloSensor,
+      'localInstalaçãoServer': localInstalação,
+      'dataInstalaçãoServer': dataInstalação,
+      'represaServer': represa,
     };
 
     console.log('Dados que serão enviados para a API:', dadosParaApi);
-    
+
     const urlApi = `http://localhost:3333/sensores/cadastrar-sensor`;
 
     fetch(urlApi, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-          
-        },
-        body: JSON.stringify(dadosParaApi) // Converte o objeto para uma string JSON
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+
+      },
+      body: JSON.stringify(dadosParaApi) // Converte o objeto para uma string JSON
     })
-    .then(response => {
+      .then(response => {
         if (!response.ok) {
-            // Se a resposta não for OK, tenta ler o corpo como JSON para obter a mensagem de erro da API
-            return response.json().then(erroApi => {
-                // Mostra a mensagem de erro da API ou um erro genérico
-                const mensagemErro = erroApi.mensagem || `Erro ao cadastrar: ${response.status}`;
-                console.error("Erro da API:", mensagemErro);
-                if (divResposta) divResposta.innerHTML = `<p style="color: red;">${mensagemErro}</p>`;
-                throw new Error(mensagemErro); // Isso fará com que caia no .catch() abaixo
-            });
+          // Se a resposta não for OK, tenta ler o corpo como JSON para obter a mensagem de erro da API
+          return response.json().then(erroApi => {
+            // Mostra a mensagem de erro da API ou um erro genérico
+            const mensagemErro = erroApi.mensagem || `Erro ao cadastrar: ${response.status}`;
+            console.error("Erro da API:", mensagemErro);
+            if (divResposta) divResposta.innerHTML = `<p style="color: red;">${mensagemErro}</p>`;
+            throw new Error(mensagemErro); // Isso fará com que caia no .catch() abaixo
+          });
         }
         return response.json(); // Converte a resposta de sucesso para JSON
-    })
-    .then(data => {
+      })
+      .then(data => {
         // Se chegou aqui, a API retornou sucesso (ex: status 201)
         console.log("Sucesso do cadastro:", data);
         divResposta.innerHTML = `<p style="color: green;">${data.mensagem || "Sensor cadastrado com sucesso!"}</p>`;
-        
+
         // Opcional: Limpar o formulário após o sucesso
         document.getElementById("ipt_modeloSensor").value = "";
         document.getElementById("ipt_localInstalação").value = "";
         document.getElementById("ipt_dataInstalação").value = "";
-        document.getElementById("slct_represa").value = "#"; 
+        document.getElementById("slct_represa").value = "#";
 
-        
-    })
-    .catch(error => {
+
+      })
+      .catch(error => {
         // Este catch pega erros da rede (ex: servidor offline) ou o erro lançado do .then() anterior
         console.error("Erro geral no fetch:", error);
         if (divResposta && !divResposta.innerHTML) { // Só mostra se não já mostrou erro da API
-             divResposta.innerHTML = `<p style="color: red;">Ocorreu um erro ao tentar cadastrar. Tente novamente.</p>`;
+          divResposta.innerHTML = `<p style="color: red;">Ocorreu um erro ao tentar cadastrar. Tente novamente.</p>`;
         }
-    });
+      });
 
-    
+
   }
 
-  window.onload = function(){
+  window.onload = function () {
     puxarRepresas()
   }
 
 </script>
+
 </html>

@@ -18,10 +18,11 @@
       <a onclick="sair()">
         <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
       </a>
-      <a href="./cadastrarFuncionarios.html" class="agora">Cadastrar Funcionario</a>
-      <a href="./cadastrarRepresas.html">Cadastrar Represas</a>
-      <a href="./cadastrarSensor.html">Cadastrar Sensor</a>
-      <a href="../dashboard/dash.html">Dashboards</a>
+      <a href="./cadastrarFuncionarios.html" class="agora" id="a-funcionarios" class="hide">Cadastrar Funcionario</a>
+      <a href="./cadastrarRepresas.html" id="a-represa"  class="hide" >Cadastrar Represas</a>
+      <a href="./cadastrarSensor.html" id="a-sensor" class="hide" >Cadastrar Sensor</a>
+      <a href="../dashboard/dash.html" id="a-dash" class="hide" >Dashboards</a>
+      <a href="../pages/perguntas.html" id="a-faq" class="hide" >FAQ</a>
     </nav>
     <nav class="nav-direita">
       <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
@@ -52,7 +53,41 @@
 </body>
 <script>
 
-  function sair(){
+  let navSensor = document.getElementById("a-sensor")
+  let navRepresas = document.getElementById("a-represa")
+  let navFuncionarios = document.getElementById("a-funcionarios")
+  let navDash = document.getElementById("a-dash")
+  let navFaq = document.getElementById("a-faq")
+
+  window.onload = nivelDeAcesso();
+
+  function nivelDeAcesso() {
+    console.log("chegou aqui ")
+    if (sessionStorage.NIVEL_ACESSO == 1) {
+      navSensor.classList.remove("hide")
+      navDash.classList.remove("hide")
+      navFaq.classList.remove("hide")
+    } else if (sessionStorage.NIVEL_ACESSO == 2) {
+      navSensor.classList.remove("hide")
+      navRepresas.classList.remove("hide")
+      navDash.classList.remove("hide")
+      navFaq.classList.remove("hide")
+    } else if (sessionStorage.NIVEL_ACESSO == 3) {
+      navSensor.classList.remove("hide")
+      navRepresas.classList.remove("hide")
+      navFuncionarios.classList.remove("hide")
+      navDash.classList.remove("hide")
+      navFaq.classList.remove("hide")
+    } else {
+      navSensor.classList.remove("hide")
+      navRepresas.classList.remove("hide")
+      navFuncionarios.classList.remove("hide")
+      navDash.classList.remove("hide")
+      navFaq.classList.remove("hide")
+    }
+  }
+
+  function sair() {
     sessionStorage.clear()
     window.location = "../index.html"
   }

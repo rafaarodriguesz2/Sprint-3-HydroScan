@@ -18,10 +18,11 @@
       <a onclick="sair()">
         <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
       </a>
-      <a href="../pages/cadastrarFuncionarios.html">Cadastrar Funcionarios</a>
-      <a href="../pages/cadastrarRepresas.html" class="agora">Cadastrar Represas</a>
-      <a href="../pages/cadastrarSensor.html" >Cadastrar Sensor</a>
-      <a href="../dashboard/dash.html" >Dashboards</a>
+      <a href="../pages/cadastrarFuncionarios.html" id="a-funcionarios"  class="hide">Cadastrar Funcionarios</a>
+      <a href="../pages/cadastrarRepresas.html" class="agora hide" id="a-represa">Cadastrar Represas</a>
+      <a href="../pages/cadastrarSensor.html" id="a-sensor" class="hide" >Cadastrar Sensor</a>
+      <a href="../dashboard/dash.html" id="a-dash" class="hide" >Dashboards</a>
+      <a href="../pages/perguntas.html" id="a-faq" class="hide" >FAQ</a>
     </nav>
     <nav class="nav-direita">
       <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
@@ -41,15 +42,48 @@
     <div class="div_resposta" id="div_resposta"></div>
   </div>
 
-  
+
   <footer class="footer">
     <h3>Fale conosco: sac@hydroscan.com</h3>
   </footer>
 </body>
 <script>
-  console.log(14349678000100)
 
-  function sair(){
+  let navSensor = document.getElementById("a-sensor")
+  let navRepresas = document.getElementById("a-represa")
+  let navFuncionarios = document.getElementById("a-funcionarios")
+  let navDash = document.getElementById("a-dash")
+  let navFaq = document.getElementById("a-faq")
+
+  window.onload = nivelDeAcesso();
+
+  function nivelDeAcesso() {
+    console.log("chegou aqui ")
+    if (sessionStorage.NIVEL_ACESSO == 1) {
+      navSensor.classList.remove("hide")
+      navDash.classList.remove("hide")
+      navFaq.classList.remove("hide")
+    } else if (sessionStorage.NIVEL_ACESSO == 2) {
+      navSensor.classList.remove("hide")
+      navRepresas.classList.remove("hide")
+      navDash.classList.remove("hide")
+      navFaq.classList.remove("hide")
+    } else if (sessionStorage.NIVEL_ACESSO == 3) {
+      navSensor.classList.remove("hide")
+      navRepresas.classList.remove("hide")
+      navFuncionarios.classList.remove("hide")
+      navDash.classList.remove("hide")
+      navFaq.classList.remove("hide")
+    } else {
+      navSensor.classList.remove("hide")
+      navRepresas.classList.remove("hide")
+      navFuncionarios.classList.remove("hide")
+      navDash.classList.remove("hide")
+      navFaq.classList.remove("hide")
+    }
+  }
+
+  function sair() {
     sessionStorage.clear()
     window.location = "../index.html"
   }

@@ -71,6 +71,10 @@ body {
     text-decoration: none;
 }
 
+.hide{
+    display: none;
+}
+
 /* Lado Esquerdo*/
 
 .nav-esquerda{

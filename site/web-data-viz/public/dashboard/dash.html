@@ -21,12 +21,11 @@
             <a onclick="sair()">
                 <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
             </a>
-            <a href="../pages/calculadora.html" class="hide">Calculadora</a>
-            <a href="../pages/sobre_nos.html" class="hide">Sobre Nós</a>
             <a href="../pages/cadastrarFuncionarios.html" class="hide" id="a-funcionarios">Cadastrar Funcionários</a>
             <a href="../pages/cadastrarRepresas.html" class="hide" id="a-represa">Cadastrar Represas</a>
             <a href="../pages/cadastrarSensor.html" class="hide" id="a-sensor">Cadastrar Sensor</a>
             <a href="./dash.html" class="hide" id="a-dash"><b>Dashboards</b></a>
+            <a href="../pages/perguntas.html" class="hide" id="a-faq">FAQ</a>
 
         </nav>
         <nav class="nav-direita">
@@ -140,13 +139,13 @@
     let navRepresas = document.getElementById("a-represa")
     let navFuncionarios = document.getElementById("a-funcionarios")
     let navDash = document.getElementById("a-dash")
+    let navFaq = document.getElementById("a-faq")
     let ultimaMedida;
     let qtdRepresas;
     let represasKPI = {}
     let kpiAdequado = 0
     let kpiAlerta = 0
     let status;
-
 
     window.onload = exibirRepresasDoUsuario();
 
@@ -155,20 +154,24 @@
         if (sessionStorage.NIVEL_ACESSO == 1) {
             navSensor.classList.remove("hide")
             navDash.classList.remove("hide")
+            navFaq.classList.remove("hide")
         } else if (sessionStorage.NIVEL_ACESSO == 2) {
             navSensor.classList.remove("hide")
             navRepresas.classList.remove("hide")
             navDash.classList.remove("hide")
+            navFaq.classList.remove("hide")
         } else if (sessionStorage.NIVEL_ACESSO == 3) {
             navSensor.classList.remove("hide")
             navRepresas.classList.remove("hide")
             navFuncionarios.classList.remove("hide")
             navDash.classList.remove("hide")
+            navFaq.classList.remove("hide")
         } else {
             navSensor.classList.remove("hide")
             navRepresas.classList.remove("hide")
             navFuncionarios.classList.remove("hide")
             navDash.classList.remove("hide")
+            navFaq.classList.remove("hide")
         }
     }
 
@@ -233,12 +236,9 @@
                 </p>
             </div>
             </div>
-
-        
     </details>
-        `;}
-
-            represasKPI[represaDaVez] = 'normal';
+        `};
+        represasKPI[represaDaVez] = 'normal';
     }
 
     function obterDadosGrafico(idRepresaClickada, nomeRepresa) {
@@ -412,7 +412,7 @@
                             console.log("Não há dados novos para captura, o gráfico não atualizará.");
                             avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Dado mais atual já exibido. Gráfico não atualizado.";
                         } else {
-                            
+
                             dadosRepresa()
                             console.log(energiaGerada)
 

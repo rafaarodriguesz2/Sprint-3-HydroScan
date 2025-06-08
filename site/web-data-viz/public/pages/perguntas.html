@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>| Perguntas Frequentes</title>
+  <link rel="stylesheet" href="../css/cadastrarFuncionarioRepresas.css">
   <link rel="stylesheet" href="../css/faq.css">
   <link rel="icon" href="../img/Logo-pequena.png" type="image/x-icon">
 </head>
@@ -15,13 +16,11 @@
       <a onclick="sair()">
         <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
       </a>
-      <a href="../pages/calculadora.html">Calculadora</a>
-      <a href="../pages/sobre_nos.html">Sobre Nós</a>
-      <a href="../pages/cadastrarFuncionarios.html" id="a-funcionarios">Cadastrar Funcionários</a>
-      <a href="../pages/cadastrarRepresas.html" id="a-represa">Cadastrar Represas</a>
-      <a href="../pages/cadastrarSensor.html" id="a-sensor">Cadastrar Sensor</a>
-      <a href="./dash.html" id="a-dash">Dashboards</a>
-      <a href="./perguntas.html">FAQ</a>
+      <a href="../pages/cadastrarFuncionarios.html" id="a-funcionarios" class="hide" >Cadastrar Funcionários</a>
+      <a href="../pages/cadastrarRepresas.html" id="a-represa" class="hide" >Cadastrar Represas</a>
+      <a href="../pages/cadastrarSensor.html" id="a-sensor" class="hide">Cadastrar Sensor</a>
+      <a href="../dashboard/dash.html" id="a-dash" class="hide">Dashboards</a>
+      <a href="./perguntas.html" id="a-faq" class="agora hide">FAQ</a>
     </nav>
     <nav class="nav-direita">
       <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
@@ -32,55 +31,93 @@
     <div class="formulario">
       <h2>Envie sua pergunta</h2>
       <form id="formPerguntas">
-          <label for="inputPergunta">Sua pergunta:</label>
-          <textarea id="inputPergunta" rows="4" placeholder="Digite sua pergunta aqui..."></textarea>
-          <button type="button" onclick="enviarPergunta()">Enviar</button>
+        <label for="inputPergunta">Sua pergunta:</label>
+        <textarea id="inputPergunta" rows="4" placeholder="Digite sua pergunta aqui..."></textarea>
+        <button type="button" onclick="enviarPergunta()">Enviar</button>
       </form>
       <p id="mensagemEnvio"></p>
-  </div>
+    </div>
 
     <!-- Perguntas frequentes -->
     <div class="faq">
-        <h2>Perguntas Frequentes</h2>
-        <details>
-            <summary>Como faço para enviar uma pergunta?</summary>
-            <p>Você pode enviar uma pergunta utilizando o campo de texto ao lado e clicando no botão "Enviar".</p>
-        </details>
-        <details>
-            <summary>Onde posso ver as perguntas enviadas?</summary>
-            <p>As perguntas enviadas podem ser visualizadas na seção de perguntas do site.</p>
-        </details>
-        <details>
-            <summary>O que acontece se minha pergunta não for enviada?</summary>
-            <p>Se sua pergunta não for enviada, verifique sua conexão com a internet ou tente novamente mais tarde.</p>
-        </details>
+      <h2>Perguntas Frequentes</h2>
+      <details>
+        <summary>Como faço para enviar uma pergunta?</summary>
+        <p>Você pode enviar uma pergunta utilizando o campo de texto ao lado e clicando no botão "Enviar".</p>
+      </details>
+      <details>
+        <summary>Onde posso ver as perguntas enviadas?</summary>
+        <p>As perguntas enviadas podem ser visualizadas na seção de perguntas do site.</p>
+      </details>
+      <details>
+        <summary>O que acontece se minha pergunta não for enviada?</summary>
+        <p>Se sua pergunta não for enviada, verifique sua conexão com a internet ou tente novamente mais tarde.</p>
+      </details>
     </div>
-</div>
-  
+  </div>
   <script src="./JS/perguntas.js"></script>
   <script>
-function enviarPergunta() {
-    const pergunta = document.getElementById('inputPergunta').value;
+    let navSensor = document.getElementById("a-sensor")
+    let navRepresas = document.getElementById("a-represa")
+    let navFuncionarios = document.getElementById("a-funcionarios")
+    let navDash = document.getElementById("a-dash")
+    let navFaq = document.getElementById("a-faq")
 
-    fetch("/perguntas", {
+    window.onload = nivelDeAcesso();
+
+    function nivelDeAcesso() {
+      console.log("chegou aqui ")
+      if (sessionStorage.NIVEL_ACESSO == 1) {
+        navSensor.classList.remove("hide")
+        navDash.classList.remove("hide")
+        navFaq.classList.remove("hide")
+      } else if (sessionStorage.NIVEL_ACESSO == 2) {
+        navSensor.classList.remove("hide")
+        navRepresas.classList.remove("hide")
+        navDash.classList.remove("hide")
+        navFaq.classList.remove("hide")
+      } else if (sessionStorage.NIVEL_ACESSO == 3) {
+        navSensor.classList.remove("hide")
+        navRepresas.classList.remove("hide")
+        navFuncionarios.classList.remove("hide")
+        navDash.classList.remove("hide")
+        navFaq.classList.remove("hide")
+      } else {
+        navSensor.classList.remove("hide")
+        navRepresas.classList.remove("hide")
+        navFuncionarios.classList.remove("hide")
+        navDash.classList.remove("hide")
+        navFaq.classList.remove("hide")
+      }
+    }
+
+    function sair() {
+      sessionStorage.clear()
+      window.location = "../index.html"
+    }
+
+    function enviarPergunta() {
+      const pergunta = document.getElementById('inputPergunta').value;
+
+      fetch("/perguntas", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({ pergunta })
-    })
-    .then(res => res.json())
-    .then(res => {
-        document.getElementById("mensagemEnvio").innerText = res.mensagem || "Pergunta enviada com sucesso!";
-        document.getElementById("mensagemEnvio").style.color = "green"; // Mensagem de sucesso :D
-        document.getElementById("inputPergunta").value = ""; // Limpa o campo do textoooo
-    })
-    .catch(err => {
-        document.getElementById("mensagemEnvio").innerText = "Erro ao enviar pergunta.";
-        document.getElementById("mensagemEnvio").style.color = "red"; // Mensagem de erro :/
-        console.error('Erro ao enviar pergunta:', err);
-    });
-}
+      })
+        .then(res => res.json())
+        .then(res => {
+          document.getElementById("mensagemEnvio").innerText = res.mensagem || "Pergunta enviada com sucesso!";
+          document.getElementById("mensagemEnvio").style.color = "green"; // Mensagem de sucesso :D
+          document.getElementById("inputPergunta").value = ""; // Limpa o campo do textoooo
+        })
+        .catch(err => {
+          document.getElementById("mensagemEnvio").innerText = "Erro ao enviar pergunta.";
+          document.getElementById("mensagemEnvio").style.color = "red"; // Mensagem de erro :/
+          console.error('Erro ao enviar pergunta:', err);
+        });
+    }
 
 
 
@@ -94,7 +131,6 @@ function enviarPergunta() {
       // Adiciona ou remove o efeito de destaque na pergunta
       element.classList.toggle('active');
     }
-
 
   </script>
 </body>

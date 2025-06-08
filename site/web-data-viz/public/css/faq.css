@@ -39,66 +39,23 @@ body {
 }
 
 /* ------------------ BARRA DE NAVEGAÇÃO ------------------ */
-.navbar {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--azul);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
-.navbar nav {
-    display: flex;
-    gap: 0;
-}
-
-.navbar a {
-    color: var(--branco);
-    font-weight: 500;
-    font-size: 1.1em;
-    /* text-transform: uppercase; */
-    letter-spacing: 0.5px;
-    padding: 8px 15px;
-    border-radius: 30px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-/* .navbar a:hover{
+.agora{
     font-weight: bold;
-} */
+}
+
+.hide{
+    display: none;
+}
 
 .nav-esquerda {
     display: flex;
     align-items: center;
 }
 
-.img-logo {
-    width: 50px;
-    height: auto;
-    margin-right: 20px;
-}
 
 .nav-direita {
     display: flex;
     align-items: center;
-}
-
-.img-perfil {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-left: 10px;
-    transition: transform 0.3s ease;
-}
-
-.img-perfil:hover {
-    transform: scale(1.1);
 }
 
 /* ------------------ MENU RESPONSIVO ------------------ */
@@ -228,13 +185,14 @@ ul li strong {
     gap: 60px;
     justify-content: space-between;
     align-items: flex-start;
-    margin: 100px auto; 
+    margin: 30px auto; 
     max-width: 1200px;
     padding: 40px 20px;
 }
 
 /* Estilo para o formulário */
 .formulario {
+    margin-top: 0px;
     flex: 1;
     background-color: var(--branco);
     padding: 30px;

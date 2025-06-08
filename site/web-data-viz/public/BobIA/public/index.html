@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,20 +11,18 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" href="img/Logo-pequena.png" type="image/x-icon">
 </head>
+
 <body>
     <header class="navbar">
-    <nav class="nav-esquerda">
-        <a href="../../localhost:3333/pages/sobre_nos.html">
-            <img class="img-logo" src="img/Logo-pequena.png" alt="Logo da empresa">
-        </a>
-        <a href="../pages/calculadora.html">Calculadora</a>
-        <a href="../pages/sobre_nos.html">Sobre Nós</a>
-        <a href="" class="agora">Suporte</a>
-        <a href="">Jira</a>
-    </nav>
-    <nav class="nav-direita">
-        <img class="img-perfil" src="img/icone-perfil.png" alt="icone do perfil">
-    </nav>
+        <nav class="nav-esquerda">
+            <a onclick="sair()">
+                <img class="img-logo" src="img/Logo-pequena.png" alt="Logo da empresa">
+            </a>
+            <a href="" class="agora">Suporte</a>
+        </nav>
+        <nav class="nav-direita">
+            <img class="img-perfil" src="img/icone-perfil.png" alt="icone do perfil">
+        </nav>
     </header>
 
     <div id="container" class="container">
@@ -38,26 +37,31 @@
             <img src="/img/load-35-ezgif.com-speed.gif" alt="Carregando..." class="loading-gif" id="gif">
         </div>
         <div id="resposta" class="resposta" style="display: none;"></div>
-        
+
     </div>
 
- 
+
 
     <script src="main.js"></script>
     <script>
-        
+
+        function sair() {
+            sessionStorage.clear()
+            window.location = "http://localhost:3333/index.html"
+        }
+
         async function gerarResposta() {
             const pergunta = document.getElementById('pergunta').value;
             const loadingContainer = document.getElementById('loading-container');
             const btnPerguntar = document.getElementById('btnPerguntar');
             const respostaDiv = document.getElementById('resposta');
-                // limpando a resposta antes de mostrar outra
-                respostaDiv.style.display = 'none'
+            // limpando a resposta antes de mostrar outra
+            respostaDiv.style.display = 'none'
 
-                // Mostrar carregamento com fade
-                loadingContainer.classList.add('fade-in');
-                loadingContainer.style.display = 'flex';
-            
+            // Mostrar carregamento com fade
+            loadingContainer.classList.add('fade-in');
+            loadingContainer.style.display = 'flex';
+
 
             const response = await fetch('/perguntar', {
                 method: 'POST',
@@ -69,19 +73,20 @@
 
             const data = await response.json();
 
-             // Esconder carregamento com fade
+            // Esconder carregamento com fade
             loadingContainer.classList.add('fade-out');
             setTimeout(() => {
                 loadingContainer.style.display = 'none';
                 loadingContainer.classList.remove('fade-in', 'fade-out');
-                
+
                 respostaDiv.style.display = 'block';
                 document.getElementById('resposta').innerText = data.resultado;
             }, 300);
-            
+
         }
 
     </script>
-    
+
 </body>
+
 </html>
