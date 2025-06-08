@@ -12,6 +12,9 @@ const int PINO_ECHO = 13;
 necessarios para seu funcionamento */
 HC_SR04 sensor (PINO_TRIGGER, PINO_ECHO);
 
+/* Definindo a variavel da altura da represa*/
+const float ALTURA_TOTAL_REPRESA = 200.0;
+
 /* iniciando uma ação */
 void setup() {
   /* definindo velicidade comunicação pela entrada USB */
@@ -23,13 +26,16 @@ void loop() {
   /* Capturando a distância do sensor */
   float distancia = sensor.distance();
 
-  /* Limitando a distância max em 100cm */
-  if (distancia > 230.0) {
-    distancia = 230.0;
+  /* Invertendo o valor medido pelo sensor para fazer sentido com a regra de negocio*/
+  float nivel_agua = ALTURA_TOTAL_REPRESA - distancia;
+
+  /* Limitando a distância max para caso de bugs, não imprima um valor negativo */
+  if (nivel_agua < 0) {
+    nivel_agua = 0;
   }
   
   /* Capturando os dados para o Serial Plotter */
-  Serial.println(distancia);
+  Serial.println(nivel_agua);
   /* o \t separa os gráficos*/
   // Serial.print(labelMax);
   /* o \t separa os gráficos*/

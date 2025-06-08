@@ -13,6 +13,7 @@
     <script src="../js/alerta.js"></script>
     <script src="../js/sessao.js"></script>
     <link rel="icon" href="../img/Logo-pequena.png" type="image/x-icon">
+
 </head>
 
 <body>
@@ -26,7 +27,6 @@
             <a href="../pages/cadastrarSensor.html" class="hide" id="a-sensor">Cadastrar Sensor</a>
             <a href="./dash.html" class="hide" id="a-dash"><b>Dashboards</b></a>
             <a href="../pages/perguntas.html" class="hide" id="a-faq">FAQ</a>
-
         </nav>
         <nav class="nav-direita">
             <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
@@ -150,7 +150,7 @@
     window.onload = exibirRepresasDoUsuario();
 
     function nivelDeAcesso() {
-        console.log("chegou aqui ")
+        console.log("chegou aqui ");
         if (sessionStorage.NIVEL_ACESSO == 1) {
             navSensor.classList.remove("hide")
             navDash.classList.remove("hide")
