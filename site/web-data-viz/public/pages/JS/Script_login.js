@@ -10,8 +10,8 @@ function checkCNPJorCPF(){
     var email = ipt_email.value
     var senha = ipt_senha.value
     if (email == 'suporte@hydroscan' && senha == 'hydroscan'){
-        window.location.href = window.localStorage.href.remove('/pages/login.html'),
-         window.location.href.replace('3333', '3001/index.html')
+        const ipAtual = window.location.hostname;
+        window.location.href = `http://${ipAtual}:3001/index.html`;
     }else{
         if(login2.checked){
             console.log("função cnpj")
