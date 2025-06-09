@@ -34,7 +34,7 @@ function cadastroEmpresa(){
 
     console.log('Dados que serão enviados para a API:', dadosParaApi);
     
-    const urlApi = `http://localhost:3333/empresas/cadastrar`;
+    const urlApi = `/empresas/cadastrar`;
 
     fetch(urlApi, {
         method: "POST",

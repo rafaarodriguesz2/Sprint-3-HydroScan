@@ -7,7 +7,7 @@ function cadastrarsensor(modeloSensor, localInstalação, dataInstalação, Repr
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO sensor (modelo, local_instalacao, data_instalacao, nome_represa) VALUES ('${modeloSensor}', '${localInstalação}',STR_TO_DATE('${dataInstalação}', '%Y-%m-%d'), '${Represa}');
+        INSERT INTO Sensor (modelo, local_instalacao, data_instalacao, nome_represa) VALUES ('${modeloSensor}', '${localInstalação}',STR_TO_DATE('${dataInstalação}', '%Y-%m-%d'), '${Represa}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
