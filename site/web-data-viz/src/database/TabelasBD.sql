@@ -16,12 +16,9 @@ CREATE TABLE Empresa (
     key (Codigo_empresa)
 );
 
-
-
 INSERT INTO Empresa (CNPJ, Nome, Endereco, Telefone, Email, Codigo_empresa, senha) VALUES
 ('14349678000100', 'Itaipu Geração', 'Rua das Águas, 100 - Foz do Iguaçu', '11990933799', 'contato@itaipu.com.br', 'EBC4K-2F', 'Itaipu'),
 ('45993432000188', 'EcoPower Soluções', 'Av. Sustentável, 500 - Belo Horizonte', '11922490747', 'suporte@ecopower.com', 'AB92KL-9J', 'EcoPower');
-
 
 -- TABELA: Usuario
 CREATE TABLE Usuario (
@@ -59,7 +56,9 @@ CREATE TABLE Represa (
 
 INSERT INTO Represa (Nome, Localizacao, Vazao, altura_queda_agua, rendimento_medio, fkCodigo_empresa, data_cadastro) VALUES
 ('Represa Azul', 'Vale das Águas, SP', 800, 90, 0.82, 'EBC4K-2F', NOW()),
-('Represa Verde', 'Montanhas Azuis, MG', 650, 0.75, 0.7, 'AB92KL-9J', NOW());
+('Represa Verde', 'Montanhas Azuis, MG', 650, 0.75, 0.7, 'AB92KL-9J', NOW()),
+('Represa Roxa', 'Vale das Águas, SP', 750, 100, 0.8, 'EBC4K-2F', NOW()),
+('Represa Marrom', 'Montanhas Azuis, MG', 700, 90, 0.75, 'AB92KL-9J', NOW());
 
 
 -- TABELA: Sensor
@@ -75,6 +74,7 @@ CREATE TABLE if not exists Sensor (
 
 INSERT INTO Sensor (modelo, status, local_instalacao, nome_represa, data_instalacao) VALUES
 ('HC-SR04', 'ativo', 'Entrada Norte', 'Represa Azul', NOW()),
+('HC-SR04', 'ativo', 'Entrada Norte', 'Represa Roxa', NOW()),
 ('MB7360', 'ativo', 'Centro Hidráulico', 'Represa Verde', NOW());
 
 
@@ -89,15 +89,27 @@ CREATE TABLE Leitura (
 );
 
 INSERT INTO Leitura (idSensor, data_hora, nivel_agua_m, status_geracao) VALUES
+-- Sensor 1
 (1, NOW(), 42.50, 'gerando'),
 (1, NOW() - INTERVAL 1 DAY, 41.80, 'gerando'),
-(2, NOW(), 35.20, 'parada');
+(1, NOW() - INTERVAL 2 DAY, 40.90, 'parada'),
+(1, NOW() - INTERVAL 3 DAY, 42.10, 'gerando'),
+(1, NOW() - INTERVAL 4 DAY, 41.30, 'gerando'),
+(1, NOW() - INTERVAL 5 DAY, 40.50, 'parada'),
+(1, NOW() - INTERVAL 6 DAY, 41.70, 'gerando'),
+(1, NOW() - INTERVAL 7 DAY, 41.10, 'gerando'),
+(1, NOW() - INTERVAL 8 DAY, 39.80, 'parada'),
 
-create table Api (
-idApi int primary key auto_increment,
-nivel_da_agua int
-);
-
+-- Sensor 2
+(2, NOW(), 35.20, 'parada'),
+(2, NOW() - INTERVAL 1 DAY, 34.80, 'parada'),
+(2, NOW() - INTERVAL 2 DAY, 34.20, 'gerando'),
+(2, NOW() - INTERVAL 3 DAY, 33.90, 'gerando'),
+(2, NOW() - INTERVAL 4 DAY, 34.50, 'parada'),
+(2, NOW() - INTERVAL 5 DAY, 33.70, 'parada'),
+(2, NOW() - INTERVAL 6 DAY, 34.10, 'gerando'),
+(2, NOW() - INTERVAL 7 DAY, 34.00, 'parada'),
+(2, NOW() - INTERVAL 8 DAY, 33.50, 'gerando');
 
 CREATE TABLE Suporte(
     id int auto_increment,
@@ -109,15 +121,11 @@ CREATE TABLE Suporte(
     primary key(id, apiKey)
 );
 
-select * from suporte;
-
+select * from Suporte;
 SELECT * FROM Empresa;
 SELECT * FROM Usuario;
 SELECT * FROM Represa;
 SELECT * FROM Leitura;
 SELECT * FROM Sensor;
-SELECT * FROM Api;
 
-INSERT INTO Represa (Nome, Localizacao, Vazao, altura_queda_agua, rendimento_medio, fkCodigo_empresa, data_cadastro) VALUES
-('Represa ROXA', 'Vale das Águas, SP', 750, 100, 0.8, 'EBC4K-2F', NOW()),
-('Represa MARROM', 'Montanhas Azuis, MG', 700, 90, 0.75, 'AB92KL-9J', NOW());
+truncate table leitura;
