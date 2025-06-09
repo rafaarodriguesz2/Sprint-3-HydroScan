@@ -34,9 +34,9 @@
     <p class="titulo"> Cadastro de Represas</p>
     <input type="text" id="ipt_nome" class="input" placeholder="Insira o nome da represa">
     <input type="text" id="ipt_localizacao" class="input" placeholder="Insira a localização da represa">
-    <input type="text" id="ipt_volume_maximo" class="input" placeholder="Insira o volume máximo da represa em M³">
-    <input type="text" id="ipt_volume_minimo" class="input" placeholder="Insira o volume mínimo da represa em M³">
-    <input type="text" id="ipt_potencia_maxima" class="input" placeholder="Insira a potência instalada em MW/h">
+    <input type="text" id="ipt_vazao" class="input" placeholder="Insira a vazão média da represa">
+    <input type="text" id="ipt_altura" class="input" placeholder="Insira altura de queda da água da represa em M">
+    <input type="text" id="ipt_rendimento" class="input" placeholder="Insira o rendimento médio da represa">
     <input type="text" id="ipt_cnpj" class="input" placeholder="Insira o código da empresa responsável">
     <button onclick="cadastroRepresa()">Cadastrar</button>
     <div class="div_resposta" id="div_resposta"></div>
@@ -91,19 +91,20 @@
   function cadastroRepresa() {
     const nome = document.getElementById("ipt_nome").value;
     const localizacao = document.getElementById("ipt_localizacao").value;
-    const volumeMaximo = document.getElementById("ipt_volume_maximo").value;
-    const volumeMinimo = document.getElementById("ipt_volume_minimo").value;
-    const potenciaMaxima = document.getElementById("ipt_potencia_maxima").value;
+    const vazao = document.getElementById("ipt_vazao").value;
+    const altura = document.getElementById("ipt_altura").value;
+    const rendimento = document.getElementById("ipt_rendimento").value;
     const cnpj = document.getElementById("ipt_cnpj").value;
+
 
     const divResposta = document.getElementById("div_resposta")
 
     const dadosParaApi = {
       nome: nome,                           // No controller: nome
       localizacao: localizacao,             // No controller: email   
-      volumeMaximo: Number(volumeMaximo),           // No controller: tipo_usuario
-      volumeMinimo: Number(volumeMinimo),           // No controller: Empresa_CNPJ (E, C, N, P, J maiúsculos)
-      potenciaMaxima: Number(potenciaMaxima),
+      vazao: Number(vazao),           // No controller: tipo_usuario
+      altura: Number(altura),           // No controller: Empresa_CNPJ (E, C, N, P, J maiúsculos)
+      rendimento: Number(rendimento),
       cnpj: cnpj
     };
 
