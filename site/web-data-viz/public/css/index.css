@@ -11,36 +11,36 @@
 }
 
 /* Configurações Padrões*/
-*{
-    margin:0px;
+* {
+    margin: 0px;
     padding: 0px;
     font-family: sans-serif;
 }
 
-body{
+body {
     background-color: var(--branco);
 }
 
 /* Configurações de cores */
-.azul-escuro{
+.azul-escuro {
     color: var(--azul-escuro);
 }
 
-.azul-claro{
+.azul-claro {
     color: var(--azul-claro);
 }
 
-.azul-claro2{
+.azul-claro2 {
     color: var(--azul-claro2);
 }
 
 /* Navbar */
-.navbar{
+.navbar {
     display: flex;
     flex-direction: row;
 }
 
-.navbar nav{
+.navbar nav {
     width: 100%;
     height: 60px;
     display: flex;
@@ -49,70 +49,82 @@ body{
     align-items: center;
 }
 
-.navbar a{
+.navbar a {
     color: var(--branco);
     text-decoration: none;
 }
 
 /* Lado Esquerdo*/
-.nav-esquerda{
+.nav-esquerda {
     display: flex;
     justify-content: flex-start;
     gap: 30px;
 }
 
-.img-logo{
+.img-logo {
     width: auto;
     height: 65px;
 }
 
 /* Lado Direito */
-.nav-direita{
+.nav-direita {
     display: flex;
     justify-content: flex-end;
 }
 
-.img-perfil{
+.img-perfil {
     width: 45px;
     height: 45px;
     margin: 10px;
 }
 
-/*Botão login e cadastro*/
-a.login, a.cadastrar {
+.cadastrar {
+    height: 40px;
+    width: 80px;
+    border: 1px solid;
+    border-color: #023a4d;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.cadastrar a {
+    font-size: 15px;
+    cursor: pointer;
+    pointer-events: auto;
+    z-index: 10;
+    position: relative;
+}
+
+.login {
     height: 40px;
     width: 80px;
     border-radius: 20px;
-    font-size: 15px;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
+    background-color: #023a4d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-left: 10px;
-    transition: background 0.3s, color 0.3s, border 0.3s;
-    border: 1px solid var(--azul-botao);
 }
 
-a.cadastrar {
-    color: var(--branco);
+.login a {
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+    pointer-events: auto;
+    z-index: 10;
+    position: relative;
 }
 
-
-a.login {
-    background: var(--azul-botao);
-    color: var(--branco);
-    border: 1px solid var(--azul-botao);
-}
 
 /* Body */
-.titulo-principal{
+.titulo-principal {
     font-size: 35px;
     position: absolute;
 }
 
-.container{
+.container {
     height: 70vh;
     width: 100%;
     display: flex;
@@ -122,27 +134,27 @@ a.login {
     background: var(--branco);
 }
 
-.conteudo-principal{
+.conteudo-principal {
     padding-left: 60px;
 }
 
-.conteudo-principal h2{
+.conteudo-principal h2 {
     font-size: 50px;
     padding-top: 60px;
 }
 
-.conteudo-principal p{
+.conteudo-principal p {
     text-align: justify;
     font-size: 17px;
     margin-right: 50px;
 }
 
-.paragrafo-azul{
+.paragrafo-azul {
     margin-top: 10px;
 }
 
 /* Div lado direito */
-.logo-principal{
+.logo-principal {
     height: 80vh;
     width: 100%;
     display: flex;
@@ -150,7 +162,7 @@ a.login {
     align-items: center;
 }
 
-.logo-principal img{
+.logo-principal img {
     margin-top: 100px;
     margin-right: 30px;
     width: 480px;
@@ -178,28 +190,30 @@ a.login {
     color: var(--azul-escuro);
 }
 
-      .suporte-float {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        width: 56px;
-        height: 56px;
-        background: var(--azul-claro2);
-        color: #fff;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        text-decoration: none;
-        z-index: 1000;
-        transition: background 0.2s;
-      }
-      .suporte-float:hover {
-        background: #172b4d;
-      }
-      .suporte-float span {
-        font-weight: bold;
-        font-family: Arial, sans-serif;
-      }
+.suporte-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    background: var(--azul-claro2);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    z-index: 1000;
+    transition: background 0.2s;
+}
+
+.suporte-float:hover {
+    background: #172b4d;
+}
+
+.suporte-float span {
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
