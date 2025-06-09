@@ -34,7 +34,7 @@ li {
 
 body {
     background: var(--cinza);
-    font-family: var(--fonte-padrao);
+    font-family: sans-serif;
     color: var(--preto);
 }
 
