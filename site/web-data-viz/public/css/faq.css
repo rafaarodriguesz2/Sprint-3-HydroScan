@@ -34,7 +34,7 @@ li {
 
 body {
     background: var(--cinza);
-    font-family: sans-serif;
+    font-family: var(--fonte-padrao);
     color: var(--preto);
 }
 
@@ -136,13 +136,13 @@ ul li {
     margin: 15px 0;
     padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(172, 60, 60, 0.1);
     transition: background-color 0.3s ease;
 }
 
 ul li:hover {
     background-color: var(--cinza);
-    color: var(--branco);
+    color: var(--azul);
 }
 
 ul li strong {
@@ -191,6 +191,7 @@ ul li strong {
 .faq:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 1000px;
 }
 
 /* Container principal das perguntas */
@@ -199,14 +200,14 @@ ul li strong {
     border-radius: 18px;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     padding: 32px 24px 24px 24px;
-    max-width: 1000px;
+    width: 1000px;
     position: static;
 }
 
 /* Título */
 .faq h2 {
     text-align: center;
-    color: #0c8ea1;
+    color: var(--azul);
     font-size: 2rem;
     margin-bottom: 28px;
     font-weight: 700;
@@ -231,8 +232,8 @@ ul li strong {
 }
 
 .faq details[open] {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
-    background: #eaf6fa;
+    box-shadow: 0 4px 160px rgba(0, 0, 0, 0.07);
+    background: var(--azul-claro);
 }
 
 /* Estilo do summary (pergunta) */
@@ -250,21 +251,12 @@ ul li strong {
 
 .faq details[open] summary {
     background: #d6f0f6;
-    color: #00c4cc;
+    color: var(--azul);
 }
 
 /* Remove o triângulo padrão do summary */
 .faq summary::-webkit-details-marker {
     display: none;
-}
-
-/* Resposta */
-.faq details p {
-    padding: 0 20px 16px 44px;
-    color: #333;
-    font-size: 1rem;
-    line-height: 1.6;
-    margin: 0;
 }
 
 /* Responsividade */
@@ -386,7 +378,7 @@ p#mensagem {
     right: 24px;
     width: 56px;
     height: 56px;
-    background: #0052cc;
+    background: var(--azul);
     color: #fff;
     border-radius: 50%;
     display: flex;
@@ -412,14 +404,14 @@ p#mensagem {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 20px; /* Reduziu de 40px para 20px */
+    gap: 150px;
     margin-top: 40px;
     margin-bottom: 40px;
 }
 
 .empresa-info {
     min-width: 320px;
-    max-width: 350px;
+    max-width: 30px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -431,6 +423,7 @@ p#mensagem {
     box-shadow: 0 4px 24px rgba(0,0,0,0.08);
     padding: 32px 24px 24px 24px;
     text-align: center;
+
 }
 
 .empresa-logo {
@@ -439,7 +432,7 @@ p#mensagem {
 }
 
 .empresa-card h3 {
-    color: #0c8ea1;
+    color: var(--azul);
     margin-bottom: 10px;
     font-size: 1.3rem;
     font-weight: 700;
@@ -473,7 +466,7 @@ p#mensagem {
 }
 
 .empresa-contato i {
-    color: #00c4cc;
+    color: var(--azul);
     margin-right: 6px;
 }
 

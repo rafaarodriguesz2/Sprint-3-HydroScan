@@ -99,19 +99,11 @@ a.cadastrar {
     color: var(--branco);
 }
 
-a.cadastrar:hover {
-    background: var(--azul-botao);
-    color: var(--branco);
-}
 
 a.login {
     background: var(--azul-botao);
     color: var(--branco);
     border: 1px solid var(--azul-botao);
-}
-a.login:hover {
-    background: var(--azul-hover);
-    border-color: var(--azul-hover);
 }
 
 /* Body */
@@ -192,7 +184,7 @@ a.login:hover {
         right: 24px;
         width: 56px;
         height: 56px;
-        background: #0052cc;
+        background: var(--azul-claro2);
         color: #fff;
         border-radius: 50%;
         display: flex;
