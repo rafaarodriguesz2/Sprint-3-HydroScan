@@ -74,10 +74,10 @@ function autenticar(req, res) {
                             } else {
                                 res.status(200).json({
                                     idUsuario: resultado[0].idUsuario,
-                                    Nome: resultado[0].Nome,
-                                    CNPJ: resultado[0].CNPJ,
-                                    Email: resultado[0].Email,
-                                    fkCodigo_empresa: resultado[0].fkCodigo_empresa,
+                                    nome: resultado[0].Nome,
+                                    cnpj: resultado[0].CNPJ,
+                                    email: resultado[0].Email,
+                                    codigo: resultado[0].fkCodigo_empresa,
                                     
                                 });
                             }
