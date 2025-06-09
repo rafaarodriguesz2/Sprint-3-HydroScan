@@ -49,17 +49,17 @@ CREATE TABLE Represa (
     idRepresa INT AUTO_INCREMENT PRIMARY KEY,
     Nome VARCHAR(100) unique key,
     Localizacao VARCHAR(200),
-    VolumeMaximo DECIMAL(10,2),
-    VolumeMinimo DECIMAL(10,2),
-    potencia_max_kw DECIMAL(10,2),
+    Vazao DECIMAL(10,2),
+    altura_queda_agua DECIMAL(10,2),
+    rendimento_medio DECIMAL(10,2),
     fkCodigo_empresa VARCHAR(14),
-    data_cadastro DATETIME,
+    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_represa_codigoEmpresa FOREIGN KEY (fkCodigo_empresa) REFERENCES Empresa(Codigo_empresa)
 );
 
-INSERT INTO Represa (Nome, Localizacao, VolumeMaximo, VolumeMinimo, potencia_max_kw, fkCodigo_empresa, data_cadastro) VALUES
-('Represa Azul', 'Vale das Águas, SP', 1991340.00, 209200.00, 5000.00, 'EBC4K-2F', NOW()),
-('Represa Verde', 'Montanhas Azuis, MG', 866730.00, 150700.00, 4000.00, 'AB92KL-9J', NOW());
+INSERT INTO Represa (Nome, Localizacao, Vazao, altura_queda_agua, rendimento_medio, fkCodigo_empresa, data_cadastro) VALUES
+('Represa Azul', 'Vale das Águas, SP', 800, 90, 0.82, 'EBC4K-2F', NOW()),
+('Represa Verde', 'Montanhas Azuis, MG', 650, 0.75, 0.7, 'AB92KL-9J', NOW());
 
 
 -- TABELA: Sensor
@@ -118,6 +118,6 @@ SELECT * FROM Leitura;
 SELECT * FROM Sensor;
 SELECT * FROM Api;
 
-INSERT INTO Represa (Nome, Localizacao, VolumeMaximo, VolumeMinimo, potencia_max_kw, fkCodigo_empresa, data_cadastro) VALUES
-('Represa ROXA', 'Vale das Águas, SP', 1991340.00, 209200.00, 5000.00, 'EBC4K-2F', NOW()),
-('Represa MARROM', 'Montanhas Azuis, MG', 866730.00, 150700.00, 4000.00, 'AB92KL-9J', NOW());
+INSERT INTO Represa (Nome, Localizacao, Vazao, altura_queda_agua, rendimento_medio, fkCodigo_empresa, data_cadastro) VALUES
+('Represa ROXA', 'Vale das Águas, SP', 750, 100, 0.8, 'EBC4K-2F', NOW()),
+('Represa MARROM', 'Montanhas Azuis, MG', 700, 90, 0.75, 'AB92KL-9J', NOW());

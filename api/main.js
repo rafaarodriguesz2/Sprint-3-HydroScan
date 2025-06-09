@@ -16,11 +16,11 @@ const serial = async (valoresSensorDigital) => {
     // conexão com o banco de dados MySQL
     const poolBancoDados = mysql.createPool(
         {
-    host: 'localhost',
+    host: '10.18.32.50',
     user: 'aluno',
-    password: 'sptech',
+    password: 'Sptech#2024',
     database: 'hydroscan',
-    port: 3306
+    port: 3307
 }).promise();
 
     // lista as portas seriais disponíveis e procura pelo Arduino
