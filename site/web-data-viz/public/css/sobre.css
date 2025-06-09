@@ -17,7 +17,6 @@
 
 /* Body */
 body {
-    font-family: Poppins;
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
     line-height: 1.6;

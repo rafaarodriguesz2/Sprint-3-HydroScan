@@ -96,9 +96,9 @@ a.login, a.cadastrar {
 }
 
 a.cadastrar {
-    background: var(--branco);
-    color: var(--azul-botao);
+    color: var(--branco);
 }
+
 a.cadastrar:hover {
     background: var(--azul-botao);
     color: var(--branco);

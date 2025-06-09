@@ -15,15 +15,19 @@
       <a onclick="sair()">
         <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
       </a>
-      <a href="../pages/cadastrarFuncionarios.html" id="a-funcionarios" class="hide">Cadastrar Funcionários</a>
-      <a href="../pages/cadastrarRepresas.html" id="a-represa" class="hide">Cadastrar Represas</a>
-      <a href="../pages/cadastrarSensor.html" id="a-sensor" class="hide">Cadastrar Sensor</a>
-      <a href="../dashboard/dash.html" id="a-dash" class="hide">Dashboards</a>
-      <a href="./perguntas.html" id="a-faq" class="agora hide">FAQ</a>
+      <a href="../pages/calculadora.html">Calculadora</a>
+      <a href="../pages/sobre_nos.html">Sobre Nós</a>
+      <a href="../pages/perguntas.html">FAQ</a>
     </nav>
     <nav class="nav-direita">
-      <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
-    </nav>
+            <div class="cadastrar">
+                <a href="../pages/cadastrar.html">Cadastrar</a>
+            </div>
+            <div class="login">
+                <a href="../pages/login.html">Login</a>
+            </div>
+            <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
+        </nav>
   </header>
 
   <div class="faq-page-wrapper">
@@ -33,7 +37,8 @@
         <h2>Perguntas Frequentes</h2>
         <details>
           <summary>Como funciona o HydroScan?</summary>
-          <p>O HydroScan utiliza sensores ultrassônicos para monitorar o nível da água em tempo real e apresenta os dados
+          <p>O HydroScan utiliza sensores ultrassônicos para monitorar o nível da água em tempo real e apresenta os
+            dados
             em uma plataforma web interativa.</p>
         </details>
         <details>
@@ -51,7 +56,8 @@
         </details>
         <details>
           <summary>Os dados ficam salvos por quanto tempo?</summary>
-          <p>Os dados ficam armazenados de forma segura e podem ser consultados a qualquer momento pelo painel do sistema.
+          <p>Os dados ficam armazenados de forma segura e podem ser consultados a qualquer momento pelo painel do
+            sistema.
           </p>
         </details>
 
@@ -76,7 +82,8 @@
         <img src="../img/Logo.png" alt="Logo HydroScan" class="empresa-logo">
         <h3>Sobre a HydroScan</h3>
         <p>
-          A <strong>HydroScan</strong> é uma solução inovadora para monitoramento e gestão de usinas hidrelétricas, focada em eficiência, sustentabilidade e tecnologia de ponta.
+          A <strong>HydroScan</strong> é uma solução inovadora para monitoramento e gestão de usinas hidrelétricas,
+          focada em eficiência, sustentabilidade e tecnologia de ponta.
         </p>
         <ul>
           <li>Monitoramento em tempo real</li>
@@ -94,40 +101,6 @@
 
   <script src="./JS/perguntas.js"></script>
   <script>
-    let navSensor = document.getElementById("a-sensor")
-    let navRepresas = document.getElementById("a-represa")
-    let navFuncionarios = document.getElementById("a-funcionarios")
-    let navDash = document.getElementById("a-dash")
-    let navFaq = document.getElementById("a-faq")
-
-    window.onload = nivelDeAcesso();
-
-    function nivelDeAcesso() {
-      console.log("chegou aqui ")
-      if (sessionStorage.NIVEL_ACESSO == 1) {
-        navSensor.classList.remove("hide")
-        navDash.classList.remove("hide")
-        navFaq.classList.remove("hide")
-      } else if (sessionStorage.NIVEL_ACESSO == 2) {
-        navSensor.classList.remove("hide")
-        navRepresas.classList.remove("hide")
-        navDash.classList.remove("hide")
-        navFaq.classList.remove("hide")
-      } else if (sessionStorage.NIVEL_ACESSO == 3) {
-        navSensor.classList.remove("hide")
-        navRepresas.classList.remove("hide")
-        navFuncionarios.classList.remove("hide")
-        navDash.classList.remove("hide")
-        navFaq.classList.remove("hide")
-      } else {
-        navSensor.classList.remove("hide")
-        navRepresas.classList.remove("hide")
-        navFuncionarios.classList.remove("hide")
-        navDash.classList.remove("hide")
-        navFaq.classList.remove("hide")
-      }
-    }
-
     function sair() {
       sessionStorage.clear()
       window.location = "../index.html"

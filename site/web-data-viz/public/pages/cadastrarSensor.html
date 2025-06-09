@@ -22,7 +22,6 @@
       <a href="./cadastrarRepresas.html" id="a-represa" class="hide">Cadastrar Represas</a>
       <a href="./cadastrarSensor.html" class="agora hide" id="a-sensor">Cadastrar Sensor</a>
       <a href="../dashboard/dash.html" id="a-dash" class="hide">Dashboards</a>
-      <a href="../pages/perguntas.html" id="a-faq" class="hide">FAQ</a>
     </nav>
     <nav class="nav-direita">
       <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
@@ -52,7 +51,6 @@
   let navRepresas = document.getElementById("a-represa")
   let navFuncionarios = document.getElementById("a-funcionarios")
   let navDash = document.getElementById("a-dash")
-  let navFaq = document.getElementById("a-faq")
 
   window.onload = nivelDeAcesso();
 
@@ -61,24 +59,20 @@
     if (sessionStorage.NIVEL_ACESSO == 1) {
       navSensor.classList.remove("hide")
       navDash.classList.remove("hide")
-      navFaq.classList.remove("hide")
     } else if (sessionStorage.NIVEL_ACESSO == 2) {
       navSensor.classList.remove("hide")
       navRepresas.classList.remove("hide")
       navDash.classList.remove("hide")
-      navFaq.classList.remove("hide")
     } else if (sessionStorage.NIVEL_ACESSO == 3) {
       navSensor.classList.remove("hide")
       navRepresas.classList.remove("hide")
       navFuncionarios.classList.remove("hide")
       navDash.classList.remove("hide")
-      navFaq.classList.remove("hide")
     } else {
       navSensor.classList.remove("hide")
       navRepresas.classList.remove("hide")
       navFuncionarios.classList.remove("hide")
       navDash.classList.remove("hide")
-      navFaq.classList.remove("hide")
     }
   }
 

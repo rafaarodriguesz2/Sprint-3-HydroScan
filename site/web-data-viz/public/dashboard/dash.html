@@ -26,7 +26,6 @@
             <a href="../pages/cadastrarRepresas.html" class="hide" id="a-represa">Cadastrar Represas</a>
             <a href="../pages/cadastrarSensor.html" class="hide" id="a-sensor">Cadastrar Sensor</a>
             <a href="./dash.html" class="hide" id="a-dash"><b>Dashboards</b></a>
-            <a href="../pages/perguntas.html" class="hide" id="a-faq">FAQ</a>
         </nav>
         <nav class="nav-direita">
             <img class="img-perfil" src="../img/icone-perfil.png" alt="icone do perfil">
@@ -145,7 +144,6 @@
     let navRepresas = document.getElementById("a-represa")
     let navFuncionarios = document.getElementById("a-funcionarios")
     let navDash = document.getElementById("a-dash")
-    let navFaq = document.getElementById("a-faq")
     let ultimaMedida;
     let qtdRepresas;
     let represasKPI = {}
@@ -160,24 +158,20 @@
         if (sessionStorage.NIVEL_ACESSO == 1) {
             navSensor.classList.remove("hide")
             navDash.classList.remove("hide")
-            navFaq.classList.remove("hide")
         } else if (sessionStorage.NIVEL_ACESSO == 2) {
             navSensor.classList.remove("hide")
             navRepresas.classList.remove("hide")
             navDash.classList.remove("hide")
-            navFaq.classList.remove("hide")
         } else if (sessionStorage.NIVEL_ACESSO == 3) {
             navSensor.classList.remove("hide")
             navRepresas.classList.remove("hide")
             navFuncionarios.classList.remove("hide")
             navDash.classList.remove("hide")
-            navFaq.classList.remove("hide")
         } else {
             navSensor.classList.remove("hide")
             navRepresas.classList.remove("hide")
             navFuncionarios.classList.remove("hide")
             navDash.classList.remove("hide")
-            navFaq.classList.remove("hide")
         }
     }
 
