@@ -191,6 +191,7 @@ ul li strong {
 .faq:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 1000px;
 }
 
 /* Container principal das perguntas */
@@ -199,7 +200,7 @@ ul li strong {
     border-radius: 18px;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     padding: 32px 24px 24px 24px;
-    max-width: 1000px;
+    width: 1000px;
     position: static;
 }
 
@@ -231,7 +232,7 @@ ul li strong {
 }
 
 .faq details[open] {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 4px 160px rgba(0, 0, 0, 0.07);
     background: #eaf6fa;
 }
 
@@ -412,14 +413,14 @@ p#mensagem {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 20px; /* Reduziu de 40px para 20px */
+    gap: 60px;
     margin-top: 40px;
     margin-bottom: 40px;
 }
 
 .empresa-info {
     min-width: 320px;
-    max-width: 350px;
+    max-width: 35px;
     width: 100%;
     display: flex;
     justify-content: center;
