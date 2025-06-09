@@ -2,7 +2,7 @@ var represaModel =require("../models/represaModel")
 
 function cadastrarRepresa(req, res){
 
-    const { nome, localizacao, volumeMaximo, volumeMinimo, potenciaMaxima, cnpj} = req.body;
+    const { nome, localizacao, vazao, altura, rendimento, cnpj} = req.body;
 
     // Validando se os campos estão preenchidos
     if (!nome) {
@@ -11,14 +11,14 @@ function cadastrarRepresa(req, res){
     if (!localizacao) {
         return res.status(400).json({ mensagem: "O campo Localização é obrigatório." });
     }
-    if (!volumeMaximo) {
-        return res.status(400).json({ mensagem: "O campo VolumeMáximo é obrigatório." });
+    if (!vazao) {
+        return res.status(400).json({ mensagem: "O campo vazão média é obrigatório." });
     }
-    if (!volumeMinimo) {
-        return res.status(400).json({ mensagem: "O campo VolumeMínimo Temporária é obrigatório." });
+    if (!altura) {
+        return res.status(400).json({ mensagem: "O campo Altura da queda de água Temporária é obrigatório." });
     }
-    if (!potenciaMaxima) {
-        return res.status(400).json({ mensagem: "O campo PotenciaMáxima da Empresa é obrigatório." });
+    if (!rendimento) {
+        return res.status(400).json({ mensagem: "O campo Rendimento médio da Empresa é obrigatório." });
     }
     if (!cnpj) {
         return res.status(400).json({ mensagem: "O campo Cnpj da Empresa é obrigatório." });
