@@ -207,7 +207,7 @@ ul li strong {
 /* Título */
 .faq h2 {
     text-align: center;
-    color: #0c8ea1;
+    color: var(--azul);
     font-size: 2rem;
     margin-bottom: 28px;
     font-weight: 700;
@@ -466,7 +466,7 @@ p#mensagem {
 }
 
 .empresa-contato i {
-    color: #00c4cc;
+    color: var(--azul);
     margin-right: 6px;
 }
 
