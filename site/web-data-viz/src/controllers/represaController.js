@@ -2,7 +2,7 @@ var represaModel =require("../models/represaModel")
 
 function cadastrarRepresa(req, res){
 
-    const { nome, localizacao, vazao, altura, rendimento, cnpj} = req.body;
+    const { nome, localizacao, vazao, altura, rendimento, codigo} = req.body;
 
     // Validando se os campos estão preenchidos
     if (!nome) {
@@ -20,18 +20,18 @@ function cadastrarRepresa(req, res){
     if (!rendimento) {
         return res.status(400).json({ mensagem: "O campo Rendimento médio da Empresa é obrigatório." });
     }
-    if (!cnpj) {
-        return res.status(400).json({ mensagem: "O campo Cnpj da Empresa é obrigatório." });
+    if (!codigo){
+        return res.status(400).json({ mensagem: "O código da Empresa esta undefined." });
     }
 
     // Se chegou até aqui, os dados básicos são válidos.
     // Podemos logar que a validação passou e manter o placeholder de resposta.
     console.log("Validação básica dos dados do funcionário passou.");
-    console.log("Dados validados:", { nome, localizacao, volumeMaximo, volumeMinimo, potenciaMaxima, cnpj });
+    console.log("Dados validados:", { nome, localizacao, vazao, altura, rendimento, codigo });
 
     // 4. Chamar a função do model para salvar no banco
 
-    represaModel.cadastrarRepresa(nome, localizacao, volumeMaximo, volumeMinimo, potenciaMaxima, cnpj) 
+    represaModel.cadastrarRepresa(nome, localizacao, vazao, altura, rendimento, codigo) 
     .then(
         function (resultado) {
             // Se o cadastro no banco foi bem-sucedido
@@ -48,7 +48,7 @@ function cadastrarRepresa(req, res){
             // É uma boa prática não expor detalhes do erro do SQL diretamente ao cliente em produção,
             // mas para desenvolvimento pode ser útil.
             res.status(500).json({ 
-                mensagem: "Erro interno ao Represa funcionário. Por favor, tente novamente.", 
+                mensagem: "Erro interno ao cadastrar represa. Por favor, tente novamente.", 
                 erro: erro.sqlMessage 
             });
         }

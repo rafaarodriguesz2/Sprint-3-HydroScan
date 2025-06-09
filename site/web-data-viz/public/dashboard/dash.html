@@ -227,7 +227,7 @@
             </div>
             
             <div class = "card-grafico">
-                <h2>Energia gerada (kW)</h2>
+                <h2>Energia gerada (MW/s)</h2>
                 <div class="graph">
                         <canvas id="myChartCanvas2${item.idRepresa}"></canvas>
                 </div>
@@ -237,8 +237,9 @@
             </div>
             </div>
     </details>
-        `};
-        represasKPI[represaDaVez] = 'normal';
+        `
+        represasKPI[represaDaVez] = 'normal';};
+        
     }
 
     function obterDadosGrafico(idRepresaClickada, nomeRepresa) {
@@ -508,7 +509,7 @@
                     elementoStatus.innerHTML = "Atenção";
                 } else {
                     elementoStatus.classList.add("normal"); // ou "normal" se preferir
-                    elementoStatus.innerHTML = "Adequado";
+                    elementoStatus.innerHTML = "Normal";
                 }
             }
         }
@@ -524,12 +525,18 @@
                     let informacoesRepresas = JSON.stringify(resposta)
                     informacoesRepresas = JSON.parse(informacoesRepresas)
 
-                    volumeMaximo = informacoesRepresas[0].VolumeMaximo
-                    volumeMinimo = informacoesRepresas[0].VolumeMinimo
-                    potenciaMaxima = informacoesRepresas[0].potencia_max_kw
+                    console.log('Informações da represa para calcular a energia gerada', informacoesRepresas);
+                    
 
-                    energiaGerada = ((nivelDaAguaAtual / 100) * volumeMaximo) * potenciaMaxima / 10000
+                    vazao = Number(informacoesRepresas[0].Vazao)
+                    altura_queda_agua = Number(informacoesRepresas[0].altura_queda_agua)
+                    rendimento = Number(informacoesRepresas[0].rendimento_medio)
 
+                    console.log('Vazão: ', vazao, 'altura: ', altura_queda_agua, 'rendimento: ', rendimento);
+        
+                    energiaGerada = (1000 * 10 * vazao * nivelDaAguaAtual * rendimento / 1000000 / 2)
+                    console.log('Energia gerada: ', energiaGerada);
+                    
 
                     // console.log(volumeMaximo)
                     // console.log(volumeMinimo)

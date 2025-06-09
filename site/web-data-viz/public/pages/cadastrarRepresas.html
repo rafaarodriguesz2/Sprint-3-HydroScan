@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de funcionarios</title>
+  <title>Cadastro de represa</title>
   <link rel="stylesheet" href="../css/cadastrarFuncionarioRepresas.css">
   <!-- Boxicons CSS -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -33,10 +33,9 @@
     <p class="titulo"> Cadastro de Represas</p>
     <input type="text" id="ipt_nome" class="input" placeholder="Insira o nome da represa">
     <input type="text" id="ipt_localizacao" class="input" placeholder="Insira a localização da represa">
-    <input type="text" id="ipt_vazao" class="input" placeholder="Insira a vazão média da represa">
-    <input type="text" id="ipt_altura" class="input" placeholder="Insira altura de queda da água da represa em M">
-    <input type="text" id="ipt_rendimento" class="input" placeholder="Insira o rendimento médio da represa">
-    <input type="text" id="ipt_cnpj" class="input" placeholder="Insira o código da empresa responsável">
+    <input type="text" id="ipt_vazao" class="input" placeholder="Insira a vazão média da represa em m³/s">
+    <input type="text" id="ipt_altura" class="input" placeholder="Insira altura de queda da represa em M">
+    <input type="text" id="ipt_rendimento" class="input" placeholder="Insira o rendimento médio da represa em decimal">
     <button onclick="cadastroRepresa()">Cadastrar</button>
     <div class="div_resposta" id="div_resposta"></div>
   </div>
@@ -88,7 +87,7 @@
     const vazao = document.getElementById("ipt_vazao").value;
     const altura = document.getElementById("ipt_altura").value;
     const rendimento = document.getElementById("ipt_rendimento").value;
-    const cnpj = document.getElementById("ipt_cnpj").value;
+    const codigo = sessionStorage.getItem('CODIGO')
 
 
     const divResposta = document.getElementById("div_resposta")
@@ -99,7 +98,7 @@
       vazao: Number(vazao),           // No controller: tipo_usuario
       altura: Number(altura),           // No controller: Empresa_CNPJ (E, C, N, P, J maiúsculos)
       rendimento: Number(rendimento),
-      cnpj: cnpj
+      codigo: codigo
     };
 
     console.log('Dados que serão enviados para a API:', dadosParaApi);
@@ -136,10 +135,9 @@
         // Opcional: Limpar o formulário após o sucesso
         document.getElementById("ipt_nome").value = "";
         document.getElementById("ipt_localizacao").value = "";
-        document.getElementById("ipt_volume_maximo").value = "";
-        document.getElementById("ipt_volume_minimo").value = "";
-        document.getElementById("ipt_potencia_maxima").value = "";
-        document.getElementById("ipt_cnpj").value = "";
+        document.getElementById("ipt_vazao").value = "";
+        document.getElementById("ipt_altura").value = "";
+        document.getElementById("ipt_rendimento").value = "";
       })
       .catch(error => {
         // Este catch pega erros da rede (ex: servidor offline) ou o erro lançado do .then() anterior
