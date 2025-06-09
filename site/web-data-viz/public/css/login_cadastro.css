@@ -155,3 +155,24 @@ input:checked + .button::before{
 #chk_mudarLogin{
   display: none;
 }
+input:focus {
+  outline: none; 
+  box-shadow: none;
+}
+p {
+  font-size: 1rem;
+  color: #333;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+p a {
+  color: #0c8ea1;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+p a:hover {
+  text-decoration: underline;
+  color: #007b8f;
+}
