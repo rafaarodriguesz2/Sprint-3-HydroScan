@@ -112,7 +112,13 @@
 
     </section>
 
-
+    <!-- Botão flutuante de suporte -->
+    <a href="https://hydroscan05.atlassian.net/servicedesk/customer/portal/34" 
+       target="_blank" 
+       class="suporte-float" 
+       title="Ir para o Suporte">
+      <span>?</span>
+    </a>
 
 
     <footer class="footer">
@@ -210,10 +216,10 @@
 
         <div class="container-card-grafico">
             <div class="card-grafico">
-            <h2>Volume de Água Atual</h2>
-            <div id="grafico${item.idRepresa}" class="display-none">
-                <h3 class="tituloGraficos">
-                </h3>
+                <h2>Nível da água atual (m³)</h2>
+                <div id="grafico${item.idRepresa}" class="display-none">
+                    <h3 class="tituloGraficos">
+                    </h3>
                     <div class="graph">
                         <canvas id="myChartCanvas${item.idRepresa}"></canvas>
                     </div>
@@ -227,7 +233,7 @@
             </div>
             
             <div class = "card-grafico">
-                <h2>Produção de energia</h2>
+                <h2>Energia gerada (kW)</h2>
                 <div class="graph">
                         <canvas id="myChartCanvas2${item.idRepresa}"></canvas>
                 </div>

@@ -16,8 +16,8 @@
       <a onclick="sair()">
         <img class="img-logo" src="../img/Logo-pequena.png" alt="Logo da empresa">
       </a>
-      <a href="../pages/cadastrarFuncionarios.html" id="a-funcionarios" class="hide" >Cadastrar Funcionários</a>
-      <a href="../pages/cadastrarRepresas.html" id="a-represa" class="hide" >Cadastrar Represas</a>
+      <a href="../pages/cadastrarFuncionarios.html" id="a-funcionarios" class="hide">Cadastrar Funcionários</a>
+      <a href="../pages/cadastrarRepresas.html" id="a-represa" class="hide">Cadastrar Represas</a>
       <a href="../pages/cadastrarSensor.html" id="a-sensor" class="hide">Cadastrar Sensor</a>
       <a href="../dashboard/dash.html" id="a-dash" class="hide">Dashboards</a>
       <a href="./perguntas.html" id="a-faq" class="agora hide">FAQ</a>
@@ -27,34 +27,73 @@
     </nav>
   </header>
 
-  <div class="container-perguntas">
-    <div class="formulario">
-      <h2>Envie sua pergunta</h2>
-      <form id="formPerguntas">
-        <label for="inputPergunta">Sua pergunta:</label>
-        <textarea id="inputPergunta" rows="4" placeholder="Digite sua pergunta aqui..."></textarea>
-        <button type="button" onclick="enviarPergunta()">Enviar</button>
-      </form>
-      <p id="mensagemEnvio"></p>
+  <div class="faq-page-wrapper">
+    <div class="container-perguntas">
+      <!-- Perguntas frequentes -->
+      <div class="faq">
+        <h2>Perguntas Frequentes</h2>
+        <details>
+          <summary>Como funciona o HydroScan?</summary>
+          <p>O HydroScan utiliza sensores ultrassônicos para monitorar o nível da água em tempo real e apresenta os dados
+            em uma plataforma web interativa.</p>
+        </details>
+        <details>
+          <summary>Como acessar os relatórios de energia?</summary>
+          <p>Os relatórios podem ser acessados na área de dashboards, onde estão disponíveis gráficos e históricos de
+            produção de energia.</p>
+        </details>
+        <details>
+          <summary>É possível cadastrar mais de uma represa?</summary>
+          <p>Sim, o sistema permite o cadastro e gerenciamento de múltiplas represas e sensores.</p>
+        </details>
+        <details>
+          <summary>Como entro em contato com o suporte?</summary>
+          <p>Você pode clicar no botão de suporte no canto da tela ou enviar um e-mail para sac@hydroscan.com.</p>
+        </details>
+        <details>
+          <summary>Os dados ficam salvos por quanto tempo?</summary>
+          <p>Os dados ficam armazenados de forma segura e podem ser consultados a qualquer momento pelo painel do sistema.
+          </p>
+        </details>
+
+        <details>
+          <summary>Existe treinamento para novos usuários?</summary>
+          <p>Sim, oferecemos materiais de apoio e vídeos tutoriais na área de ajuda do sistema.</p>
+        </details>
+        <details>
+          <summary>Como posso visualizar o histórico de medições?</summary>
+          <p>O histórico de medições está disponível na dashboard, com gráficos detalhados por período.</p>
+        </details>
+        <details>
+          <summary>O sistema emite alertas automáticos?</summary>
+          <p>Sim, o HydroScan pode emitir alertas automáticos em caso de níveis críticos de água ou falhas nos sensores.
+          </p>
+        </details>
+      </div>
     </div>
 
-    <!-- Perguntas frequentes -->
-    <div class="faq">
-      <h2>Perguntas Frequentes</h2>
-      <details>
-        <summary>Como faço para enviar uma pergunta?</summary>
-        <p>Você pode enviar uma pergunta utilizando o campo de texto ao lado e clicando no botão "Enviar".</p>
-      </details>
-      <details>
-        <summary>Onde posso ver as perguntas enviadas?</summary>
-        <p>As perguntas enviadas podem ser visualizadas na seção de perguntas do site.</p>
-      </details>
-      <details>
-        <summary>O que acontece se minha pergunta não for enviada?</summary>
-        <p>Se sua pergunta não for enviada, verifique sua conexão com a internet ou tente novamente mais tarde.</p>
-      </details>
+    <div class="empresa-info">
+      <div class="empresa-card">
+        <img src="../img/Logo.png" alt="Logo HydroScan" class="empresa-logo">
+        <h3>Sobre a HydroScan</h3>
+        <p>
+          A <strong>HydroScan</strong> é uma solução inovadora para monitoramento e gestão de usinas hidrelétricas, focada em eficiência, sustentabilidade e tecnologia de ponta.
+        </p>
+        <ul>
+          <li>Monitoramento em tempo real</li>
+          <li>Alertas automáticos de segurança</li>
+          <li>Relatórios detalhados e exportação de dados</li>
+          <li>Plataforma responsiva e fácil de usar</li>
+        </ul>
+        <div class="empresa-contato">
+          <p><strong>Contato:</strong></p>
+          <p><i class="bx bx-envelope"></i> hydscan@hydroscan05.atlassian.net</p>
+          <p><i class="bx bx-globe"></i> www.hydroscan.com</p>
+        </div>
+      </div>
     </div>
   </div>
+
   <script src="./JS/perguntas.js"></script>
   <script>
     let navSensor = document.getElementById("a-sensor")
@@ -133,6 +172,13 @@
     }
 
   </script>
+
+  <!-- Botão flutuante de suporte -->
+  <a href="https://hydroscan05.atlassian.net/servicedesk/customer/portal/34" target="_blank" class="suporte-float"
+    title="Ir para o Suporte">
+    <span>?</span>
+  </a>
+
 </body>
 
 </html>

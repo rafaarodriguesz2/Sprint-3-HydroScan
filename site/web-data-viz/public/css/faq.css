@@ -39,11 +39,11 @@ body {
 }
 
 /* ------------------ BARRA DE NAVEGAÇÃO ------------------ */
-.agora{
+.agora {
     font-weight: bold;
 }
 
-.hide{
+.hide {
     display: none;
 }
 
@@ -171,79 +171,11 @@ ul li strong {
         opacity: 0;
         transform: translateY(10px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-
-/* ------------------ FORMULÁRIO ------------------ */
-
-.container-perguntas {
-    display: flex;
-    gap: 60px;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin: 30px auto; 
-    max-width: 1200px;
-    padding: 40px 20px;
-}
-
-/* Estilo para o formulário */
-.formulario {
-    margin-top: 0px;
-    flex: 1;
-    background-color: var(--branco);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.formulario:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.formulario h2 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    color: var(--azul);
-    text-align: center;
-}
-
-.formulario textarea {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid var(--cinza-escuro);
-    border-radius: 8px;
-    font-size: 1em;
-    resize: none;
-    transition: border-color 0.3s ease;
-}
-
-.formulario textarea:focus {
-    border-color: var(--azul);
-    outline: none;
-}
-
-.formulario button {
-    background-color: var(--azul);
-    color: var(--branco);
-    border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.formulario button:hover {
-    background-color: var(--azul-claro);
-    transform: scale(1.05);
 }
 
 /* Estilo para as perguntas frequentes */
@@ -261,6 +193,26 @@ ul li strong {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* Container principal das perguntas */
+.container-perguntas {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    padding: 32px 24px 24px 24px;
+    max-width: 1000px;
+    position: static;
+}
+
+/* Título */
+.faq h2 {
+    text-align: center;
+    color: #0c8ea1;
+    font-size: 2rem;
+    margin-bottom: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
 .faq h2 {
     font-size: 1.8em;
     margin-bottom: 20px;
@@ -268,30 +220,51 @@ ul li strong {
     text-align: center;
 }
 
+/* Estilo dos detalhes (pergunta) */
 .faq details {
-    margin-bottom: 15px;
-    background-color: var(--azul-claro);
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
+    background: #f5f8fa;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    transition: box-shadow 0.2s;
 }
 
-.faq details:hover {
-    background-color: var(--cinza);
-    color: var(--branco);
+.faq details[open] {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+    background: #eaf6fa;
 }
 
+/* Estilo do summary (pergunta) */
 .faq summary {
-    font-weight: bold;
     cursor: pointer;
-    font-size: 1.2em;
+    padding: 16px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #022531;
+    outline: none;
+    border-radius: 10px;
+    transition: background 0.2s;
+    list-style: none;
 }
 
-.faq p {
-    margin-top: 10px;
-    font-size: 1em;
-    color: var(--preto);
+.faq details[open] summary {
+    background: #d6f0f6;
+    color: #00c4cc;
+}
+
+/* Remove o triângulo padrão do summary */
+.faq summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Resposta */
+.faq details p {
+    padding: 0 20px 16px 44px;
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
 }
 
 /* Responsividade */
@@ -302,12 +275,14 @@ ul li strong {
         padding: 10px;
     }
 
-    .formulario, .faq {
+    .formulario,
+    .faq {
         flex: none;
         width: 100%;
     }
 
-    .formulario h2, .faq h2 {
+    .formulario h2,
+    .faq h2 {
         font-size: 1.5em;
     }
 
@@ -328,6 +303,27 @@ ul li strong {
         font-size: 0.9em;
     }
 }
+
+@media (max-width: 800px) {
+    .container-perguntas {
+        padding: 18px 6px 12px 6px;
+    }
+
+    .faq h2 {
+        font-size: 1.3rem;
+    }
+
+    .faq summary {
+        font-size: 1rem;
+        padding: 12px 10px;
+    }
+
+    .faq details p {
+        font-size: 0.97rem;
+        padding-left: 30px;
+    }
+}
+
 p#mensagem {
     margin-top: 20px;
     font-size: 1.2em;
@@ -381,5 +377,114 @@ p#mensagem {
 
     button[type="submit"] {
         padding: 10px 25px;
+    }
+}
+
+.suporte-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    background: #0052cc;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    z-index: 1000;
+    transition: background 0.2s;
+}
+
+.suporte-float:hover {
+    background: #172b4d;
+}
+
+.suporte-float span {
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+.faq-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px; /* Reduziu de 40px para 20px */
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.empresa-info {
+    min-width: 320px;
+    max-width: 350px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.empresa-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 32px 24px 24px 24px;
+    text-align: center;
+}
+
+.empresa-logo {
+    width: 90px;
+    margin-bottom: 18px;
+}
+
+.empresa-card h3 {
+    color: #0c8ea1;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.empresa-card p {
+    color: #022531;
+    font-size: 1rem;
+    margin-bottom: 14px;
+}
+
+.empresa-card ul {
+    list-style: disc inside;
+    text-align: left;
+    margin: 0 0 18px 0;
+    color: #0c8ea1;
+    font-size: 1rem;
+    padding-left: 0;
+}
+
+.empresa-card ul li {
+    margin-bottom: 6px;
+}
+
+.empresa-contato {
+    background: #f5f8fa;
+    border-radius: 10px;
+    padding: 10px 0;
+    color: #022531;
+    font-size: 0.97rem;
+}
+
+.empresa-contato i {
+    color: #00c4cc;
+    margin-right: 6px;
+}
+
+@media (max-width: 900px) {
+    .faq-page-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+    .empresa-info {
+        max-width: 100%;
+        min-width: unset;
     }
 }

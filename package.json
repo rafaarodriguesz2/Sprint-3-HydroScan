@@ -1,0 +1,22 @@
+{
+  "name": "sprint-3-hydroscan",
+  "version": "1.0.0",
+  "description": "HydroScan é um projeto acadêmico desenvolvido como parte da disciplina de **Pesquisa e Inovação I**, no curso de **Ciência da Computação** da **SPTech School**. O projeto tem como foco o desenvolvimento de um sistema informativo e visual para gerenciamento de dados relacionados a usinas hidrelétricas, abordando desde o cadastro das usinas até a exibição de dados operacionais em gráficos.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafaarodriguesz2/Sprint-3-HydroScan.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafaarodriguesz2/Sprint-3-HydroScan/issues"
+  },
+  "homepage": "https://github.com/rafaarodriguesz2/Sprint-3-HydroScan#readme",
+  "dependencies": {
+    "jira-client": "^8.2.2"
+  }
+}
