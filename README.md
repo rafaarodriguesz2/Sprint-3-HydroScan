@@ -1,106 +1,152 @@
 
-# HydroScan - Sistema de Monitoramento para Usinas Hidrelétricas  
+# NextRail - Sistema de Visualização de Dados Ferroviários  
 
-HydroScan é um projeto acadêmico desenvolvido como parte da disciplina de **Pesquisa e Inovação I**, no curso de **Ciência da Computação** da **SPTech School**. O projeto tem como foco o desenvolvimento de um sistema informativo e visual para gerenciamento de dados relacionados a usinas hidrelétricas, abordando desde o cadastro das usinas até a exibição de dados operacionais em gráficos.
+NextRail é um projeto acadêmico desenvolvido como parte da disciplina de **Pesquisa e Inovação I**, no curso de **Ciência da Computação** da **SPTech School**.  
+O sistema tem como objetivo auxiliar no **gerenciamento e análise de dados ferroviários**, oferecendo uma interface organizada, segura e interativa para usuários.
 
 ---
 
 ## Objetivo do Projeto
 
 > [!INFO]
-> O setor de energia elétrica é essencial para o desenvolvimento de um país, e as usinas hidrelétricas têm papel central na geração dessa energia.  
-> Com isso em mente, o HydroScan foi idealizado como uma ferramenta para facilitar o monitoramento e gestão dessas usinas, oferecendo:
-> 
-> - Visualização de dados operacionais como volume de água, energia gerada e nível dos reservatórios;
-> - Cadastro das usinas e seus responsáveis técnicos;
-> - Análises rápidas por meio de dashboards visuais e gráficos dinâmicos;
-> - Organização centralizada de informações relevantes para o setor hidrelétrico.
+> O setor ferroviário desempenha papel essencial na logística e transporte de cargas e passageiros.  
+> O **NextRail** surge como uma ferramenta para apoiar o monitoramento e gestão de informações, proporcionando:
+>
+> - Cadastro e autenticação de usuários;  
+> - Gestão de avisos e medições em tempo real;  
+> - Visualização organizada e responsiva de dados;  
+> - Base sólida para futuras análises gráficas e dashboards.  
 
 ---
 
 ## Funcionalidades
 
 > [!INFO]
-> O HydroScan já conta com as seguintes funcionalidades implementadas:
-> 
-> - Página inicial com apresentação do sistema;
-> - Cadastro e listagem de usinas hidrelétricas;
-> - Cadastro de responsáveis técnicos vinculados às usinas;
-> - Dashboard com gráficos de monitoramento utilizando Chart.js;
-> - Validação de dados nos formulários;
-> - Autenticação de usuários com controle de acesso;
-> - Backend funcional com persistência em banco de dados MySQL;
-> - API desenvolvida em Node.js com rotas seguras.
+> O projeto já conta com as seguintes funcionalidades implementadas:
+>
+> - Página inicial de apresentação do sistema;  
+> - Cadastro e login de usuários com persistência em banco de dados;  
+> - CRUD de avisos e medições;  
+> - Estrutura modular com **routes**, **controllers** e **models**;  
+> - Configuração de ambientes (desenvolvimento/produção);  
+> - Backend funcional em Node.js integrado a MySQL;  
+> - Design responsivo em HTML5 e CSS3.  
 
 ---
 
 ## Tecnologias Utilizadas
 
-> [!INFO]
-> - **HTML5**: Estruturação do conteúdo.  
-> - **CSS3**: Estilização e layout das páginas.  
-> - **JavaScript**: Comportamento da interface, manipulação de dados e gráficos.  
-> - **Chart.js**: Biblioteca para renderização de gráficos interativos.  
-> - **MySQL**: Persistência dos dados em banco relacional.  
-> - **Node.js e Express**: Backend para cadastro, autenticação e integração com o banco.
+> [!NOTE]
+> - **HTML5** → Estrutura do front-end.  
+> - **CSS3** → Estilização e layout responsivo.  
+> - **JavaScript (ES6+)** → Interatividade e manipulação de dados.  
+> - **Node.js + Express** → Backend e API REST.  
+> - **MySQL** → Banco de dados relacional.  
+> - **dotenv** → Configuração de variáveis de ambiente.  
 
 ---
 
 ## Como Executar o Projeto
 
 ### 1. Clonar o repositório
+```bash
+git clone https://github.com/igor-trindade/NextRail.git
+cd NextRail
+````
+
+### 2. Instalar dependências
 
 ```bash
-git clone https://github.com/rafaarodriguesz2/Sprint-2-HydroScan.git
-cd Sprint-2-HydroScan
+npm install
+```
+
+### 3. Configurar ambiente
+
+No arquivo `app.js`, selecione o ambiente:
+
+```js
+// Produção (remoto)
+// var ambiente_processo = 'producao';
+
+// Desenvolvimento (local)
+var ambiente_processo = 'desenvolvimento';
+```
+
+### 4. Criar tabelas no banco
+
+Execute o script localizado em:
+
+```
+/src/database/script-tabelas.sql
+```
+
+### 5. Configurar variáveis de ambiente
+
+Edite o arquivo `.env` com credenciais de banco e porta.
+
+### 6. Executar servidor
+
+```bash
+npm start
 ```
 
 ---
 
-## Protótipo no Tinkercad
+## Estrutura do Projeto
 
-> [!NOTE]
-> Este projeto também foi pensado considerando um cenário físico.  
-> Um protótipo eletrônico pode ser acessado através do seguinte link:
-
-[Ver protótipo no Tinkercad (simulação)](https://www.tinkercad.com/things/foaG9tKUlGJ-hydroscan)  
-![prototipo](https://github.com/user-attachments/assets/54ccfc66-5cbc-4fa6-84b2-8d92d0fa3517)
+```plaintext
+NextRail/
+├── public/              # Arquivos estáticos (HTML, CSS, JS)
+├── src/
+│   ├── database/        # Script de tabelas e configuração DB
+│   ├── controllers/     # Lógica de negócio
+│   ├── models/          # Modelos de dados
+│   └── routes/          # Definição das rotas
+├── app.js               # Arquivo principal do servidor
+├── package.json         # Dependências e scripts NPM
+└── README.md            # Documentação do projeto
+```
 
 ---
 
 ## Próximos Passos
 
-> [!IMPORTANT]
-> - Melhorias na responsividade e acessibilidade;  
-> - Implementação de painel administrativo com permissões avançadas;  
-> - Integração com APIs externas para dados hidrológicos em tempo real.
+> \[!IMPORTANT]
+>
+> * Melhorar design responsivo e experiência do usuário;
+> * Implementar dashboards com gráficos interativos (ex.: Chart.js);
+> * Criar painel administrativo com níveis de acesso;
+> * Futuras integrações com APIs externas para dados ferroviários.
 
 ---
 
 ## Sobre o Projeto
 
-Este projeto simula um sistema de apoio à gestão de empresas do setor hidrelétrico. Com base em um cenário realista, aplicamos conceitos de front-end, modelagem de dados, autenticação de usuários e visualização interativa. O HydroScan oferece uma base sólida para expansão e customização.
+Este projeto foi desenvolvido como prática acadêmica, simulando um sistema de apoio ao setor ferroviário.
+Combinando **front-end, back-end, autenticação e persistência em banco relacional**, o NextRail oferece uma base sólida para expansão de funcionalidades em cenários reais.
 
 ---
 
 ## Créditos
 
-**Curso:** Ciência da Computação  
-**Instituição:** SPTech School  
-**Disciplina:** Pesquisa e Inovação I  
+**Curso:** Ciência da Computação
+**Instituição:** SPTech School
+**Disciplina:** Pesquisa e Inovação I
 
-> [!NOTE]
-> **Integrantes do grupo:**  
-> - Leandro Akio Takahashi  
-> - Gabriel Furtado  
-> - Gustavo Soares  
-> - Rafael Alonso  
-> - Kheyla Thais  
+> \[!NOTE]
+> **Integrantes do grupo:**
+>
+> * Igor Trindade
+> * Felipe Hideki
+> * Lucas Hideo
+> * Guilherme Aoki
+> * Bianca Ortega
+> * Kheyla Thais
 
 ---
 
 ## Licença
 
-> [!WARNING]
-> Este projeto é de uso educacional e sem fins comerciais.  
+> \[!WARNING]
+> Este projeto é de uso **educacional** e sem fins comerciais.
 > Todos os direitos reservados aos autores.
